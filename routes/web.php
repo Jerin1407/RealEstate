@@ -3,8 +3,6 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/', function () { return view('login');});
-
 Route::get('/', function () { return view('pages.index');})->name('home');
 Route::get('/about', function () { return view('pages.about');})->name('about');
 Route::get('/service', function () { return view('pages.service');})->name('service');
