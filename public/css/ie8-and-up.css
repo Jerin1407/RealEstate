@@ -1,0 +1,24 @@
+#menu {
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#88ffffff', endColorstr='#88ffffff');
+}
+#news{
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#88ffffff', endColorstr='#88ffffff');
+	border:1px solid #ccc !important;
+}
+#property-links ul li a{
+	padding:0 5px !important;
+}
+.ad-box{
+	margin-left:14px;
+	
+}
+#search{
+	border-radius: 11px;
+	behavior: url(border-radius.htc) ;
+}
+input{
+	border-radius: 11px;
+	behavior: url(css.htc) ;
+	border:none;
+	outline:none;
+}

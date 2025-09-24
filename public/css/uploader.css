@@ -1,0 +1,44 @@
+#upload{
+    /*   width: 120px;
+        height: 50px;
+        min-height: 70%;
+        float: right;
+        color: #ec2028;
+        font-weight: bold;
+        font-size: 13px;
+        background: #ffffff;
+        padding: 15px 18px 0 15px;
+        text-decoration: none;
+        max-width: 100%;
+        position: relative;
+        top: 15px;
+        right: 0px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 1px solid white;
+        text-align: center;
+        -moz-border-radius:5px; -webkit-border-radius:5px;
+        cursor:pointer !important;*/
+}
+#upload:hover{
+    background-color: #ec2028 !important;
+    color: #ffffff;
+}
+.darkbg{
+    background:#ddd !important;
+}
+#status{
+    font-family:Arial; 
+    padding:5px;
+    display: block;
+}
+ul#files{ list-style:none; padding:0; margin:0; }
+/*ul#files li{ padding:10px; margin-bottom:2px; width:100px; float:left; margin-right:10px;}*/
+ul#files li img{ max-width:100px; max-height:100px; }
+.success{     
+    width: 80%;
+    background:whitesmoke; 
+    border:1px solid #339933; 
+}
+.error{ background:#f0c6c3; border:1px solid #cc6622; }
+/*style sheet copy and paste here*/

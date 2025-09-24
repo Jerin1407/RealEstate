@@ -1,0 +1,633 @@
+#pull {
+    display: none;
+}
+
+
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    #pull {
+        display: block;
+    }
+
+    .head_left {
+        padding: 10px 0px;
+        float: left;
+        width: 75%;
+    }
+    .head_right {
+        padding: 5px 0px;
+        float: right;
+        width: 25%;
+        text-align: right;
+    }
+    .property_search input.find_locat {
+        float: none;
+        width: 100%;
+    }
+    .property_search input.submit_button {
+        margin: 15px 0px 10px;
+        float: none;
+        width: 100%;
+    }
+    .property_signbox h1 {
+        font-size: 30px;
+    }
+    .content_panel h1 {
+        font-size: 30px;
+    }
+
+    .look_listing {
+        margin: 15px 1%;
+        float: left;
+        width: 30%;
+    }
+    #what_looks h2 {
+        font-size: 30px;
+    }
+    .look_thumb img {
+        width: 170px;
+        height: 170px;
+    }
+
+    .ftr_col01 {
+        margin: 0px 1% 20px;
+        float: left;
+        width: 48%;
+    }
+    .ftr_col02 {
+        margin: 0px 1% 20px;
+        float: left;
+        width: 48%;
+    }
+    .ftr_col03 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+
+    .copyright {
+        float: none;
+        text-align: center;
+        /*        background: url(../favicon.ico) left top no-repeat ;*/
+    }
+    .link_ftr {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr ul li {
+        padding: 5px 10px;
+        float: none;
+        display: inline-block;
+    }
+    .ResSlid0 .item {
+        width: 50% !important;
+    }
+    .ResSlid1 .item {
+        width: 50% !important;
+    }
+    .ResSlid2 .item {
+        width: 50% !important;
+    }
+    .ResSlid3 .item {
+        width: 50% !important;
+    }
+    .ResSlid4 .item {
+        width: 50% !important;
+    }
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .date-price_item{
+        float: none;
+    }
+}
+
+
+
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .head_left {
+        padding: 10px 0px;
+        float: left;
+        width: 75%;
+    }
+    .head_left ul li {
+        margin: 0px 0px;
+        padding: 0px 0px;
+        background: none;
+        font-size: 14px;
+    }
+    .head_left ul li+li {
+        padding: 0px 0px 0px 7px;
+        background: none;
+    }
+
+    .head_right {
+        padding: 5px 0px;
+        float: right;
+        width: 25%;
+        text-align: right;
+    }
+    .property_search input.find_locat {
+        float: none;
+        width: 100%;
+    }
+    .property_search input.submit_button {
+        margin: 15px 0px 10px;
+        float: none;
+        width: 100%;
+    }
+    .property_signbox h1 {
+        font-size: 30px;
+    }
+    .content_panel h1 {
+        font-size: 30px;
+    }
+
+    .look_listing {
+        float: none;
+        width: 90%;
+    }
+    .looking_items {
+        font-size: 15px;
+        color: red;
+
+    }
+    #what_looks h2 {
+        font-size: 30px;
+    }
+    .look_thumb img {
+        width: 155px;
+        height: 155px;
+    }
+
+    .ftr_col01 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+    .ftr_col02 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+    .ftr_col03 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+
+    .copyright {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr ul li {
+        padding: 5px 10px;
+        float: none;
+        display: inline-block;
+    }
+    .ResSlid0 .item {
+        width: 100% !important;
+    }
+    .ResSlid1 .item {
+        width: 100% !important;
+    }
+    .ResSlid2 .item {
+        width: 100% !important;
+    }
+    .ResSlid3 .item {
+        width: 100% !important;
+    }
+    .ResSlid4 .item {
+        width: 100% !important;
+    } 
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .date-price_item{
+        float: none;
+    }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 767px) {
+    .head_left {
+        padding: 10px 0px;
+        float: left;
+        width: 75%;
+    }
+    .head_right {
+        padding: 5px 0px;
+        float: right;
+        width: 25%;
+        text-align: right;
+    }
+    .property_search input.find_locat {
+        float: none;
+        width: 100%;
+    }
+    .property_search input.submit_button {
+        margin: 15px 0px 10px;
+        float: none;
+        width: 100%;
+    }
+    .property_signbox h1 {
+        font-size: 30px;
+    }
+    .content_panel h1 {
+        font-size: 30px;
+    }
+
+    .look_listing {
+        margin: 15px 1%;
+        float: left;
+        width: 48%;
+    }
+    #what_looks h2 {
+        font-size: 30px;
+    }
+    .look_thumb img {
+        width: 170px;
+        height: 170px;
+    }
+
+    .ftr_col01 {
+        margin: 0px 1% 20px;
+        float: left;
+        width: 48%;
+    }
+    .ftr_col02 {
+        margin: 0px 1% 20px;
+        float: left;
+        width: 48%;
+    }
+    .ftr_col03 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+
+    .copyright {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr ul li {
+        padding: 5px 10px;
+        float: none;
+        display: inline-block;
+    }
+
+    .ResSlid0 .item {
+        width: 50% !important;
+    }
+    .ResSlid1 .item {
+        width: 50% !important;
+    }
+    .ResSlid2 .item {
+        width: 50% !important;
+    }
+    .ResSlid3 .item {
+        width: 50% !important;
+    }
+    .ResSlid4 .item {
+        width: 50% !important;
+    }
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .date-price_item{
+        float: none;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .head_left {
+        padding: 10px 0px;
+        float: none;
+        width: 100%;
+    }
+    .head_left ul li {
+        margin: 0px 0px;
+        padding: 0px 0px;
+        background: none;
+        font-size: 12px;
+    }
+    .head_left ul li+li {
+        padding: 0px 0px 0px 7px;
+        background: none;
+    }
+
+    .head_right {
+        padding: 5px 0px;
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    .property_search input.find_locat {
+        float: none;
+        width: 100%;
+    }
+    .property_search input.submit_button {
+        margin: 15px 0px 10px;
+        float: none;
+        width: 100%;
+    }
+    .property_signbox h1 {
+        font-size: 25px;
+    }
+    .content_panel h1 {
+        font-size: 25px;
+    }
+
+    .look_listing {
+        float: none;
+        width: 90%;
+    }
+    #what_looks h2 {
+        font-size: 27px;
+    }
+    .look_thumb img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .ftr_col01 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+    .ftr_col02 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+    .ftr_col03 {
+        margin: 0px 0px 20px;
+        float: none;
+        width: 100%;
+    }
+
+    .copyright {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr {
+        float: none;
+        text-align: center;
+    }
+    .link_ftr ul li {
+        padding: 5px 10px;
+        float: none;
+        display: inline-block;
+    }
+
+    .ResSlid0 .item {
+        width: 100% !important;
+    }
+    .ResSlid1 .item {
+        width: 100% !important;
+    }
+    .ResSlid2 .item {
+        width: 100% !important;
+    }
+    .ResSlid3 .item {
+        width: 100% !important;
+    }
+    .ResSlid4 .item {
+        width: 100% !important;
+    }
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .date-price_item{
+        float: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .logo_box {
+        padding: 10px 0px;
+        width: 100%;
+        float: none;
+        text-align: center;
+    }
+    .wrapper_panel {
+        width: 95%;
+    }
+    .head_wrapper {
+        padding: 15px 0px 0px;
+        width: 100%;
+    }
+    .content_panel {
+        padding: 0px 0px 0px;
+        width: 95%;
+    }
+    .footer_containar {
+        width: 95%;
+    }
+
+    .topnav {
+        padding: 15px 0px 0px;
+        width: 100%;
+        float: none;
+    }
+    .topnav nav {
+        width: 100%;
+        margin: 0px 0px;
+        padding: 0px 0px;
+        background: #ec2028;
+    }
+    .topnav nav ul {
+        margin: 0px 0px;
+        padding: 0px 0px;
+        list-style-type: none;
+    }
+    .topnav nav ul li {
+        margin: 0px 0px;
+        padding: 0px 0px;
+        line-height: normal;
+        display: block;
+        float: none;
+        width: auto;
+        height: auto;
+        text-transform: uppercase;
+        border-top: 1px solid #d91920;
+        border-bottom: 1px solid #f8242c;
+    }
+    .topnav nav ul li a {
+        margin: 0px 0px;
+        padding: 10px 0px;
+        display: block;
+        height: auto;
+        line-height: normal;
+        font-size: 14px;
+        color: #FFF;
+        height: auto;
+        width: auto;
+        border-radius: 0px;
+        font-weight: 500;
+        border: none;
+    }
+
+    .topnav nav ul li a:hover {
+        background: #dc050e;
+        border: none;
+        color: #fff;
+    }
+    .topnav ul li.active a {
+        background: #dc050e;
+        border: none;
+        color: #fff;
+    }
+
+    .topnav nav a {
+        text-align: left;
+        width: 100%;
+        text-indent: 10px;
+        text-decoration: none;
+        font-size: 17px;
+        color: #FFF;
+    }
+    .topnav nav a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .topnav nav ul {
+        display: none;
+        height: auto;
+    }
+
+    .topnav nav a#pull {
+        display: block;
+        width: 100%;
+        position: relative;
+        background: #dd161e;
+        margin: 0px 0px;
+        color: #FFF;
+        text-transform: uppercase;
+        font-weight: 700;
+        line-height: 40px;
+    }
+    .topnav nav a#pull:after {
+        content: "";
+        background: url(../images/nav-icon.png) no-repeat;
+        width: 25px;
+        height: 20px;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .auth_box {
+        margin: 0px auto;
+        padding: 0px 0px;
+        width: 200px;
+        float: none;
+    }
+    .banner_box img {
+        height: auto;
+    }
+
+    .property_panel {
+        padding: 25px 0px;
+        width: 100%;
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        transform: none;
+        background: #231f20;
+    }
+    .location_box {
+        width: 95%;
+    }
+
+    .property_signbox {
+        margin: 0px auto;
+        width: 95%;
+    }
+
+    .slider_prev {
+        display: none;
+    }
+    .slider_next {
+        display: none;
+    }
+
+    .resCarousel-inner {
+        width: 100%;
+    }
+    .slider_container {
+        padding: 40px 0px 0px;
+    }
+    .slider_container h1 {
+        padding: 25px 0px 10px;
+    }
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .homeloan-content{
+        padding-left: 5px;
+        padding-right: 1px;
+    }
+    .about-content_homeloan{
+        padding: 160px 12px 40px 12px;
+    }
+    .homeloan-content label,input,.message-imput{
+        width:100%;
+    }
+    .form-content{
+        padding-right:5px;
+    }
+    .date-price_item{
+        float: none;
+    }
+
+}
+
+
+@media screen and (max-width: 900px) {
+    .about-content{
+        color: #EC2028;
+        padding: 80px 120px 40px 80px;
+    }
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .date-price_item{
+        float: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-content, .resources-content{
+        padding: 80px 40px 40px 40px;
+    }
+    .homeloan-contentdetails {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .date-price_item{
+        float: none;
+    }
+}
+
