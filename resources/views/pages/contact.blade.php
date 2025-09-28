@@ -6,10 +6,12 @@
 
             <!-- Left Side: Contact Form -->
             <div>
+
                 <!-- Heading -->
                 <h2 class="text-2xl font-bold text-red-600 mb-6">Contact US</h2>
 
                 <form class="space-y-6">
+
                     <!-- Name -->
                     <div class="flex items-center justify-between">
                         <label for="name" class="w-1/3 font-medium text-gray-700">Name*</label>

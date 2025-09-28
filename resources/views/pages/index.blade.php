@@ -15,6 +15,7 @@
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
+
                     <!-- Villa 1 -->
                     <div
                         class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
@@ -40,6 +41,7 @@
                             </div>
                     </div>
                     </a>
+
                     <!-- Villa 2 -->
                     <a href="{{ route('moder-villa-in-koorkenchery') }}">
                         <div
@@ -64,6 +66,7 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Villa 3 -->
                     <a href="{{ route('koorkenchery-4bhk') }}">
                         <div
@@ -88,6 +91,7 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Villa 4 -->
                     <a href="{{ route('peramangalam-villa') }}">
                         <div
@@ -131,6 +135,7 @@
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
+
                     <!-- Flat 1 -->
                     <a href="{{ route('flat-punkunnam') }}">
                         <div
@@ -156,6 +161,7 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Flat 2 -->
                     <a href="{{ route('luxury-flat-patturaikkal') }}">
                         <div
@@ -180,6 +186,7 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Flat 3 -->
                     <a href="{{ route('kuriachira-flat') }}">
                         <div
@@ -249,6 +256,7 @@
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
+
                     <!-- Plot 1 -->
                     <a href="{{ route('plot-in-viyyur') }}">
                         <div
@@ -370,6 +378,7 @@
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
+
                     <!-- Commercial 1 -->
                     <a href="{{ route('amalanagar-2-bhk') }}">
                         <div
@@ -394,9 +403,9 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Commercial 2 -->
                     <a href="{{ route('westfort-2bhk') }}">
-
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
                             <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
@@ -420,6 +429,7 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Commercial 3 -->
                     <a href="{{ route('westfort-2bhk-1000SqFt') }}">
                         <div
@@ -445,6 +455,7 @@
                             </div>
                         </div>
                     </a>
+
                     <!-- Commercial 4 -->
                     <a href="{{ route('railway-station-near-pootole') }}">
                         <div
@@ -484,6 +495,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
                 <!-- Property 1 -->
                 <a href="{{ route('attractive-3bhk') }}">
                     <div
@@ -561,7 +573,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- Why Choose Us -->
     <section class="py-16 bg-white">

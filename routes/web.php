@@ -15,6 +15,7 @@ Route::get('/admin', function () {
     }
     return view('pages.admin');
 })->name('admin');
+Route::get('/properties', function () { return view('pages.properties');})->name('properties');
 
 Route::get('/luxury-villa-in-kolazhy', function () { return view('subpages.luxury_villa_in_kolazhy');})->name('luxury-villa-in-kolazhy');
 Route::get('/flat-punkunnam', function () { return view('subpages.flat_punkunnam');})->name('flat-punkunnam');

@@ -3,6 +3,7 @@
 @section('content')
     <section id="services" class="bg-white py-16">
         <div class="container mx-auto px-6 md:px-12 lg:px-20">
+
             <!-- Title -->
             <h2 class="text-3xl md:text-4xl font-bold text-red-600 mb-6">SERVICES</h2>
 
@@ -100,6 +101,7 @@
 
             <!-- Thumbnails by Department -->
             <div class="mb-6 space-y-8 mt-6">
+
                 <!-- Living Room -->
                 <div>
                     <h3 class="text-lg font-semibold mb-3 text-gray-800">Living Room</h3>
@@ -218,6 +220,7 @@
 
                     </div>
                 </div>
+
                 <!-- kitchen -->
                 <div>
                     <h3 class="text-lg font-semibold mb-3 text-gray-800">Kitchen</h3>
@@ -246,7 +249,6 @@
                 </div>
 
                 <!-- False Ceiling -->
-
                 <div>
                     <h3 class="text-lg font-semibold mb-3 text-gray-800">False Ceiling</h3>
                     <div class="flex flex-wrap gap-3 justify-center md:justify-start">
@@ -286,6 +288,7 @@
                 </div>
 
                 <section class="px-6 py-10 bg-white text-gray-800">
+
                     <!-- Property Management Services -->
                     <h2 class="text-2xl font-bold text-red-600 mb-4">
                         PROPERTY MANAGEMENT SERVICES
@@ -353,8 +356,6 @@
                         <br><br>
                         For more details & for enquiries, visit: <a href="#" class="text-blue-600 hover:underline">
                             www.godsownhome.in</a> or contact: 974543 22 00.
-
-
                     </p>
 
                 </section>

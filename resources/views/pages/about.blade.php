@@ -3,6 +3,7 @@
 @section('content')
     <section id="about" class="bg-white py-16 text-center md:text-start">
         <div class="container mx-auto px-6 md:px-12 lg:px-20">
+
             <!-- Heading -->
             <h2 class="text-3xl md:text-4xl font-bold text-red-600 mb-6">About Us</h2>
 

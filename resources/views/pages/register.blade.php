@@ -5,7 +5,8 @@
         <div class="w-80 max-w-sm p-6 bg-white shadow-md rounded-md ">
             <h2 class="text-2xl font-bold text-red-600 mb-6 text-center">Register</h2>
 
-            <form id="registerForm" action="{{ route('registerUser') }}" method="POST" class="space-y-4" onsubmit="return validateForm()">
+            <form id="registerForm" action="{{ route('registerUser') }}" method="POST" class="space-y-4"
+                onsubmit="return validateForm()">
                 @csrf
 
                 <!-- Username -->
@@ -38,6 +39,7 @@
                     <p id="error-message" class="text-red-600 text-sm mt-1 hidden">Passwords do not match</p>
                 </div>
 
+                <!-- Submit Button -->
                 <div>
                     <button type="submit"
                         class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md transition duration-200">

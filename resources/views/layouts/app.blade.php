@@ -7,14 +7,13 @@
     <title>@yield('title', 'Real Estate Thrissur - Find Your Dream Home')</title>
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
     <link href="./assets/css/output.css" rel="stylesheet" />
-
 </head>
 
 <body class="bg-gray-50 font-sans">
 
     <!-- Header -->
     @include('layouts.header')
-    
+
     <!-- Index -->
     @yield('content')
 
@@ -55,6 +54,7 @@
         })();
     </script>
 </body>
+
 <script src="assets/js/script.js"></script>
 
 </html>

@@ -2,6 +2,7 @@
 
 @section('content')
     <section class="px-6 py-10 bg-white text-gray-800">
+
         <!-- Home Loan Assistance -->
         <h2 class="text-2xl font-bold text-red-600 mb-8">
             HOME LOAN ASSISTANCE

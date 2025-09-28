@@ -19,9 +19,8 @@ class UserController extends Controller
         return view('pages.register');
     }
 
-
     public function register(Request $request)
-    {        
+    {
         // validate inputs
         $request->validate([
             'username' => 'required|string|max:255',
@@ -59,7 +58,6 @@ class UserController extends Controller
         }
 
         return back()->with('error', 'Invalid username or password.');
-
     }
 
     public function logout(Request $request)
