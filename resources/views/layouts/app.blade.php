@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Real Estate Thrissur - Find Your Dream Home')</title>
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
-    <link href="./assets/css/output.css" rel="stylesheet" />
+    <link href="./assets/css/output_2.css" rel="stylesheet" />
 </head>
 
 <body class="bg-gray-50 font-sans">

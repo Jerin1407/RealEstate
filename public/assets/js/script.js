@@ -19,4 +19,39 @@ const adsButton = document.getElementById('adsButton');
             }
         });
 
+// add property
+function previewImage(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('previewContainer');
+    previewContainer.innerHTML = ""; // clear old previews
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = "w-24 h-24 object-cover rounded border";
+        previewContainer.appendChild(img);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+   ClassicEditor
+        .create(document.querySelector('#description'), {
+            toolbar: [
+                'heading', '|', 
+                'bold', 'italic', 'underline', 'strikethrough', '|', 
+                'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+                'undo', 'redo'
+            ]
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
 

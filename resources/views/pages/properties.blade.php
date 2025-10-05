@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Thrissur - Find Your Dream Home</title>
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
-    <link href="./assets/css/output.css" rel="stylesheet" />
+    <link href="./assets/css/output_2.css" rel="stylesheet" />
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -59,10 +59,12 @@
                                 Delete
                             </button>
                         </div>
-                        <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
+                        <a href="{{ route('add-property') }}">
+                            <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
                             <i class="fas fa-plus mr-2"></i>
                             Add Property
                         </button>
+                        </a>
                     </div>
                 </div>
 
@@ -73,9 +75,10 @@
                         <!-- Table Header -->
                         <thead class="bg-gray-300 text-black">
                             <tr>
-                                <th class="px-4 py-3 text-left text-sm font-medium">
+                                {{-- <th class="px-4 py-3 text-left text-sm font-medium">
                                     <input type="checkbox" class="rounded">
-                                </th>
+                                </th> --}}
+                                <th></th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property code</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Title</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Category</th>

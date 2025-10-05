@@ -8,14 +8,17 @@ Route::get('/about', function () { return view('pages.about');})->name('about');
 Route::get('/service', function () { return view('pages.service');})->name('service');
 Route::get('/home-loan', function () { return view('pages.home_loan');})->name('home-loan');
 Route::get('/contact', function () { return view('pages.contact');})->name('contact');
-// Route::get('/admin', function () { return view('pages.admin');})->name('admin');
-Route::get('/admin', function () {
-    if (!session()->has('user_id')) {
-        return redirect()->route('login')->with('error', 'Please login first.');
-    }
-    return view('pages.admin');
-})->name('admin');
+ Route::get('/admin', function () { return view('pages.admin');})->name('admin');
+// Route::get('/admin', function () {
+//     if (!session()->has('user_id')) {
+//         return redirect()->route('login')->with('error', 'Please login first.');
+//     }
+//     return view('pages.admin');
+// })->name('admin');
 Route::get('/properties', function () { return view('pages.properties');})->name('properties');
+Route::get('/properties/addproperty', function () { return view('property.add');})->name('add-property');
+Route::get('/properties/editproperty', function () { return view('property.edit');})->name('edit-property');
+Route::get('/properties/viewproperty', function () { return view('property.view');})->name('view-property');
 
 Route::get('/luxury-villa-in-kolazhy', function () { return view('subpages.luxury_villa_in_kolazhy');})->name('luxury-villa-in-kolazhy');
 Route::get('/flat-punkunnam', function () { return view('subpages.flat_punkunnam');})->name('flat-punkunnam');
