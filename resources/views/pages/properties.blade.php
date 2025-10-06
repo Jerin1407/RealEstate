@@ -59,7 +59,7 @@
                                 Delete
                             </button>
                         </div>
-                        <a href="{{ route('add-property') }}">
+                        <a href="{{ route('addproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
                             <i class="fas fa-plus mr-2"></i>
                             Add Property

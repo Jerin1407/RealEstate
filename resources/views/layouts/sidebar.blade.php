@@ -83,7 +83,7 @@
                 <nav class="flex flex-col space-y-2">
 
                     <a href="{{ route('admin') }}" class="hover:text-gray-300 px-3 py-2 rounded">Dashboard</a>
-                    <a href="{{ route('properties') }}" class="hover:text-gray-300 px-3 py-2 rounded">Properties</a>
+                    <a href="{{ route('listproperty') }}" class="hover:text-gray-300 px-3 py-2 rounded">Properties</a>
 
                     <!-- Ads with Popup Submenu -->
                     <div class="relative">

@@ -6,6 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class MyProperties extends Model
 {
-    protected $table = 'my_properties';
-    protected $fillable = ['property_name'];
+    protected $table = 'properties';
+    protected $primaryKey = 'property_id';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'posted_by',
+        'locality_id',
+        'category_id',
+        'price_range_id',
+        'area_unit_id',
+        'approved_by',
+        'property_code',
+        'price',
+        'property_title',
+        'bhk',
+        'property_description',
+        'youtubeurl',
+        'contact_name',
+        'contact_number',
+        'post_date',
+        'modified_date',
+        'is_approved',
+        'is_modified',
+        'priority',
+    ];
 }
