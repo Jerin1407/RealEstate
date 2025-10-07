@@ -75,9 +75,6 @@
                         <!-- Table Header -->
                         <thead class="bg-gray-300 text-black">
                             <tr>
-                                {{-- <th class="px-4 py-3 text-left text-sm font-medium">
-                                    <input type="checkbox" class="rounded">
-                                </th> --}}
                                 <th></th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property code</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Title</th>

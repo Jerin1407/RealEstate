@@ -9,6 +9,13 @@
                 onsubmit="return validateForm()">
                 @csrf
 
+                <!-- Full Name -->
+                <div>
+                    <label for="fullname" class="block text-sm text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter full name" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                </div>
+
                 <!-- Username -->
                 <div>
                     <label for="username" class="block text-sm text-gray-700 mb-1">Username</label>

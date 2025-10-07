@@ -31,13 +31,28 @@
 
             <!-- Form Container -->
             <div class="p-6">
-                <form class="space-y-6" method="POST" enctype="multipart/form-data">
+                <form class="space-y-6" action="{{ route('saveproperty') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
 
                     <!-- Property Code -->
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Property Code</label>
+
+                        @php
+                            $lastProperty = \App\Models\MyProperties::orderBy('property_id', 'desc')->first();
+                            $nextCode =
+                                'RT' .
+                                str_pad(
+                                    $lastProperty ? intval(substr($lastProperty->property_code, 2)) + 1 : 1000,
+                                    4,
+                                    '0',
+                                    STR_PAD_LEFT,
+                                );
+                        @endphp
+
                         <div class="col-span-4">
-                            <input type="text" value="RT6193" name="property_code" readonly
+                            <input type="text" value="{{ $nextCode }}" name="property_code" readonly
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -161,26 +176,26 @@
                             <select name="priority"
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select One</option>
-                                <option value="P1">P1</option>
-                                <option value="P2">P2</option>
-                                <option value="P3">P3</option>
-                                <option value="P4">P4</option>
-                                <option value="P5">P5</option>
-                                <option value="P6">P6</option>
-                                <option value="P7">P7</option>
-                                <option value="P8">P8</option>
-                                <option value="P9">P9</option>
-                                <option value="P10">P10</option>
-                                <option value="P11">P11</option>
-                                <option value="P12">P12</option>
-                                <option value="P13">P13</option>
-                                <option value="P14">P14</option>
-                                <option value="P15">P15</option>
-                                <option value="P16">P16</option>
-                                <option value="P17">P17</option>
-                                <option value="P18">P18</option>
-                                <option value="P19">P19</option>
-                                <option value="P20">P20</option>
+                                <option value="1">P1</option>
+                                <option value="2">P2</option>
+                                <option value="3">P3</option>
+                                <option value="4">P4</option>
+                                <option value="5">P5</option>
+                                <option value="6">P6</option>
+                                <option value="7">P7</option>
+                                <option value="8">P8</option>
+                                <option value="9">P9</option>
+                                <option value="10">P10</option>
+                                <option value="11">P11</option>
+                                <option value="12">P12</option>
+                                <option value="13">P13</option>
+                                <option value="14">P14</option>
+                                <option value="15">P15</option>
+                                <option value="16">P16</option>
+                                <option value="17">P17</option>
+                                <option value="18">P18</option>
+                                <option value="19">P19</option>
+                                <option value="20">P20</option>
                             </select>
                         </div>
                     </div>

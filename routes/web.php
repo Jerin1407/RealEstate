@@ -9,13 +9,6 @@ Route::get('/about', function () { return view('pages.about');})->name('about');
 Route::get('/service', function () { return view('pages.service');})->name('service');
 Route::get('/home-loan', function () { return view('pages.home_loan');})->name('home-loan');
 Route::get('/contact', function () { return view('pages.contact');})->name('contact');
-Route::get('/admin', function () { return view('pages.admin');})->name('admin');
-// Route::get('/admin', function () {
-//     if (!session()->has('user_id')) {
-//         return redirect()->route('login')->with('error', 'Please login first.');
-//     }
-//     return view('pages.admin');
-// })->name('admin');
 Route::get('/properties/editproperty', function () { return view('property.edit');})->name('edit-property');
 Route::get('/properties/viewproperty', function () { return view('property.view');})->name('view-property');
 
@@ -44,6 +37,7 @@ Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login/user', [UserController::class, 'login'])->name('loginUser');
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register/user', [UserController::class, 'register'])->name('registerUser');
+Route::get('/admin', [UserController::class, 'showAdmin'])->name('admin');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');

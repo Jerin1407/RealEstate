@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function showAdmin()
+    {
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error', 'Please log in to access the admin page.');
+        }
+
+        return view('pages.admin');
+    }
+
     public function showLoginForm()
     {
         return view('pages.login');
@@ -21,19 +30,24 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // validate inputs
+        // Validate inputs
         $request->validate([
-            'username' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,login_name',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password'
         ]);
 
-        // save user
+        // Save user
         $user = new UserModel();
-        $user->username = $request->username;
+        $user->user_type_id = 1;
+        $user->login_name = $request->username;
+        // $user->password = Hash::make($request->password);
+        $user->password = $request->password;
+        $user->fullname = $request->fullname;
+        $user->contact_number = '';
+        $user->contact_address = '';
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect()->route('login')->with('success', 'Registered successfully. Please login !!!');
@@ -41,23 +55,34 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        // validate input
+        // Validate inputs
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        // find user by username
-        $user = UserModel::where('username', $request->username)->first();
+        // Find user by username
+        $user = UserModel::where('login_name', $request->username)->first();
 
-        if ($user && Hash::check($request->password, $user->password)) {
-            // Store user in session
-            session(['user_id' => $user->id, 'username' => $user->username]);
+        // Check if user exists and password is correct
 
-            return redirect()->route('admin')->with('success', 'Login successful!');
+        // if ($user && Hash::check($request->password, $user->password)) {
+
+        if ($user && $user->password === $request->password) {
+
+            // Store user info in session
+            session([
+                'user_id' => $user->user_id,
+                'username' => $user->login_name,
+                'fullname' => $user->fullname,
+                'email' => $user->email,
+                'user_type_id' => $user->user_type_id,
+            ]);
+
+            return redirect()->route('admin')->with('success', 'Login successfull!');
+        } else {
+            return redirect()->back()->with('error', 'Invalid username or password');
         }
-
-        return back()->with('error', 'Invalid username or password.');
     }
 
     public function logout(Request $request)
