@@ -61,9 +61,9 @@
                         </div>
                         <a href="{{ route('addproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
-                            <i class="fas fa-plus mr-2"></i>
-                            Add Property
-                        </button>
+                                <i class="fas fa-plus mr-2"></i>
+                                Add Property
+                            </button>
                         </a>
                     </div>
                 </div>
@@ -114,6 +114,69 @@
         </section>
     </main>
 
+    </div>
+
+    <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+
+            <!-- Results info -->
+            <div class="text-sm text-gray-700">
+                Showing <span class="font-medium">1</span> to
+                <span class="font-medium">10</span> of
+                <span class="font-medium">45</span> results
+            </div>
+
+            <!-- Pagination controls -->
+            <div class="flex items-center gap-1">
+                <!-- First page (disabled state) -->
+                <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">
+                    &laquo; First
+                </span>
+
+                <!-- Previous page (disabled state) -->
+                <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">
+                    &lsaquo; Prev
+                </span>
+
+                <!-- Page 1 (active) -->
+                <span class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">
+                    1
+                </span>
+
+                <!-- Page 2 -->
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+                    2
+                </a>
+
+                <!-- Page 3 -->
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+                    3
+                </a>
+
+                <!-- Ellipsis -->
+                <span class="px-3 py-2 text-gray-500">...</span>
+
+                <!-- Last page -->
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+                    5
+                </a>
+
+                <!-- Next page (enabled) -->
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+                    Next &rsaquo;
+                </a>
+
+                <!-- Last page (enabled) -->
+                <a href="#"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+                    Last &raquo;
+                </a>
+            </div>
+        </div>
     </div>
 
     </section>

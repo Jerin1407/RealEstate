@@ -39,7 +39,7 @@
         <div class="w-80 max-w-sm p-6 bg-white shadow-md rounded-md ">
             <h2 class="text-2xl font-bold text-red-600 mb-6 text-center">Login</h2>
 
-            <form action="{{ route('loginUser') }}" method="POST" class="space-y-4" onsubmit="return validateForm()">
+            <form action="{{ route('loginUser') }}" method="POST" class="space-y-4">
                 @csrf
 
                 <!-- Username -->

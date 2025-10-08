@@ -62,7 +62,7 @@
                         <label class="col-span-2 text-sm text-gray-700">Title <span
                                 class="text-red-500">*</span></label>
                         <div class="col-span-4">
-                            <input type="text" name="title"
+                            <input type="text" name="title" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <label class="col-span-2 text-sm text-gray-700 pt-2">Category <span
                                 class="text-red-500">*</span></label>
                         <div class="col-span-4 relative">
-                            <select id="categorySelect" name="category"
+                            <select id="categorySelect" name="category" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-white cursor-pointer">
                                 <option value="0">Select Any</option>
                                 @foreach ($categories as $category)
@@ -96,7 +96,7 @@
                                 class="text-red-500">*</span></label>
                         <div class="col-span-10 md:w-1/2">
                             <!-- Rich Text Editor Toolbar -->
-                            <textarea name="description" id="description" rows="5" class="  border rounded p-2"></textarea>
+                            <textarea name="description" id="description" rows="5" class="border rounded p-2"></textarea>
                         </div>
                     </div>
 
@@ -104,7 +104,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Youtube URL</label>
                         <div class="col-span-4">
-                            <input type="text" name="youtube_url"
+                            <input type="text" name="youtube_url" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <label class="col-span-2 text-sm text-gray-700">Location <span
                                 class="text-red-500">*</span></label>
                         <div class="col-span-4 flex items-center space-x-2">
-                            <select name="location"
+                            <select name="location" required
                                 class="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select Any</option>
                                 @foreach ($locations as $location)
@@ -134,7 +134,7 @@
                         <label class="col-span-2 text-sm text-gray-700">Price Range <span
                                 class="text-red-500">*</span></label>
                         <div class="col-span-4">
-                            <select name="price_range"
+                            <select name="price_range" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select Any</option>
                                 @foreach ($priceRanges as $priceRange)
@@ -149,7 +149,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Price</label>
                         <div class="col-span-4">
-                            <select name="price"
+                            <select name="price" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select Any</option>
                                 @foreach ($priceUnits as $priceUnit)
@@ -164,7 +164,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Exact Price</label>
                         <div class="col-span-4">
-                            <input type="text" name="exact_price"
+                            <input type="text" name="exact_price" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Priority</label>
                         <div class="col-span-4">
-                            <select name="priority"
+                            <select name="priority" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select One</option>
                                 <option value="1">P1</option>
@@ -204,7 +204,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Amount For</label>
                         <div class="col-span-4">
-                            <select name="amount_for"
+                            <select name="amount_for" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select One</option>
                                 @foreach ($areaUnits as $areaUnit)
@@ -225,7 +225,7 @@
                                     <span class="text-gray-800 font-medium">Upload Images</span>
 
                                     <!-- Hidden File Input -->
-                                    <input type="file" id="imageUpload" accept="image/*" class="hidden"
+                                    <input type="file" id="imageUpload" accept="image/*" class="hidden" required
                                         name="images[]" multiple onchange="previewImage(event)">
 
                                     <!-- Trigger Button -->
@@ -251,7 +251,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Contact Person</label>
                         <div class="col-span-4">
-                            <input type="text" name="contact_person"
+                            <input type="text" name="contact_person" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -260,7 +260,7 @@
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Contact Number</label>
                         <div class="col-span-4">
-                            <input type="number" name="contact_number"
+                            <input type="number" name="contact_number" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                         <label class="col-span-2 text-sm text-gray-700"></label>
                         <div class="col-span-10">
                             <div class="flex items-center space-x-2">
-                                <input type="checkbox" id="terms" class="w-4 h-4 border-gray-300 rounded">
+                                <input type="checkbox" id="terms" class="w-4 h-4 border-gray-300 rounded" required>
                                 <label for="terms" class="text-sm text-gray-700">
                                     Click to Agree <a href="#" class="text-blue-600 hover:underline">Terms and
                                         Conditions</a>

@@ -5,8 +5,7 @@
         <div class="w-80 max-w-sm p-6 bg-white shadow-md rounded-md ">
             <h2 class="text-2xl font-bold text-red-600 mb-6 text-center">Register</h2>
 
-            <form id="registerForm" action="{{ route('registerUser') }}" method="POST" class="space-y-4"
-                onsubmit="return validateForm()">
+            <form id="registerForm" action="{{ route('registerUser') }}" method="POST" class="space-y-4">
                 @csrf
 
                 <!-- Full Name -->
