@@ -9,8 +9,9 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Premium Villas</h3>
                     <p class="text-gray-600">Luxury independent houses with gardens</p>
                 </div>
-                <button class="text-primary font-semibold hover:text-red-secondary transition-colors">View All 245+
-                    →</button>
+                <a href=""><button class="text-primary font-semibold hover:text-red-secondary transition-colors">View
+                        All 245+
+                        →</button></a>
             </div>
 
             <div class="overflow-x-auto">

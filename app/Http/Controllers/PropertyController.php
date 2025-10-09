@@ -15,7 +15,12 @@ class PropertyController extends Controller
 {
     public function listProperty()
     {
-        return view('pages.properties');
+        // Fetch with category and location relationships
+        $properties = MyProperties::with(['category', 'locality'])
+            ->orderByDesc('post_date')
+            ->paginate(10);
+
+        return view('pages.properties', compact('properties'));
     }
 
     public function addProperty()

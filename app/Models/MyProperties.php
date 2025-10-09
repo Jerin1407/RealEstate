@@ -31,4 +31,16 @@ class MyProperties extends Model
         'is_modified',
         'priority',
     ];
+
+    // Relationship with Category
+    public function category()
+    {
+        return $this->belongsTo(CategoryModel::class, 'category_id', 'category_id');
+    }
+
+    // Relationship with Location
+    public function locality()
+    {
+        return $this->belongsTo(LocationModel::class, 'locality_id', 'locality_id');
+    }
 }

@@ -91,22 +91,30 @@
 
                         <!-- Table Body -->
                         <tbody class="bg-white">
-                            <tr class="border-b border-gray-200 hover:bg-gray-50">
-                                <td class="px-4 py-3">
-                                    <input type="checkbox" class="rounded">
-                                </td>
-                                <td class="px-4 py-3 text-sm text-gray-900">PRP001</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">Veluthur near 1410 SqFt, 4.5 cent,
-                                    3BHK Villa</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">Villa</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">Veluthur</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">Property Description</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">Realestate</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">2025-09-25</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">₹55,00,000</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">Active</td>
-                                <td class="px-4 py-3 text-sm text-gray-900">High</td>
-                            </tr>
+                            @foreach ($properties as $property)
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="px-4 py-3">
+                                        <input type="checkbox" class="rounded">
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_code }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_title }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ $property->category->category_name ?? 'N/A' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ $property->locality->locality_name ?? 'N/A' }}
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ Str::limit($property->property_description, 50) }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $property->posted_by }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $property->post_date }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        ₹{{ number_format($property->price, 2) }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ $property->is_approved ? 'Active' : 'Inactive' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ ucfirst($property->priority) }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -116,65 +124,60 @@
 
     </div>
 
+    <!-- Custom Pagination -->
     <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
         <div class="flex items-center justify-between flex-wrap gap-4">
 
             <!-- Results info -->
             <div class="text-sm text-gray-700">
-                Showing <span class="font-medium">1</span> to
-                <span class="font-medium">10</span> of
-                <span class="font-medium">45</span> results
+                Showing
+                <span class="font-medium">{{ $properties->firstItem() ?? 0 }}</span> to
+                <span class="font-medium">{{ $properties->lastItem() ?? 0 }}</span> of
+                <span class="font-medium">{{ $properties->total() }}</span> results
             </div>
 
             <!-- Pagination controls -->
             <div class="flex items-center gap-1">
-                <!-- First page (disabled state) -->
-                <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">
-                    &laquo; First
-                </span>
+                <!-- First -->
+                @if ($properties->onFirstPage())
+                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&laquo;
+                        First</span>
+                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&lsaquo;
+                        Prev</span>
+                @else
+                    <a href="{{ $properties->url(1) }}"
+                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&laquo;
+                        First</a>
+                    <a href="{{ $properties->previousPageUrl() }}"
+                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&lsaquo;
+                        Prev</a>
+                @endif
 
-                <!-- Previous page (disabled state) -->
-                <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">
-                    &lsaquo; Prev
-                </span>
+                <!-- Page Numbers -->
+                @foreach ($properties->getUrlRange(1, $properties->lastPage()) as $page => $url)
+                    @if ($page == $properties->currentPage())
+                        <span
+                            class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">{{ $page }}</span>
+                    @elseif ($page > $properties->currentPage() - 2 && $page < $properties->currentPage() + 2)
+                        <a href="{{ $url }}"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">{{ $page }}</a>
+                    @endif
+                @endforeach
 
-                <!-- Page 1 (active) -->
-                <span class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">
-                    1
-                </span>
-
-                <!-- Page 2 -->
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                    2
-                </a>
-
-                <!-- Page 3 -->
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                    3
-                </a>
-
-                <!-- Ellipsis -->
-                <span class="px-3 py-2 text-gray-500">...</span>
-
-                <!-- Last page -->
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                    5
-                </a>
-
-                <!-- Next page (enabled) -->
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                    Next &rsaquo;
-                </a>
-
-                <!-- Last page (enabled) -->
-                <a href="#"
-                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                    Last &raquo;
-                </a>
+                <!-- Next -->
+                @if ($properties->hasMorePages())
+                    <a href="{{ $properties->nextPageUrl() }}"
+                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Next
+                        &rsaquo;</a>
+                    <a href="{{ $properties->url($properties->lastPage()) }}"
+                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Last
+                        &raquo;</a>
+                @else
+                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Next
+                        &rsaquo;</span>
+                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Last
+                        &raquo;</span>
+                @endif
             </div>
         </div>
     </div>

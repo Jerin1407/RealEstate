@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () { return view('pages.index');})->name('home');
 Route::get('/about', function () { return view('pages.about');})->name('about');
 Route::get('/service', function () { return view('pages.service');})->name('service');
 Route::get('/home-loan', function () { return view('pages.home_loan');})->name('home-loan');
@@ -45,5 +45,7 @@ Route::post('/saveproperty', [PropertyController::class, 'saveProperty'])->name(
 // Route::get('/editproperty/{id}', [PropertyController::class, 'editProperty'])->name('editproperty');
 // Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'])->name('updateproperty');
 // Route::get('/deleteproperty/{id}', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
+
+Route::get('/index', [HomeController::class, 'index'])->name('home');
 
 
