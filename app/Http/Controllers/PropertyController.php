@@ -87,7 +87,7 @@ class PropertyController extends Controller
         $property->property_code = $propertyCode;
         $property->price = $request->exact_price;
         $property->property_title = $request->title;
-        $property->property_description = $request->description;
+        $property->property_description = strip_tags($request->description);
         $property->youtubeurl = $request->youtube_url;
         $property->contact_name = $request->contact_person;
         $property->contact_number = $request->contact_number;

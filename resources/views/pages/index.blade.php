@@ -9,114 +9,63 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Premium Villas</h3>
                     <p class="text-gray-600">Luxury independent houses with gardens</p>
                 </div>
-                <a href=""><button class="text-primary font-semibold hover:text-red-secondary transition-colors">View
+                <a href="{{ route('viewAllVilla') }}"><button
+                        class="text-primary font-semibold hover:text-red-secondary transition-colors">View
                         All 245+
                         →</button></a>
             </div>
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
-
-                    <!-- Villa 1 -->
-                    <div
-                        class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                        <a href="{{ route('luxury-villa-in-kolazhy') }}">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/dfdfv.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-
-                            <div class="p-6 md:h-48">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Luxury Villa in Kolazhy</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Villa</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">4 BHK • 2500 sq ft • Garden • Parking</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹1.2 Cr</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                    </div>
-                    </a>
-
-                    <!-- Villa 2 -->
-                    <a href="{{ route('moder-villa-in-koorkenchery') }}">
+                    @foreach ($villas as $villa)
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/e434.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 md:h-48">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Koorkanchery Villa </h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Villa</span>
+                            <a href="{{ route('viewVillaProperty', ['id' => $villa->property_id]) }}">
+                                <div
+                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                                    @php
+                                        $coverImage = $villa->images->where('is_cover', 1)->first();
+                                    @endphp
+                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                        alt="{{ $villa->property_title }}" class="h-56 w-full object-cover">
                                 </div>
-                                <p class="text-gray-600 mb-4">4 BHK • 2260 sq ft • Pool • Gym</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹1.8 Cr</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
 
-                    <!-- Villa 3 -->
-                    <a href="{{ route('koorkenchery-4bhk') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/e4554.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 md:h-48">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Villa in koorkanchery</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Villa</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">4 BHK • 2360 sq ft • Terrace • Security</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹95 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                <div class="p-6 md:h-48">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-xl font-bold text-gray-800">{{ $villa->property_title }}</h4>
+                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">
+                                            {{ $villa->category->category_name ?? 'Villa' }}
+                                        </span>
+                                    </div>
 
-                    <!-- Villa 4 -->
-                    <a href="{{ route('peramangalam-villa') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/432323.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 md:h-48">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Peramangalam </h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Villa</span>
+                                    <p class="text-gray-600 mb-4">
+                                        {{ Str::limit($villa->property_description, 10) }}
+                                    </p>
+
+                                    <div class="flex justify-between items-center">
+                                        @php
+                                            if ($villa->price >= 10000000) {
+                                                $formattedPrice = round($villa->price / 10000000, 2) . ' Cr';
+                                            } elseif ($villa->price >= 100000) {
+                                                $formattedPrice = round($villa->price / 100000, 2) . ' L';
+                                            } else {
+                                                $formattedPrice = number_format($villa->price, 0);
+                                            }
+                                        @endphp
+
+                                        <span class="text-2xl font-bold text-primary">
+                                            ₹{{ $formattedPrice }}
+                                        </span>
+
+                                        <button
+                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                            View Details
+                                        </button>
+                                    </div>
                                 </div>
-                                <p class="text-gray-600 mb-4">4 BHK • 2800 sq ft • Duplex • Garden</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹1.4 Cr</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    @endforeach
                 </div>
             </div>
         </div>
