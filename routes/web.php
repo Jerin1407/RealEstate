@@ -99,3 +99,11 @@ Route::post('/saveproperty', [PropertyController::class, 'saveProperty'])->name(
 Route::get('/index', [HomeController::class, 'index'])->name('home');
 Route::get('/view-all-villa', [HomeController::class, 'viewAllVilla'])->name('viewAllVilla');
 Route::get('/view-villa-property/{id}', [HomeController::class, 'viewVillaProperty'])->name('viewVillaProperty');
+Route::get('/view-all-flat', [HomeController::class, 'viewAllFlat'])->name('viewAllFlat');
+Route::get('/view-flat-property/{id}', [HomeController::class, 'viewFlatProperty'])->name('viewFlatProperty');
+Route::get('/view-all-plot', [HomeController::class, 'viewAllPlot'])->name('viewAllPlot');
+Route::get('/view-plot-property/{id}', [HomeController::class, 'viewPlotProperty'])->name('viewPlotProperty');
+Route::get('/view-all-commercial', [HomeController::class, 'viewAllCommercial'])->name('viewAllCommercial');
+Route::get('/view-commercial-property/{id}', [HomeController::class, 'viewCommercialProperty'])->name('viewcommercialProperty');
+
+

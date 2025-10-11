@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: '{{ asset('uploads/' . ($villa->images->where('is_cover', 1)->first()->filename ?? 'images/no-image.jpg')) }}' }">
-
+    <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: '{{ asset('uploads/' . ($commercial->images->where('is_cover', 1)->first()->filename ?? 'images/no-image.jpg')) }}' }">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
 
             <!-- Left Side: Image + Property Description -->
@@ -14,7 +13,7 @@
 
                     <!-- Thumbnails -->
                     <div class="flex mt-2 gap-2 overflow-x-auto">
-                        @foreach ($villa->images as $img)
+                        @foreach ($commercial->images as $img)
                             <img src="{{ asset('uploads/' . $img->filename) }}"
                                 @click="selectedImage = '{{ asset('uploads/' . $img->filename) }}'"
                                 class="w-24 h-20 object-cover rounded cursor-pointer border-2"
@@ -26,35 +25,35 @@
 
                 <!-- Property Description -->
                 <div>
-                    <h3 class="text-red-600 font-bold text-lg mb-2">{{ $villa->property_code }}</h3>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ $villa->property_title }}</h2>
+                    <h3 class="text-red-600 font-bold text-lg mb-2">{{ $commercial->property_code }}</h3>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ $commercial->property_title }}</h2>
 
                     <h4 class="text-lg font-semibold text-gray-700 mb-2">Property Description</h4>
-                    <p class="text-gray-700 leading-relaxed mb-4">{{ strip_tags($villa->property_description) }}</p>
+                    <p class="text-gray-700 leading-relaxed mb-4">{{ strip_tags($commercial->property_description) }}</p>
 
                     <p class="text-gray-700 mb-2"><span class="font-semibold">Asking Price:</span>
                         @php
-                            if ($villa->price >= 10000000) {
-                                $formattedPrice = round($villa->price / 10000000, 2) . ' Cr';
-                            } elseif ($villa->price >= 100000) {
-                                $formattedPrice = round($villa->price / 100000, 2) . ' L';
+                            if ($commercial->price >= 10000000) {
+                                $formattedPrice = round($commercial->price / 10000000, 2) . ' Cr';
+                            } elseif ($commercial->price >= 100000) {
+                                $formattedPrice = round($commercial->price / 100000, 2) . ' L';
                             } else {
-                                $formattedPrice = number_format($villa->price, 0);
+                                $formattedPrice = number_format($commercial->price, 0);
                             }
                         @endphp
                         ₹{{ $formattedPrice }}
                     </p>
 
-                    <p class="font-semibold text-gray-800">Contact: <span class="font-normal">{{ $villa->contact_name }}</span>
+                    <p class="font-semibold text-gray-800">Contact: <span class="font-normal">{{ $commercial->contact_name }}</span>
                         </p>
 
                     <p class="text-gray-700 mb-2">
-                        <span class="font-semibold">Contact Number:</span> {{ $villa->contact_number }}
+                        <span class="font-semibold">Contact Number:</span> {{ $commercial->contact_number }}
                     </p>
 
                     <div class="flex justify-between items-center mt-8">
                         <p class="text-xl font-bold text-red-600">
-                            {{ $villa->locality->locality_name ?? 'N/A' }}
+                            {{ $commercial->locality->locality_name ?? 'N/A' }}
                         </p>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                     <!-- Property ID (Prefilled) -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Property ID</label>
-                        <input type="text" value="{{ $villa->property_code }}" readonly
+                        <input type="text" value="{{ $commercial->property_code }}" readonly
                             class="w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-100 cursor-not-allowed">
                     </div>
 
@@ -122,5 +121,6 @@
         </div>
     </section>
 
+    <!-- Alpine.js (for thumbnail click functionality) -->
     <script src="https://unpkg.com/alpinejs" defer></script>
 @endsection

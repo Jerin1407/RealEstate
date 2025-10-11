@@ -9,9 +9,14 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Premium Villas</h3>
                     <p class="text-gray-600">Luxury independent houses with gardens</p>
                 </div>
+
+                @php
+                    $villaCount = \App\Models\MyProperties::where('category_id', 1)->count();
+                @endphp
+
                 <a href="{{ route('viewAllVilla') }}"><button
                         class="text-primary font-semibold hover:text-red-secondary transition-colors">View
-                        All 245+
+                        All {{ $villaCount }}+
                         →</button></a>
             </div>
 
@@ -34,7 +39,7 @@
                                     <div class="flex justify-between items-start mb-2">
                                         <h4 class="text-xl font-bold text-gray-800">{{ $villa->property_title }}</h4>
                                         <span class="bg-primary text-white px-2 py-1 rounded text-sm">
-                                            {{ $villa->category->category_name ?? 'Villa' }}
+                                            Villa
                                         </span>
                                     </div>
 
@@ -79,114 +84,68 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Modern Flats</h3>
                     <p class="text-gray-600">Contemporary apartments in prime locations</p>
                 </div>
-                <button class="text-primary font-semibold hover:text-red-secondary transition-colors">View All 380+
-                    →</button>
+
+                @php
+                    $flatCount = \App\Models\MyProperties::where('category_id', 2)->count();
+                @endphp
+
+                <a href="{{ route('viewAllFlat') }}"><button
+                        class="text-primary font-semibold hover:text-red-secondary transition-colors">View
+                        All {{ $flatCount }}+
+                        →</button></a>
             </div>
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
-
-                    <!-- Flat 1 -->
-                    <a href="{{ route('flat-punkunnam') }}">
+                    @foreach ($flats as $flat)
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/xfdfdfe.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Punkunnam</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Flat</span>
+                            <a href="{{ route('viewFlatProperty', ['id' => $flat->property_id]) }}">
+                                <div
+                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                                    @php
+                                        $coverImage = $flat->images->where('is_cover', 1)->first();
+                                    @endphp
+                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                        alt="{{ $flat->property_title }}" class="h-56 w-full object-cover">
                                 </div>
-                                <p class="text-gray-600 mb-4">2 BHK • 940 sq ft • Balcony • Gym</p>
-                                <br>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹85 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
 
-                    <!-- Flat 2 -->
-                    <a href="{{ route('luxury-flat-patturaikkal') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/2e0dbb48-1bca-4646-aa79-65693f747b22.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Luxury Flat Patturaikkal</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Flat</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">3 BHK • 1745 sq ft • Furnished • Bus Stop</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹65 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                <div class="p-6 md:h-48">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-xl font-bold text-gray-800">{{ $flat->property_title }}</h4>
+                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">
+                                            Flat
+                                        </span>
+                                    </div>
 
-                    <!-- Flat 3 -->
-                    <a href="{{ route('kuriachira-flat') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/34925fa6-9bd8-4d3b-a7bb-27b60f0da90e.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Kuriachira near New Flat </h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Flat</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">2 BHK • 2200 sq ft • Terrace • Pool</p>
-                                <br>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹1.1 Cr</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                    <p class="text-gray-600 mb-4">
+                                        {{ Str::limit($flat->property_description, 10) }}
+                                    </p>
 
-                    <!-- Flat 4 -->
-                    <a href="{{ route('luxuriant-near-eastfort') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/02afed07-38f0-49af-84f0-c98a3064dc5f.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Luxuriant 1200 SqFt</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Flat</span>
+                                    <div class="flex justify-between items-center">
+                                        @php
+                                            if ($flat->price >= 10000000) {
+                                                $formattedPrice = round($flat->price / 10000000, 2) . ' Cr';
+                                            } elseif ($flat->price >= 100000) {
+                                                $formattedPrice = round($flat->price / 100000, 2) . ' L';
+                                            } else {
+                                                $formattedPrice = number_format($flat->price, 0);
+                                            }
+                                        @endphp
+
+                                        <span class="text-2xl font-bold text-primary">
+                                            ₹{{ $formattedPrice }}
+                                        </span>
+
+                                        <button
+                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                            View Details
+                                        </button>
+                                    </div>
                                 </div>
-                                <p class="text-gray-600 mb-4">3 BHK • 1200 sq ft • Furnished • Central</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹45 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -200,115 +159,68 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Premium Plots</h3>
                     <p class="text-gray-600">Ready-to-build land parcels in prime locations</p>
                 </div>
-                <button class="text-primary font-semibold hover:text-red-secondary transition-colors">View All 156+
-                    →</button>
+
+                @php
+                    $plotCount = \App\Models\MyProperties::where('category_id', 3)->count();
+                @endphp
+
+                <a href="{{ route('viewAllPlot') }}"><button
+                        class="text-primary font-semibold hover:text-red-secondary transition-colors">View
+                        All {{ $plotCount }}+
+                        →</button></a>
             </div>
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
-
-                    <!-- Plot 1 -->
-                    <a href="{{ route('plot-in-viyyur') }}">
+                    @foreach ($plots as $plot)
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/2121_02082024134448.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 md:h-54">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Plot in Viyyur</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Plot</span>
+                            <a href="{{ route('viewPlotProperty', ['id' => $plot->property_id]) }}">
+                                <div
+                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                                    @php
+                                        $coverImage = $plot->images->where('is_cover', 1)->first();
+                                    @endphp
+                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                        alt="{{ $plot->property_title }}" class="h-56 w-full object-cover">
                                 </div>
-                                <p class="text-gray-600 mb-4">10cent • Plot • Panchayat Approved</p>
-                                <br>
-                                <br>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹45 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
 
-                    <!-- Plot 2 -->
-                    <a href="{{ route('residential-plot-in-kolazhy') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/12_02082024135736.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 md:54">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Residential Plot in Kolazhy</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Plot</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">2400 sq ft • Gated Community • Highway Access</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹72 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                <div class="p-6 md:h-48">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-xl font-bold text-gray-800">{{ $plot->property_title }}</h4>
+                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">
+                                            Plot
+                                        </span>
+                                    </div>
 
-                    <!-- Plot 3 -->
-                    <a href="{{ route('residential-land-thiroor') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/9a94dcf9-8449-4321-bfb7-23e721ca1742.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 ">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Residential Land for sale in Thiroor</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Plot</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">1800 sq ft • Corner • Clear Title • Railway Station</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹58 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                    <p class="text-gray-600 mb-4">
+                                        {{ Str::limit($plot->property_description, 10) }}
+                                    </p>
 
-                    <!-- Plot 4 -->
-                    <a href="{{ route('villa-plot-in-kottekadu') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/WhatsApp%20Image%202024-02-02%20at%204.00.30%20PM.jpeg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6 h-54">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Villa Plot in Kottekad</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Plot</span>
+                                    <div class="flex justify-between items-center">
+                                        @php
+                                            if ($plot->price >= 10000000) {
+                                                $formattedPrice = round($plot->price / 10000000, 2) . ' Cr';
+                                            } elseif ($plot->price >= 100000) {
+                                                $formattedPrice = round($plot->price / 100000, 2) . ' L';
+                                            } else {
+                                                $formattedPrice = number_format($plot->price, 0);
+                                            }
+                                        @endphp
+
+                                        <span class="text-2xl font-bold text-primary">
+                                            ₹{{ $formattedPrice }}
+                                        </span>
+
+                                        <button
+                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                            View Details
+                                        </button>
+                                    </div>
                                 </div>
-                                <p class="text-gray-600 mb-4">3000 sq ft • Villa Plot • River View • Peaceful</p>
-                                <br>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹85 L</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -322,115 +234,68 @@
                     <h3 class="text-3xl font-bold text-gray-800 mb-2">Commercial Properties</h3>
                     <p class="text-gray-600">Office spaces and retail properties for business</p>
                 </div>
-                <button class="text-primary font-semibold hover:text-red-secondary transition-colors">View All 89+
-                    →</button>
+
+                @php
+                    $commercialCount = \App\Models\MyProperties::where('category_id', 4)->count();
+                @endphp
+
+                <a href="{{ route('viewAllCommercial') }}"><button
+                        class="text-primary font-semibold hover:text-red-secondary transition-colors">View
+                        All {{ $commercialCount }}+
+                        →</button></a>
             </div>
 
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
-
-                    <!-- Commercial 1 -->
-                    <a href="{{ route('amalanagar-2-bhk') }}">
+                    @foreach ($commercials as $commercial)
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/a9e7deed-eff4-443a-88f8-d8d962f1c82b_01082024082623.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Amalanagar 2 BHK Fully Furnitured</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Commercial</span>
+                            <a href="{{ route('viewcommercialProperty', ['id' => $commercial->property_id]) }}">
+                                <div
+                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                                    @php
+                                        $coverImage = $commercial->images->where('is_cover', 1)->first();
+                                    @endphp
+                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                        alt="{{ $commercial->property_title }}" class="h-56 w-full object-cover">
                                 </div>
-                                <p class="text-gray-600 mb-4">2500 sq ft • Furnished • IT Park • Parking</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹15000</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
 
-                    <!-- Commercial 2 -->
-                    <a href="{{ route('westfort-2bhk') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/asaw.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Westfort 2bhk</h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Commercial</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">1200 sq ft • Ground Floor • High Footfall</p>
-                                <br>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹20000</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                <div class="p-6 md:h-48">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-xl font-bold text-gray-800">{{ $commercial->property_title }}</h4>
+                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">
+                                            Commercial
+                                        </span>
+                                    </div>
 
-                    <!-- Commercial 3 -->
-                    <a href="{{ route('westfort-2bhk-1000SqFt') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/tyty_09082024114406.jpg"
-                                    alt="" class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Westfort 2bhk, 1000SqFt, </h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Commercial</span>
-                                </div>
-                                <p class="text-gray-600 mb-4">5000 sq ft • Industrial • Loading Bay</p>
-                                <br>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹20000</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                                    <p class="text-gray-600 mb-4">
+                                        {{ Str::limit($commercial->property_description, 10) }}
+                                    </p>
 
-                    <!-- Commercial 4 -->
-                    <a href="{{ route('railway-station-near-pootole') }}">
-                        <div
-                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
-                            <div class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                <img src="https://realestatethrissur.com/uploads/property/544.jpg" alt=""
-                                    class="h-56 w-full object-cover">
-                            </div>
-                            <div class="p-6">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="text-xl font-bold text-gray-800">Railway station Near pootole Commerc...
-                                    </h4>
-                                    <span class="bg-primary text-white px-2 py-1 rounded text-sm">Commercial</span>
+                                    <div class="flex justify-between items-center">
+                                        @php
+                                            if ($commercial->price >= 10000000) {
+                                                $formattedPrice = round($commercial->price / 10000000, 2) . ' Cr';
+                                            } elseif ($commercial->price >= 100000) {
+                                                $formattedPrice = round($commercial->price / 100000, 2) . ' L';
+                                            } else {
+                                                $formattedPrice = number_format($commercial->price, 0);
+                                            }
+                                        @endphp
+
+                                        <span class="text-2xl font-bold text-primary">
+                                            ₹{{ $formattedPrice }}
+                                        </span>
+
+                                        <button
+                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                            View Details
+                                        </button>
+                                    </div>
                                 </div>
-                                <p class="text-gray-600 mb-4">1200 sq ft • Modern • Cafeteria • WiFi</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-primary">₹32000</span>
-                                    <button
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                    @endforeach
                 </div>
             </div>
         </div>
