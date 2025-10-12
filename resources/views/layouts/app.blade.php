@@ -7,6 +7,8 @@
     <title>@yield('title', 'Real Estate Thrissur - Find Your Dream Home')</title>
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
     <link href="../assets/css/output_2.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="bg-gray-50 font-sans">

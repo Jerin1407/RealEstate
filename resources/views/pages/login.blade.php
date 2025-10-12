@@ -1,40 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Success Alert -->
-    @if (session('success'))
-        <div id="success-alert"
-            class="mb-4 p-4 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm font-medium flex items-center">
-            {{ session('success') }}
-        </div>
-
-        <script>
-            setTimeout(() => {
-                let alert = document.getElementById('success-alert');
-                if (alert) {
-                    alert.style.display = 'none';
-                }
-            }, 3000);
-        </script>
-    @endif
-
-    <!-- Error Alert -->
-    @if (session('error'))
-        <div id="success-alert"
-            class="mb-4 p-4 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm font-medium flex items-center">
-            {{ session('error') }}
-        </div>
-
-        <script>
-            setTimeout(() => {
-                let alert = document.getElementById('success-alert');
-                if (alert) {
-                    alert.style.display = 'none';
-                }
-            }, 3000);
-        </script>
-    @endif
-
     <section id="about" class="bg-white py-16 text-center md:text-start flex justify-center">
         <div class="w-80 max-w-sm p-6 bg-white shadow-md rounded-md ">
             <h2 class="text-2xl font-bold text-red-600 mb-6 text-center">Login</h2>
@@ -73,5 +39,28 @@
                     class="text-red-600 hover:underline text-sm ml-2">Sign Up</a>
             </div>
         </div>
+
+        <script>
+            @if (session('error'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session('error') }}'
+                });
+            @endif
+        </script>
     </section>
 @endsection

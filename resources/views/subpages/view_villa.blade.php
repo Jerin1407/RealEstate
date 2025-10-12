@@ -27,34 +27,52 @@
                 <!-- Property Description -->
                 <div>
                     <h3 class="text-red-600 font-bold text-lg mb-2">{{ $villa->property_code }}</h3>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ $villa->property_title }}</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {{ $villa->property_title }}
+                    </h2>
 
                     <h4 class="text-lg font-semibold text-gray-700 mb-2">Property Description</h4>
-                    <p class="text-gray-700 leading-relaxed mb-4">{{ strip_tags($villa->property_description) }}</p>
-
-                    <p class="text-gray-700 mb-2"><span class="font-semibold">Asking Price:</span>
-                        @php
-                            if ($villa->price >= 10000000) {
-                                $formattedPrice = round($villa->price / 10000000, 2) . ' Cr';
-                            } elseif ($villa->price >= 100000) {
-                                $formattedPrice = round($villa->price / 100000, 2) . ' L';
-                            } else {
-                                $formattedPrice = number_format($villa->price, 0);
-                            }
-                        @endphp
-                        ₹{{ $formattedPrice }}
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        {{ strip_tags($villa->property_description) }}
                     </p>
-
-                    <p class="font-semibold text-gray-800">Contact: <span class="font-normal">{{ $villa->contact_name }}</span>
-                        </p>
-
-                    <p class="text-gray-700 mb-2">
-                        <span class="font-semibold">Contact Number:</span> {{ $villa->contact_number }}
+                    <p class="text-gray-700 mb-2"><span class="font-semibold">Asking Price:</span> @php
+                        if ($villa->price >= 10000000) {
+                            $formattedPrice = round($villa->price / 10000000, 2) . ' Cr';
+                        } elseif ($villa->price >= 100000) {
+                            $formattedPrice = round($villa->price / 100000, 2) . ' L';
+                        } else {
+                            $formattedPrice = number_format($villa->price, 0);
+                        }
+                    @endphp
+                        ₹ {{ $formattedPrice }} (Negotiable)</p>
+                    <p class="text-gray-700 mb-2"><span class="font-semibold">Contact:</span> For professional assistance and better deals contact <span class="font-semibold">GOD’s
+                            OWN Properties
+                            Pvt. Ltd</span>
+                    </p>
+                    <p class="text-gray-700 mb-4">Loan with lowest interest rates available.</p>
+                    <p class="mb-6">
+                        Search More Villa / Flats @
+                        <a href="https://www.realestatethrissur.com" target="_blank" class="text-blue-600 underline">
+                            www.realestatethrissur.com
+                        </a>
+                    </p>
+                    <p class="text-gray-700">
+                        GODs OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort,
+                        Thrissur
                     </p>
 
                     <div class="flex justify-between items-center mt-8">
-                        <p class="text-xl font-bold text-red-600">
-                            {{ $villa->locality->locality_name ?? 'N/A' }}
+                        <p class="text-xl font-bold">
+                            Rs. <span class="text-red-600">{{ $villa->price }}</span>
+                        </p>
+                        <p class="text-xl font-bold text-red-600">{{ $villa->locality->locality_name ?? 'N/A' }}</p>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <p class="font-semibold text-gray-800">Contact: <span
+                                class="font-normal">{{ $villa->contact_name }}</span>
+                        </p>
+                        <p class="font-semibold text-gray-800">Contact Number:
+                            <span class="font-normal">{{ $villa->contact_number }}</span>
                         </p>
                     </div>
                 </div>

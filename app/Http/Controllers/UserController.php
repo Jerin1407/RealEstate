@@ -79,7 +79,7 @@ class UserController extends Controller
                 'user_type_id' => $user->user_type_id,
             ]);
 
-            return redirect()->route('admin')->with('success', 'Login successfull!');
+            return redirect()->route('admin')->with('success', 'Login successfull! Welcome back...');
         } else {
             return redirect()->back()->with('error', 'Invalid username or password');
         }
