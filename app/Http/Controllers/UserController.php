@@ -79,7 +79,7 @@ class UserController extends Controller
                 'user_type_id' => $user->user_type_id,
             ]);
 
-            return redirect()->route('admin')->with('success', 'Login successfull! Welcome back...');
+            return redirect()->route('admin')->with('success_login', 'Login successfull! Welcome back...');
         } else {
             return redirect()->back()->with('error', 'Invalid username or password');
         }
@@ -88,6 +88,6 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return redirect()->route('login')->with('success', 'Logout successfull!');
+        return redirect()->route('login')->with('success_logout', 'Logout successfull!');
     }
 }

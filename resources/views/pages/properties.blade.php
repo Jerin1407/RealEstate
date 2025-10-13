@@ -7,6 +7,8 @@
     <title>Real Estate Thrissur - Find Your Dream Home</title>
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
     <link href="./assets/css/output_2.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -46,7 +48,8 @@
                                 <i class="far fa-eye mr-2"></i>
                                 View
                             </button>
-                            <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
+                            <button id="editPropertyBtn"
+                                class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
                                 <i class="fas fa-edit mr-2"></i>
                                 Edit
                             </button>
@@ -94,7 +97,8 @@
                             @foreach ($properties as $property)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
                                     <td class="px-4 py-3">
-                                        <input type="checkbox" class="rounded">
+                                        <input type="checkbox" name="selected_property"
+                                            value="{{ $property->property_id }}" class="property-checkbox rounded">
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_code }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_title }}</td>
@@ -219,6 +223,74 @@
                 }
             }
         })();
+
+        // success alert
+        @if (session('success'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            });
+        @endif
+
+        // edit property
+        document.getElementById('editPropertyBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Get all selected checkboxes
+            const selected = document.querySelectorAll('.property-checkbox:checked');
+
+            // Validate selection
+            if (selected.length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'No property selected!',
+                    text: 'Please select a property to edit.',
+                    position: 'top',
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                });
+                return;
+            }
+            if (selected.length > 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Multiple selected!',
+                    text: 'Please select only one property to edit.',
+                    position: 'top',
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 4000,
+                });
+                return;
+            }
+
+            // Get selected property ID
+            const propertyId = selected[0].value;
+
+            // Redirect to edit page
+            window.location.href = `/editproperty/${propertyId}`;
+        });
     </script>
 </body>
 

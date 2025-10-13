@@ -112,6 +112,57 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('listproperty')->with('success', 'Property added successfully.');
+        return redirect()->route('listproperty')->with('success', 'Property added successfully!!!');
+    }
+
+    public function editProperty($id)
+    {
+        $property = MyProperties::findOrFail($id);
+        $categories = CategoryModel::all();
+        $locations = LocationModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $priceUnits = PriceUnitModel::all();
+        $areaUnits = AreaUnitModel::all();
+
+        return view('property.edit', compact('property', 'categories', 'locations', 'priceRanges', 'priceUnits', 'areaUnits'));
+    }
+
+    public function updateProperty(Request $request, $id)
+    {
+        $property = MyProperties::findOrFail($id);
+
+        $property->update([
+            'property_title' => $request->input('title'),
+            'category_id' => $request->input('category'),
+            'locality_id' => $request->input('location'),
+            'price_range_id' => $request->input('price_range'),
+            'price' => $request->input('exact_price'),
+            'priority' => $request->input('priority'),
+            'property_description' => $request->input('description'),
+            'youtubeurl' => $request->input('youtube_url'),
+            'contact_name' => $request->input('contact_person'),
+            'contact_number' => $request->input('contact_number'),
+            'modified_date' => now(),
+        ]);
+
+        return redirect()->route('listproperty')->with('success', 'Property updated successfully!!!');
+    }
+
+    public function deletePropertyImage($id)
+    {
+        // Find the image record
+        $image = PropertyImageModel::findOrFail($id);
+
+        // Delete the file from 'public/uploads'
+        $filePath = public_path('uploads/' . $image->filename);
+        if (file_exists($filePath)) {
+            unlink($filePath); // delete the file
+        }
+
+        // Delete the database record
+        $image->delete();
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Image deleted successfully!!!');
     }
 }

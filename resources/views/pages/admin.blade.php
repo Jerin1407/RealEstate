@@ -119,7 +119,7 @@
             }
         })();
 
-        @if (session('success'))
+        @if (session('success_login'))
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -136,7 +136,7 @@
             });
             Toast.fire({
                 icon: 'success',
-                title: '{{ session('success') }}'
+                title: '{{ session('success_login') }}'
             });
         @endif
     </script>

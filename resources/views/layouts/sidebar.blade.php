@@ -30,10 +30,9 @@
             <h1 id="admin" class="font-bold text-primary">Welcome {{ session('fullname') }}</h1>
 
             <!-- List Property Button (desktop only) -->
-            <form action="{{ route('logout') }}" method="POST"
-                onsubmit="return confirm('Are you sure you want to logout?');">
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button
+                <button type="button" id="logoutBtn"
                     class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
                     Logout
                 </button>
@@ -111,3 +110,29 @@
                 </nav>
             </div>
         </div>
+
+        <script>
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, logout',
+                    cancelButtonText: 'Cancel',
+                    timerProgressBar: true,
+                    background: '#EF4444', // red
+                    color: '#fff',
+                    iconColor: '#fff'
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Are you sure you want to logout?'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('logoutForm').submit();
+                    }
+                });
+            });
+        </script>

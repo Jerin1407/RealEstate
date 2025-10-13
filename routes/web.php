@@ -17,9 +17,6 @@ Route::get('/home-loan', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
-Route::get('/properties/editproperty', function () {
-    return view('property.edit');
-})->name('edit-property');
 Route::get('/properties/viewproperty', function () {
     return view('property.view');
 })->name('view-property');
@@ -45,8 +42,9 @@ Route::get('/admin', [UserController::class, 'showAdmin'])->name('admin');
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');
 Route::post('/saveproperty', [PropertyController::class, 'saveProperty'])->name('saveproperty');
-// Route::get('/editproperty/{id}', [PropertyController::class, 'editProperty'])->name('editproperty');
-// Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'])->name('updateproperty');
+Route::get('/editproperty/{id}', [PropertyController::class, 'editProperty'])->name('editproperty');
+Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'])->name('updateproperty');
+Route::post('/deletepropertyimage/{id}', [PropertyController::class, 'deletePropertyImage'])->name('deletePropertyImage');
 // Route::get('/deleteproperty/{id}', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
 
 Route::get('/index', [HomeController::class, 'index'])->name('home');
