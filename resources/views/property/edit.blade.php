@@ -228,14 +228,20 @@
                                                 alt="Property Image" class="w-24 h-24 object-cover rounded border">
 
                                             <!-- Delete Image -->
-                                            <form
+                                            {{-- <form
                                                 action="{{ route('deletePropertyImage', $image->property_thumb_id) }}"
                                                 method="POST" class="absolute top-1 right-1">
                                                 @csrf
                                                 @method('POST')
                                                 <button type="submit"
                                                     class="bg-red-500 text-black text-xs px-2 py-1 rounded">✕</button>
-                                            </form>
+                                            </form> --}}
+                                            <button type="button"
+                                                onclick="deleteImage('{{ route('deletePropertyImage', $image->property_thumb_id) }}')"
+                                                class="bg-red-500 text-black text-xs px-2 py-1 rounded">
+                                                ✕
+                                            </button>
+
                                         </div>
                                     @endforeach
                                 </div>
@@ -295,6 +301,11 @@
                         </div>
                     </div>
                 </form>
+                <!-- Hidden delete form (used by JS dynamically) -->
+                <form id="deleteImageForm" method="POST" style="display:none;">
+                    @csrf
+                    @method('POST')
+                </form>
             </div>
         </div>
 
@@ -339,6 +350,46 @@
                 }
             }
         })();
+
+        // Delete Property Image
+        function deleteImage(actionUrl) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Are you want to delete this image?',
+                icon: 'warning',
+                toast: true,
+                position: 'top',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                timerProgressBar: true,
+                width: '380px', // smaller toast size
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.getElementById('deleteImageForm');
+                    form.action = actionUrl;
+                    form.submit();
+                }
+            });
+        }
+
+        // alert success
+        @if (session('success_deleteImage'))
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                title: '{{ session('success_deleteImage') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        @endif
 
         // alert success
         @if (session('success'))

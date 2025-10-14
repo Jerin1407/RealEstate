@@ -112,7 +112,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('listproperty')->with('success', 'Property added successfully!!!');
+        return redirect()->route('listproperty')->with('success', 'Property saved successfully!!!');
     }
 
     public function editProperty($id)
@@ -129,23 +129,67 @@ class PropertyController extends Controller
 
     public function updateProperty(Request $request, $id)
     {
-        $property = MyProperties::findOrFail($id);
+        // Check login session
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->with('error_update', 'Please log in before updating a property.');
+        }
 
-        $property->update([
-            'property_title' => $request->input('title'),
-            'category_id' => $request->input('category'),
-            'locality_id' => $request->input('location'),
-            'price_range_id' => $request->input('price_range'),
-            'price' => $request->input('exact_price'),
-            'priority' => $request->input('priority'),
-            'property_description' => $request->input('description'),
-            'youtubeurl' => $request->input('youtube_url'),
-            'contact_name' => $request->input('contact_person'),
-            'contact_number' => $request->input('contact_number'),
-            'modified_date' => now(),
+        // Validate inputs
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|not_in:0',
+            'description' => 'required|string',
+            'youtube_url' => 'nullable|string',
+            'location' => 'required|not_in:0',
+            'price_range' => 'required|not_in:0',
+            'price' => 'nullable|numeric',
+            'exact_price' => 'nullable|numeric',
+            'priority' => 'nullable|string|max:10',
+            'amount_for' => 'nullable|not_in:0',
+            'contact_person' => 'nullable|string|max:255',
+            'contact_number' => 'nullable|string|max:20',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        return redirect()->route('listproperty')->with('success', 'Property updated successfully!!!');
+        // Find the property
+        $property = MyProperties::findOrFail($id);
+
+        // Update property details
+        $property->locality_id = $request->location;
+        $property->category_id = $request->category;
+        $property->price_range_id = $request->price_range;
+        $property->area_unit_id = $request->amount_for;
+        $property->price = $request->exact_price;
+        $property->property_title = $request->title;
+        $property->property_description = strip_tags($request->description);
+        $property->youtubeurl = $request->youtube_url;
+        $property->contact_name = $request->contact_person;
+        $property->contact_number = $request->contact_number;
+        $property->modified_date = now()->format('Y-m-d H:i:s');
+        $property->priority = $request->priority;
+        $property->is_modified = 1;
+        $property->save();
+
+        // Handle image uploads (optional)
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $image) {
+                $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads'), $filename);
+
+                PropertyImageModel::create([
+                    'property_id' => $property->property_id,
+                    'filename' => $filename,
+                    'is_cover' => $index === 0 ? 1 : 0, // mark first image as cover if desired
+                ]);
+            }
+        }
+
+        return redirect()->route('listproperty')->with('success_update', 'Property updated successfully!!!');
+    }
+
+    public function viewProperty()
+    {
+        return view('property.view');
     }
 
     public function deletePropertyImage($id)
@@ -162,7 +206,11 @@ class PropertyController extends Controller
         // Delete the database record
         $image->delete();
 
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'Image deleted successfully!!!');
+        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
+    }
+
+    public function deleteProperty()
+    {
+        return redirect()->route('listproperty')->with('success_delete', 'Property deleted successfully!!!');
     }
 }

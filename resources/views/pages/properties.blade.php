@@ -8,7 +8,6 @@
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
     <link href="./assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -44,10 +43,12 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
-                            <button class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
-                                <i class="far fa-eye mr-2"></i>
-                                View
-                            </button>
+                            <a href="{{ route('viewproperty') }}">
+                                <button class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
+                                    <i class="far fa-eye mr-2"></i>
+                                    View
+                                </button>
+                            </a>
                             <button id="editPropertyBtn"
                                 class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
                                 <i class="fas fa-edit mr-2"></i>
@@ -57,10 +58,12 @@
                                 <i class="fas fa-download mr-2"></i>
                                 Export
                             </button>
-                            <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
+                            <a href="">
+                                <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
                                 <i class="fas fa-trash mr-2"></i>
                                 Delete
                             </button>
+                            </a>
                         </div>
                         <a href="{{ route('addproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
@@ -246,6 +249,28 @@
             });
         @endif
 
+        // success alert
+        @if (session('success_update'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_update') }}'
+            });
+        @endif
+
         // edit property
         document.getElementById('editPropertyBtn').addEventListener('click', function(e) {
             e.preventDefault();
@@ -272,7 +297,7 @@
             if (selected.length > 1) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Multiple selected!',
+                    title: ' Multiple properties selected!',
                     text: 'Please select only one property to edit.',
                     position: 'top',
                     background: '#EF4444', // red color
