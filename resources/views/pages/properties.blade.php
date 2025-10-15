@@ -43,12 +43,11 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
-                            <a href="{{ route('viewproperty') }}">
-                                <button class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
-                                    <i class="far fa-eye mr-2"></i>
-                                    View
-                                </button>
-                            </a>
+                            <button type="button" id="viewBtn"
+                                class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
+                                <i class="far fa-eye mr-2"></i>
+                                View
+                            </button>
                             <button id="editPropertyBtn"
                                 class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
                                 <i class="fas fa-edit mr-2"></i>
@@ -58,12 +57,14 @@
                                 <i class="fas fa-download mr-2"></i>
                                 Export
                             </button>
-                            <a href="">
-                                <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
-                                <i class="fas fa-trash mr-2"></i>
-                                Delete
-                            </button>
-                            </a>
+                            <form id="deleteForm" action="{{ route('deleteproperty') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" id="deleteBtn"
+                                    class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
+                                    <i class="fas fa-trash mr-2"></i>
+                                    Delete
+                                </button>
                         </div>
                         <a href="{{ route('addproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
@@ -100,7 +101,7 @@
                             @foreach ($properties as $property)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
                                     <td class="px-4 py-3">
-                                        <input type="checkbox" name="selected_property"
+                                        <input type="checkbox" name="selected_properties[]"
                                             value="{{ $property->property_id }}" class="property-checkbox rounded">
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_code }}</td>
@@ -111,7 +112,7 @@
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ $property->locality->locality_name ?? 'N/A' }}
                                     <td class="px-4 py-3 text-sm text-gray-900">
-                                        {{ Str::limit($property->property_description, 50) }}</td>
+                                        {{ Str::limit(strip_tags($property->property_description), 50) }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->posted_by }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->post_date }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
@@ -124,6 +125,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </form>
                 </div>
             </div>
         </section>
@@ -315,6 +317,100 @@
 
             // Redirect to edit page
             window.location.href = `/editproperty/${propertyId}`;
+        });
+
+        // Delete Button
+        document.getElementById('deleteBtn').addEventListener('click', function() {
+            const selected = document.querySelectorAll('.property-checkbox:checked');
+            if (selected.length === 0) {
+                Swal.fire({
+                    position: 'top',
+                    icon: 'warning',
+                    title: 'Please select atleast one property!',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    toast: true,
+                });
+                return;
+            }
+
+            Swal.fire({
+                position: 'top',
+                title: 'Are you sure?',
+                text: 'You want to delete selected property(s)?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete!',
+                cancelButtonText: 'Cancel',
+                width: '400px'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').submit();
+                }
+            });
+        });
+
+        @if (session('success_delete'))
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: '{{ session('success_delete') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                width: '300px'
+            });
+        @endif
+
+        @if (session('error_delete'))
+            Swal.fire({
+                position: 'top',
+                icon: 'error',
+                title: '{{ session('error_delete') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                width: '300px'
+            });
+        @endif
+
+        document.getElementById('viewBtn').addEventListener('click', function() {
+            const selected = document.querySelectorAll('.property-checkbox:checked');
+
+            if (selected.length === 0) {
+                // No property selected
+                Swal.fire({
+                    position: 'top',
+                    icon: 'warning',
+                    title: 'No property selected!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    toast: true,
+                });
+            } else if (selected.length > 1) {
+                // More than one selected
+                Swal.fire({
+                    position: 'top',
+                    icon: 'warning',
+                    title: 'Please select only one property!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    toast: true,
+                });
+            } else {
+                // Exactly one selected — redirect to view page
+                const propertyId = selected[0].value;
+                window.location.href = `/viewproperty/${propertyId}`;
+            }
         });
     </script>
 </body>

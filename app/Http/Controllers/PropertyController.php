@@ -10,6 +10,7 @@ use App\Models\PriceUnitModel;
 use App\Models\AreaUnitModel;
 use App\Models\MyProperties;
 use App\Models\PropertyImageModel;
+use Illuminate\Support\Facades\File;
 
 class PropertyController extends Controller
 {
@@ -187,9 +188,11 @@ class PropertyController extends Controller
         return redirect()->route('listproperty')->with('success_update', 'Property updated successfully!!!');
     }
 
-    public function viewProperty()
+    public function viewProperty($id)
     {
-        return view('property.view');
+        $property = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
+
+        return view('property.view', compact('property'));
     }
 
     public function deletePropertyImage($id)
@@ -209,8 +212,32 @@ class PropertyController extends Controller
         return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
     }
 
-    public function deleteProperty()
+    public function deleteProperty(Request $request)
     {
-        return redirect()->route('listproperty')->with('success_delete', 'Property deleted successfully!!!');
+        $propertyIds = $request->input('selected_properties', []);
+
+        if (empty($propertyIds)) {
+            return redirect()->route('listproperty')->with('error_delete', 'No properties selected.');
+        }
+
+        foreach ($propertyIds as $id) {
+            $property = MyProperties::find($id);
+            if ($property) {
+                // Delete all related images
+                $images = PropertyImageModel::where('property_id', $id)->get();
+                foreach ($images as $image) {
+                    $imagePath = public_path('uploads/' . $image->filename);
+                    if (File::exists($imagePath)) {
+                        File::delete($imagePath);
+                    }
+                    $image->delete();
+                }
+
+                // Delete property record
+                $property->delete();
+            }
+        }
+
+        return redirect()->back()->with('success_delete', 'Property deleted successfully!!!');
     }
 }

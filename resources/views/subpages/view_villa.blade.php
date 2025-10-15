@@ -86,21 +86,21 @@
                     <!-- Name -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Your Name</label>
-                        <input type="text"
+                        <input type="text" name="name"
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
 
                     <!-- Phone -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Phone</label>
-                        <input type="text"
+                        <input type="text" name="number"
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
 
                     <!-- Email -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Email Id</label>
-                        <input type="email"
+                        <input type="email" name="email"
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
 
@@ -114,7 +114,7 @@
                     <!-- Message -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Type your message</label>
-                        <textarea rows="4"
+                        <textarea rows="4" name="message"
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"></textarea>
                     </div>
 
@@ -122,7 +122,7 @@
                         <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
                             class="mx-auto mb-2">
                         <label class="block text-gray-700 mb-1">Enter the code above here:</label>
-                        <input type="text"
+                        <input type="text" name="captcha_code"
                             class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                         <p class="text-xs text-gray-500 mt-2">
                             Can't read the image?
