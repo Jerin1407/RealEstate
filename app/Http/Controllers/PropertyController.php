@@ -96,6 +96,7 @@ class PropertyController extends Controller
         $property->modified_date = null;
         $property->is_approved = 0;
         $property->is_modified = 0;
+        $property->is_active = 1;
         $property->priority = $request->priority;
         $property->save();
 
@@ -240,4 +241,5 @@ class PropertyController extends Controller
 
         return redirect()->back()->with('success_delete', 'Property deleted successfully!!!');
     }
+
 }

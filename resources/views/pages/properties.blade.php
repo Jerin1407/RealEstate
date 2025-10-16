@@ -412,6 +412,20 @@
                 window.location.href = `/viewproperty/${propertyId}`;
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.querySelector('input[placeholder="Search..."]');
+        const tableRows = document.querySelectorAll("tbody tr");
+
+        searchInput.addEventListener("keyup", function () {
+            const searchValue = this.value.toLowerCase();
+
+            tableRows.forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                row.style.display = rowText.includes(searchValue) ? "" : "none";
+            });
+        });
+    });
     </script>
 </body>
 

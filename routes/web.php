@@ -58,5 +58,7 @@ Route::get('/view-all-plot', [HomeController::class, 'viewAllPlot'])->name('view
 Route::get('/view-plot-property/{id}', [HomeController::class, 'viewPlotProperty'])->name('viewPlotProperty');
 Route::get('/view-all-commercial', [HomeController::class, 'viewAllCommercial'])->name('viewAllCommercial');
 Route::get('/view-commercial-property/{id}', [HomeController::class, 'viewCommercialProperty'])->name('viewcommercialProperty');
+Route::get('/search-location', [HomeController::class, 'searchLocation'])->name('searchLocation');
+
 
 

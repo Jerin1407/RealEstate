@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MyProperties;
+use App\Models\CategoryModel;
+use App\Models\PriceRangeModel;
+use App\Models\LocationModel;
 
 class HomeController extends Controller
 {
@@ -35,7 +38,11 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        return view('pages.index', compact('villas', 'flats', 'plots', 'commercials'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.index', compact('villas', 'flats', 'plots', 'commercials', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewAllVilla()
@@ -125,4 +132,16 @@ class HomeController extends Controller
 
         return view('subpages.view_commercial', compact('commercial'));
     }
+
+    public function searchLocation(Request $request)
+{
+    $query = $request->get('query', '');
+
+    $locations = LocationModel::where('locality_name', 'like', "%{$query}%")
+        ->orderBy('locality_name')
+        ->take(10)
+        ->get(['locality_name']); // only fetch needed column
+
+    return response()->json($locations);
+}
 }

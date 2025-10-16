@@ -152,20 +152,26 @@
                 <select
                     class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
                     <option>Property Type</option>
-                    <option>Villa</option>
-                    <option>Flat</option>
-                    <option>Plot</option>
-                    <option>Commercial</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                    @endforeach
                 </select>
-                <input type="text" placeholder="Location"
-                    class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
+                {{-- <input type="text" placeholder="Location"
+                    class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary"> --}}
+                <div class="relative w-full max-w-sm">
+                    <input type="text" id="locationInput" placeholder="Search Location..."
+                        class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary w-full">
+                    <div id="suggestionsBox"
+                        class="absolute bg-white text-gray-700 border border-gray-200 w-full mt-1 rounded-lg shadow-md hidden z-50">
+                    </div>
+                </div>
                 <select
                     class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
                     <option>Price Range</option>
-                    <option>Under ₹50L</option>
-                    <option>₹50L - ₹1Cr</option>
-                    <option>₹1Cr - ₹2Cr</option>
-                    <option>Above ₹2Cr</option>
+                    @foreach ($priceRanges as $priceRange)
+                        <option value="{{ $priceRange->price_range_id }}">{{ $priceRange->price_range }}
+                        </option>
+                    @endforeach
                 </select>
                 <button
                     class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-semibold">
@@ -174,4 +180,51 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#locationInput').on('keyup', function() {
+                let query = $(this).val();
+
+                if (query.length >= 2) {
+                    $.ajax({
+                        url: "{{ route('searchLocation') }}",
+                        type: "GET",
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            let html = '';
+                            if (data.length > 0) {
+                                data.forEach(function(item) {
+                                    html +=
+                                        `<div class="p-2 hover:bg-gray-100 cursor-pointer suggestion-item">${item.locality_name}</div>`;
+                                });
+                            } else {
+                                html = `<div class="p-2 text-gray-500">No results found</div>`;
+                            }
+                            $('#suggestionsBox').html(html).removeClass('hidden');
+                        }
+                    });
+                } else {
+                    $('#suggestionsBox').addClass('hidden');
+                }
+            });
+
+            // When user clicks a suggestion
+            $(document).on('click', '.suggestion-item', function() {
+                $('#locationInput').val($(this).text());
+                $('#suggestionsBox').addClass('hidden');
+            });
+
+            // Hide suggestions when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('#locationInput, #suggestionsBox').length) {
+                    $('#suggestionsBox').addClass('hidden');
+                }
+            });
+        });
+    </script>
+
 </section>
