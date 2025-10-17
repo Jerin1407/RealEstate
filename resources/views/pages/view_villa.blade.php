@@ -13,7 +13,7 @@
                                     @php
                                         $coverImage = $villa->images->where('is_cover', 1)->first();
                                     @endphp
-                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                    <img src="{{ $coverImage ? asset('uploads/property' . $coverImage->filename) : asset('images/no-image.jpg') }}"
                                         alt="{{ $villa->property_title }}" class="h-56 w-full object-cover">
                                 </div>
 
@@ -26,7 +26,7 @@
                                     </div>
 
                                     <p class="text-gray-600 mb-4">
-                                        {{ Str::limit($villa->property_description, 50) }}
+                                        {{ strip_tags(Str::limit($villa->property_description, 50)) }}
                                     </p>
 
                                     @php

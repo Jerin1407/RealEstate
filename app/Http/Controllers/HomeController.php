@@ -56,7 +56,11 @@ class HomeController extends Controller
         // Count total villas
         $villaCount = $villas->count();
 
-        return view('pages.view_villa', compact('villas', 'villaCount'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.view_villa', compact('villas', 'villaCount', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewVillaProperty($id)
@@ -64,7 +68,11 @@ class HomeController extends Controller
         // Fetch villa with relationships
         $villa = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
-        return view('subpages.view_villa', compact('villa'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('subpages.view_villa', compact('villa', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewAllFlat()
@@ -78,7 +86,11 @@ class HomeController extends Controller
         // Count total villas
         $flatCount = $flats->count();
 
-        return view('pages.view_flat', compact('flats', 'flatCount'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.view_flat', compact('flats', 'flatCount', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewFlatProperty($id)
@@ -86,7 +98,11 @@ class HomeController extends Controller
         // Fetch villa with relationships
         $flat = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
-        return view('subpages.view_flat', compact('flat'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('subpages.view_flat', compact('flat', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewAllPlot()
@@ -100,7 +116,11 @@ class HomeController extends Controller
         // Count total villas
         $plotCount = $plots->count();
 
-        return view('pages.view_plot', compact('plots', 'plotCount'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.view_plot', compact('plots', 'plotCount', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewPlotProperty($id)
@@ -108,7 +128,11 @@ class HomeController extends Controller
         // Fetch villa with relationships
         $plot = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
-        return view('subpages.view_plot', compact('plot'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('subpages.view_plot', compact('plot', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewAllCommercial()
@@ -122,7 +146,11 @@ class HomeController extends Controller
         // Count total villas
         $commercialCount = $commercials->count();
 
-        return view('pages.view_commercial', compact('commercials', 'commercialCount'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.view_commercial', compact('commercials', 'commercialCount', 'categories', 'priceRanges', 'locations'));
     }
 
     public function viewCommercialProperty($id)
@@ -130,7 +158,11 @@ class HomeController extends Controller
         // Fetch villa with relationships
         $commercial = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
-        return view('subpages.view_commercial', compact('commercial'));
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('subpages.view_commercial', compact('commercial', 'categories', 'priceRanges', 'locations'));
     }
 
     public function searchLocation(Request $request)

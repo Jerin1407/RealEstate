@@ -31,7 +31,7 @@
                                     @php
                                         $coverImage = $villa->images->where('is_cover', 1)->first();
                                     @endphp
-                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                    <img src="{{ $coverImage ? asset('uploads/property/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
                                         alt="{{ $villa->property_title }}" class="h-56 w-full object-cover">
                                 </div>
 
@@ -44,7 +44,7 @@
                                     </div>
 
                                     <p class="text-gray-600 mb-4">
-                                        {{ Str::limit($villa->property_description, 10) }}
+                                        {{ strip_tags(Str::limit($villa->property_description, 10)) }}
                                     </p>
 
                                     <div class="flex justify-between items-center">
@@ -106,7 +106,7 @@
                                     @php
                                         $coverImage = $flat->images->where('is_cover', 1)->first();
                                     @endphp
-                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                    <img src="{{ $coverImage ? asset('uploads/property/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
                                         alt="{{ $flat->property_title }}" class="h-56 w-full object-cover">
                                 </div>
 
@@ -119,7 +119,7 @@
                                     </div>
 
                                     <p class="text-gray-600 mb-4">
-                                        {{ Str::limit($flat->property_description, 10) }}
+                                        {{ strip_tags(Str::limit($flat->property_description, 10)) }}
                                     </p>
 
                                     <div class="flex justify-between items-center">
@@ -181,7 +181,7 @@
                                     @php
                                         $coverImage = $plot->images->where('is_cover', 1)->first();
                                     @endphp
-                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                    <img src="{{ $coverImage ? asset('uploads/property/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
                                         alt="{{ $plot->property_title }}" class="h-56 w-full object-cover">
                                 </div>
 
@@ -194,7 +194,7 @@
                                     </div>
 
                                     <p class="text-gray-600 mb-4">
-                                        {{ Str::limit($plot->property_description, 10) }}
+                                        {{ strip_tags(Str::limit($plot->property_description, 10)) }}
                                     </p>
 
                                     <div class="flex justify-between items-center">
@@ -256,7 +256,7 @@
                                     @php
                                         $coverImage = $commercial->images->where('is_cover', 1)->first();
                                     @endphp
-                                    <img src="{{ $coverImage ? asset('uploads/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                    <img src="{{ $coverImage ? asset('uploads/property/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
                                         alt="{{ $commercial->property_title }}" class="h-56 w-full object-cover">
                                 </div>
 
@@ -269,7 +269,7 @@
                                     </div>
 
                                     <p class="text-gray-600 mb-4">
-                                        {{ Str::limit($commercial->property_description, 10) }}
+                                        {{ strip_tags(Str::limit($commercial->property_description, 10)) }}
                                     </p>
 
                                     <div class="flex justify-between items-center">

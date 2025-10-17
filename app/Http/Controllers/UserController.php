@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use Illuminate\Support\Facades\Hash;
+use App\Models\CategoryModel;
+use App\Models\LocationModel;
+use App\Models\PriceRangeModel;
 
 class UserController extends Controller
 {
@@ -20,12 +23,20 @@ class UserController extends Controller
 
     public function showLoginForm()
     {
-        return view('pages.login');
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+    
+        return view('pages.login', compact('categories', 'priceRanges', 'locations'));
     }
 
     public function showRegistrationForm()
     {
-        return view('pages.register');
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.register', compact('categories', 'priceRanges', 'locations'));
     }
 
     public function register(Request $request)
