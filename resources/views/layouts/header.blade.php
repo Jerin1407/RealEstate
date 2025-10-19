@@ -148,36 +148,38 @@
 
         <!-- Search Bar -->
         <div class="bg-white rounded-lg p-6 max-w-4xl mx-auto shadow-xl">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <select
-                    class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
-                    <option>Property Type</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
-                    @endforeach
-                </select>
-                {{-- <input type="text" placeholder="Location"
+            <form action="{{ route('searchProperty') }}" method="GET">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <select name="category_id"
+                        class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
+                        <option>Property Type</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                        @endforeach
+                    </select>
+                    {{-- <input type="text" placeholder="Location"
                     class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary"> --}}
-                <div class="relative w-full max-w-sm">
-                    <input type="text" id="locationInput" placeholder="Search Location..."
-                        class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary w-full">
-                    <div id="suggestionsBox"
-                        class="absolute bg-white text-gray-700 border border-gray-200 w-full mt-1 rounded-lg shadow-md hidden z-50">
+                    <div class="relative w-full max-w-sm">
+                        <input type="text" name="location" id="locationInput" placeholder="Search Location..."
+                            class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary w-full">
+                        <div id="suggestionsBox"
+                            class="absolute bg-white text-gray-700 border border-gray-200 w-full mt-1 rounded-lg shadow-md hidden z-50">
+                        </div>
                     </div>
+                    <select name="price_range_id"
+                        class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
+                        <option>Price Range</option>
+                        @foreach ($priceRanges as $priceRange)
+                            <option value="{{ $priceRange->price_range_id }}">{{ $priceRange->price_range }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button
+                        class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-semibold">
+                        Search Properties
+                    </button>
                 </div>
-                <select
-                    class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary">
-                    <option>Price Range</option>
-                    @foreach ($priceRanges as $priceRange)
-                        <option value="{{ $priceRange->price_range_id }}">{{ $priceRange->price_range }}
-                        </option>
-                    @endforeach
-                </select>
-                <button
-                    class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors font-semibold">
-                    Search Properties
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 

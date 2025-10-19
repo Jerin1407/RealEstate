@@ -21,7 +21,7 @@ class PropertyController extends Controller
             ->orderByDesc('post_date')
             ->paginate(10);
 
-        return view('pages.properties', compact('properties'));
+        return view('property.list', compact('properties'));
     }
 
     public function addProperty()

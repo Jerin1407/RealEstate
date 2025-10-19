@@ -166,14 +166,52 @@ class HomeController extends Controller
     }
 
     public function searchLocation(Request $request)
-{
-    $query = $request->get('query', '');
+    {
+        $query = $request->get('query', '');
 
-    $locations = LocationModel::where('locality_name', 'like', "%{$query}%")
-        ->orderBy('locality_name')
-        ->take(10)
-        ->get(['locality_name']); // only fetch needed column
+        $locations = LocationModel::where('locality_name', 'like', "%{$query}%")
+            ->orderBy('locality_name')
+            ->take(10)
+            ->get(['locality_name']); // only fetch needed column
 
-    return response()->json($locations);
-}
+        return response()->json($locations);
+    }
+
+    public function searchProperty(Request $request)
+    {
+        $query = MyProperties::with(['category', 'locality', 'images']);
+
+        // Filter by category
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // Filter by location name
+        if ($request->filled('location')) {
+            $query->whereHas('locality', function ($q) use ($request) {
+                $q->where('locality_name', 'like', '%' . $request->location . '%');
+            });
+        }
+
+        // Filter by price range
+        if ($request->filled('price_range_id')) {
+            $priceRange = PriceRangeModel::find($request->price_range_id);
+
+            if ($priceRange && preg_match('/(\d+)\s*-\s*(\d+)/', $priceRange->price_range, $matches)) {
+                $min = (int) $matches[1] * 100000; // convert lakh to rupees
+                $max = (int) $matches[2] * 100000;
+                $query->whereBetween('price', [$min, $max]);
+            }
+        }
+
+        $villas = $query->orderByDesc('post_date')->get();
+
+        // Return the same "Premium Villas" view but filtered
+        $categories = \App\Models\CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+
+        // Return the same view used for displaying all villas
+        return view('pages.searchProperty', compact('villas', 'categories', 'priceRanges'));
+    }
+
 }

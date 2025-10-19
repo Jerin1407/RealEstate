@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -431,4 +431,4 @@
 
 <script src="assets/js/script.js"></script>
 
-</html>
+</html> --}}

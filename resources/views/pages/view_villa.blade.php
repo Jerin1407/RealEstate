@@ -13,7 +13,7 @@
                                     @php
                                         $coverImage = $villa->images->where('is_cover', 1)->first();
                                     @endphp
-                                    <img src="{{ $coverImage ? asset('uploads/property' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                    <img src="{{ $coverImage ? asset('uploads/property/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
                                         alt="{{ $villa->property_title }}" class="h-56 w-full object-cover">
                                 </div>
 
