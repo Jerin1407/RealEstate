@@ -9,6 +9,7 @@ use App\Models\PriceRangeModel;
 use App\Models\PriceUnitModel;
 use App\Models\AreaUnitModel;
 use App\Models\MyProperties;
+use App\Models\PropertyEnquire;
 use App\Models\PropertyImageModel;
 use Illuminate\Support\Facades\File;
 
@@ -242,4 +243,27 @@ class PropertyController extends Controller
         return redirect()->back()->with('success_delete', 'Property deleted successfully!!!');
     }
 
+    public function propertyEnquiry(Request $request)
+    {
+        $request->validate([
+            'property_id' => 'required|integer',
+            'property_code' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'number' => 'required|string|max:20',
+            'message' => 'required|string',
+        ]);
+
+        PropertyEnquire::create([
+            'property_id' => $request->property_id,
+            'property_code' => $request->property_code,
+            'fullname' => $request->name,
+            'contact_number' => $request->number,
+            'email' => $request->email,
+            'message' => $request->message,
+            'created_at' => now(),
+        ]);
+
+        return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
+    }
 }

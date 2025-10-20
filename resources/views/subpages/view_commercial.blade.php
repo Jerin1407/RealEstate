@@ -79,26 +79,31 @@
             <!-- Right Side: Enquiry Form -->
             <div class="bg-white rounded-lg shadow-lg p-6 lg:h-2/3 ">
                 <h3 class="text-xl font-bold text-gray-900 my-4">Enquire About This Property</h3>
-                <form class="space-y-4">
+                <form class="space-y-4" action="{{ route('propertyEnquiry') }}" method="POST">
+                    @csrf
+
+                    <!-- Hidden Fields -->
+                    <input type="hidden" name="property_id" value="{{ $commercial->property_id }}">
+                    <input type="hidden" name="property_code" value="{{ $commercial->property_code }}">
 
                     <!-- Name -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Your Name</label>
-                        <input type="text"
+                        <input type="text" name="name" required
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
 
                     <!-- Phone -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Phone</label>
-                        <input type="text"
+                        <input type="text" name="number" required
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
 
                     <!-- Email -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Email Id</label>
-                        <input type="email"
+                        <input type="email" name="email" required
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none">
                     </div>
 
@@ -112,15 +117,16 @@
                     <!-- Message -->
                     <div>
                         <label class="block text-gray-700 font-medium mb-1">Type your message</label>
-                        <textarea rows="4"
+                        <textarea rows="4" name="message"
                             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-red-500 focus:outline-none"></textarea>
                     </div>
 
+                    <!-- Captcha -->
                     <div class="border border-gray-300 rounded-lg p-4 text-center">
                         <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
                             class="mx-auto mb-2">
                         <label class="block text-gray-700 mb-1">Enter the code above here:</label>
-                        <input type="text"
+                        <input type="text" required
                             class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                         <p class="text-xs text-gray-500 mt-2">
                             Can't read the image?
@@ -140,4 +146,27 @@
 
     <!-- Alpine.js (for thumbnail click functionality) -->
     <script src="https://unpkg.com/alpinejs" defer></script>
+
+    <script>
+        @if (session('success_enquiry'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_enquiry') }}'
+            });
+        @endif
+    </script>
 @endsection

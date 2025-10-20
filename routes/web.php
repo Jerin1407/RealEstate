@@ -17,9 +17,6 @@ Route::get('/home-loan', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
-Route::get('/properties/viewproperty', function () {
-    return view('property.view');
-})->name('view-property');
 
 Route::get('/attractive-3bhk', function () {
     return view('subpages.attractive_3bhk');
@@ -48,6 +45,7 @@ Route::get('/viewproperty/{id}', [PropertyController::class, 'viewProperty'])->n
 Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'])->name('updateproperty');
 Route::post('/deletepropertyimage/{id}', [PropertyController::class, 'deletePropertyImage'])->name('deletePropertyImage');
 Route::delete('/deleteproperty', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
+Route::post('/propertyenquiry', [PropertyController::class, 'propertyEnquiry'])->name('propertyEnquiry');
 
 Route::get('/index', [HomeController::class, 'index'])->name('home');
 Route::get('/view-all-villa', [HomeController::class, 'viewAllVilla'])->name('viewAllVilla');
