@@ -197,21 +197,49 @@ class HomeController extends Controller
         if ($request->filled('price_range_id')) {
             $priceRange = PriceRangeModel::find($request->price_range_id);
 
-            if ($priceRange && preg_match('/(\d+)\s*-\s*(\d+)/', $priceRange->price_range, $matches)) {
-                $min = (int) $matches[1] * 100000; // convert lakh to rupees
-                $max = (int) $matches[2] * 100000;
-                $query->whereBetween('price', [$min, $max]);
+            if ($priceRange) {
+                $rangeText = strtolower(trim($priceRange->price_range));
+
+                if (str_contains($rangeText, '& above')) {
+                    if (preg_match('/(\d+\.?\d*)\s*(l|lakhs|lakh)?/', $rangeText, $matches)) {
+                        $min = (float)$matches[1];
+                        $unit = $matches[2] ?? '';
+
+                        if (in_array($unit, ['l', 'lakh', 'lakhs'])) {
+                            $min *= 100000;
+                        }
+
+                        $query->where('price', '>=', $min);
+                    }
+                } else {
+                    if (preg_match('/(\d+\.?\d*)\s*(l|lakhs|lakh)?\s*-\s*(\d+\.?\d*)\s*(l|lakhs|lakh)?/', $rangeText, $matches)) {
+                        $min = (float)$matches[1];
+                        $max = (float)$matches[3];
+                        $unitMin = $matches[2] ?? '';
+                        $unitMax = $matches[4] ?? '';
+
+                        if (in_array($unitMin, ['l', 'lakh', 'lakhs'])) {
+                            $min *= 100000;
+                        }
+                        if (in_array($unitMax, ['l', 'lakh', 'lakhs'])) {
+                            $max *= 100000;
+                        }
+
+                        $query->whereBetween('price', [$min, $max]);
+                    } elseif (preg_match('/(\d+)\s*-\s*(\d+)/', $rangeText, $matches)) {
+                        $query->whereBetween('price', [(float)$matches[1], (float)$matches[2]]);
+                    }
+                }
             }
         }
 
         $villas = $query->orderByDesc('post_date')->get();
 
         // Return the same "Premium Villas" view but filtered
-        $categories = \App\Models\CategoryModel::all();
+        $categories = CategoryModel::all();
         $priceRanges = PriceRangeModel::all();
 
         // Return the same view used for displaying all villas
         return view('pages.searchProperty', compact('villas', 'categories', 'priceRanges'));
     }
-
 }
