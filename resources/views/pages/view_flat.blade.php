@@ -5,6 +5,8 @@
         <div class="container mx-auto px-4">
             <div class="overflow-x-auto">
                 <div class="flex flex-wrap gap-6 justify-center">
+
+                    <!-- Flats Cards -->
                     @foreach ($flats as $flat)
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80">

@@ -20,6 +20,7 @@
                         →</button></a>
             </div>
 
+            <!-- Villas Cards -->
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
                     @foreach ($villas as $villa)
@@ -95,6 +96,7 @@
                         →</button></a>
             </div>
 
+            <!-- Flats Cards -->
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
                     @foreach ($flats as $flat)
@@ -170,6 +172,7 @@
                         →</button></a>
             </div>
 
+            <!-- Plots Cards -->
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
                     @foreach ($plots as $plot)
@@ -245,6 +248,7 @@
                         →</button></a>
             </div>
 
+            <!-- Commercial Cards -->
             <div class="overflow-x-auto">
                 <div class="flex space-x-6 pb-4" style="width: max-content;">
                     @foreach ($commercials as $commercial)

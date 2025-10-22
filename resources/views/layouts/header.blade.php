@@ -127,7 +127,6 @@
     });
 </script>
 
-
 <script>
     const menuBtn = document.getElementById("menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -136,8 +135,6 @@
         mobileMenu.classList.toggle("hidden");
     });
 </script>
-
-
 
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-primary to-secondary text-white py-20">

@@ -11,5 +11,4 @@ class UserModel extends Model
     public $timestamps = false;
 
     protected $fillable = ['user_type_id', 'login_name', 'password', 'fullname', 'contact_number', 'contact_address', 'email'];
-
 }

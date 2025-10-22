@@ -11,6 +11,13 @@ class PropertyEnquire extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'property_id', 'fullname', 'contact_number', 'email', 'property_code', 'message', 'captcha_code', 'created_at'
+        'property_id',
+        'fullname',
+        'contact_number',
+        'email',
+        'property_code',
+        'message',
+        'captcha_code',
+        'created_at'
     ];
 }

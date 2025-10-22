@@ -39,7 +39,6 @@ Route::get('/admin', [UserController::class, 'showAdmin'])->name('admin');
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');
 Route::post('/saveproperty', [PropertyController::class, 'saveProperty'])->name('saveproperty');
-Route::get('/viewproperty', [PropertyController::class, 'viewProperty'])->name('viewproperty');
 Route::get('/editproperty/{id}', [PropertyController::class, 'editProperty'])->name('editproperty');
 Route::get('/viewproperty/{id}', [PropertyController::class, 'viewProperty'])->name('viewproperty');
 Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'])->name('updateproperty');

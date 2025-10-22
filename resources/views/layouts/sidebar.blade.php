@@ -78,7 +78,8 @@
 
         <!-- Sidebar -->
         <div class="relative">
-            <div class="w-60 bg-gradient-to-b from-primary to-secondary text-white min-h-screen p-5" style="height: 100%">
+            <div class="w-60 bg-gradient-to-b from-primary to-secondary text-white min-h-screen p-5"
+                style="height: 100%">
                 <nav class="flex flex-col space-y-2">
 
                     <a href="{{ route('admin') }}" class="hover:text-gray-300 px-3 py-2 rounded">Dashboard</a>

@@ -26,7 +26,7 @@ class UserController extends Controller
         $categories = CategoryModel::all();
         $priceRanges = PriceRangeModel::all();
         $locations = LocationModel::all();
-    
+
         return view('pages.login', compact('categories', 'priceRanges', 'locations'));
     }
 
@@ -99,6 +99,7 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
+        
         return redirect()->route('login')->with('success_logout', 'Logout successfull!');
     }
 }

@@ -11,6 +11,8 @@ use App\Models\AreaUnitModel;
 use App\Models\MyProperties;
 use App\Models\PropertyEnquire;
 use App\Models\PropertyImageModel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PropertyEnquiryMail;
 use Illuminate\Support\Facades\File;
 
 class PropertyController extends Controller
@@ -38,6 +40,7 @@ class PropertyController extends Controller
 
     public function saveProperty(Request $request)
     {
+        // Check login session
         if (!session()->has('user_id')) {
             return redirect()->route('login')->with('error', 'Please log in before adding a property.');
         }
@@ -263,6 +266,19 @@ class PropertyController extends Controller
             'message' => $request->message,
             'created_at' => now(),
         ]);
+
+        // Prepare email data
+        $data = [
+            'property_id' => $request->property_id,
+            'property_code' => $request->property_code,
+            'name' => $request->name,
+            'email' => $request->email,
+            'number' => $request->number,
+            'message' => $request->message,
+        ];
+
+        // Send email
+        Mail::to('bYw4y@example.com')->send(new PropertyEnquiryMail($data));
 
         return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
     }

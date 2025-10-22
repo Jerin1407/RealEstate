@@ -10,7 +10,7 @@ class AreaUnitModel extends Model
     protected $primaryKey = 'area_unit_id ';
     public $timestamps = false;
 
-    protected $fillable = [ 
+    protected $fillable = [
         'unit_name'
     ];
 }

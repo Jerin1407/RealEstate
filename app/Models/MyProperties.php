@@ -44,8 +44,9 @@ class MyProperties extends Model
         return $this->belongsTo(LocationModel::class, 'locality_id', 'locality_id');
     }
 
+    // Relationship with Image
     public function images()
-{
-    return $this->hasMany(PropertyImageModel::class, 'property_id', 'property_id');
-}
+    {
+        return $this->hasMany(PropertyImageModel::class, 'property_id', 'property_id');
+    }
 }

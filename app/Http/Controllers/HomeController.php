@@ -21,19 +21,19 @@ class HomeController extends Controller
 
         $flats = MyProperties::with(['category', 'locality'])
             ->where('category_id', 2)
-            //->where('is_approved', 1) // Optional: show only approved villas
+            //->where('is_approved', 1) // Optional: show only approved flats
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
         $plots = MyProperties::with(['category', 'locality'])
             ->where('category_id', 3)
-            //->where('is_approved', 1) // Optional: show only approved villas
+            //->where('is_approved', 1) // Optional: show only approved plots
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
         $commercials = MyProperties::with(['category', 'locality'])
             ->where('category_id', 4)
-            //->where('is_approved', 1) // Optional: show only approved villas
+            //->where('is_approved', 1) // Optional: show only approved commercials
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
@@ -77,13 +77,13 @@ class HomeController extends Controller
 
     public function viewAllFlat()
     {
-        // Fetch all villas (category_id = 2)
+        // Fetch all flats (category_id = 2)
         $flats = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 2)
             ->orderByDesc('post_date')
             ->get();
 
-        // Count total villas
+        // Count total flats
         $flatCount = $flats->count();
 
         $categories = CategoryModel::all();
@@ -95,7 +95,7 @@ class HomeController extends Controller
 
     public function viewFlatProperty($id)
     {
-        // Fetch villa with relationships
+        // Fetch flat with relationships
         $flat = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
         $categories = CategoryModel::all();
@@ -107,13 +107,13 @@ class HomeController extends Controller
 
     public function viewAllPlot()
     {
-        // Fetch all villas (category_id = 3)
+        // Fetch all plots (category_id = 3)
         $plots = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 3)
             ->orderByDesc('post_date')
             ->get();
 
-        // Count total villas
+        // Count total plots
         $plotCount = $plots->count();
 
         $categories = CategoryModel::all();
@@ -125,7 +125,7 @@ class HomeController extends Controller
 
     public function viewPlotProperty($id)
     {
-        // Fetch villa with relationships
+        // Fetch plot with relationships
         $plot = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
         $categories = CategoryModel::all();
@@ -137,13 +137,13 @@ class HomeController extends Controller
 
     public function viewAllCommercial()
     {
-        // Fetch all villas (category_id = 4)
+        // Fetch all commercials (category_id = 4)
         $commercials = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 4)
             ->orderByDesc('post_date')
             ->get();
 
-        // Count total villas
+        // Count total commercials
         $commercialCount = $commercials->count();
 
         $categories = CategoryModel::all();
@@ -155,7 +155,7 @@ class HomeController extends Controller
 
     public function viewCommercialProperty($id)
     {
-        // Fetch villa with relationships
+        // Fetch commercial with relationships
         $commercial = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
         $categories = CategoryModel::all();
@@ -186,7 +186,7 @@ class HomeController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
-        // Filter by location name
+        // Filter by location
         if ($request->filled('location')) {
             $query->whereHas('locality', function ($q) use ($request) {
                 $q->where('locality_name', 'like', '%' . $request->location . '%');

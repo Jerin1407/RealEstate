@@ -31,6 +31,7 @@
                 </div>
             </form>
 
+            <!-- Forgot Password -->
             <div class="mt-4 text-center">
                 <a href="#" class="text-red-600 hover:underline text-sm">Forgot Password</a>
             </div>
@@ -41,6 +42,7 @@
         </div>
 
         <script>
+            // Success message
             @if (session('success_logout'))
                 const Toast = Swal.mixin({
                     toast: true,
@@ -62,6 +64,7 @@
                 });
             @endif
 
+            // Error message
             @if (session('error'))
                 const Toast = Swal.mixin({
                     toast: true,
@@ -83,6 +86,7 @@
                 });
             @endif
 
+            // Error message
             @if (session('error_update'))
                 const Toast = Swal.mixin({
                     toast: true,

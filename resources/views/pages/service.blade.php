@@ -71,8 +71,6 @@
         </div>
     </section>
 
-
-
     <section class="bg-white flex items-center justify-center min-h-screen w-full">
         <div class=" max-w-7xl bg-white rounded-xl shadow-lg p-4">
 
@@ -133,7 +131,6 @@
                         <img data-category="Living Room"
                             src="  https://realestatethrissur.com/images/LivingRoom/GODs%20Living9.jpg"
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
-
                     </div>
                 </div>
 
@@ -165,7 +162,6 @@
                         <img data-category="Dining Room"
                             src="https://realestatethrissur.com/images/DinningRoom/Gods%20Dining8.jpg"
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
-
                     </div>
                 </div>
 
@@ -191,7 +187,6 @@
                         <img data-category="Bedroom"
                             src="https://realestatethrissur.com/images/Bedroom/Gods%20Bedroom%206.jpg"
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
-
                     </div>
                 </div>
 
@@ -217,7 +212,6 @@
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
                         <img data-category="Wardrobes" src="https://realestatethrissur.com/images/Wardrobes/9.jpg"
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
-
                     </div>
                 </div>
 
@@ -243,8 +237,6 @@
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
                         <img data-category="kitchen" src="https://realestatethrissur.com/images/Kitchen/9.jpg"
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
-
-
                     </div>
                 </div>
 
@@ -282,8 +274,6 @@
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
                         <img data-category="False-Ceiling" src="https://realestatethrissur.com/images/FalseCeiling/15.jpg"
                             class="thumbnail w-32 h-20 object-cover rounded-lg cursor-pointer border-2 border-transparent">
-
-
                     </div>
                 </div>
 

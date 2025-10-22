@@ -119,6 +119,7 @@
             }
         })();
 
+        // success message
         @if (session('success_login'))
             const Toast = Swal.mixin({
                 toast: true,
