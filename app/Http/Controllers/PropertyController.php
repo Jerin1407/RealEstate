@@ -19,8 +19,8 @@ class PropertyController extends Controller
 {
     public function listProperty()
     {
-        // Fetch with category and location relationships
-        $properties = MyProperties::with(['category', 'locality'])
+        // Fetch with category, user and location relationships
+        $properties = MyProperties::with(['category', 'locality', 'user'])
             ->orderByDesc('post_date')
             ->paginate(10);
 
@@ -255,6 +255,9 @@ class PropertyController extends Controller
             'email' => 'required|email|max:255',
             'number' => 'required|string|max:20',
             'message' => 'required|string',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
         PropertyEnquire::create([

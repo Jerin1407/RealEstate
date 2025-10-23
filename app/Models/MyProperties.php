@@ -49,4 +49,10 @@ class MyProperties extends Model
     {
         return $this->hasMany(PropertyImageModel::class, 'property_id', 'property_id');
     }
+
+    // Relationship with User
+    public function user()
+    {
+        return $this->belongsTo(UserModel::class, 'posted_by', 'user_id');
+    }
 }

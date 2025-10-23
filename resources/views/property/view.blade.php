@@ -172,27 +172,28 @@
 
 
                                     <div class="flex justify-between items-center mt-8">
+
+                                        <!-- Price -->
                                         <p class="text-xl font-bold">
                                             Rs. <span class="text-red-600">{{ $property->price }}</span>
                                         </p>
+
+                                        <!-- Location -->
                                         <p class="text-xl font-bold text-red-600">
                                             {{ $property->locality->locality_name ?? 'N/A' }}
                                         </p>
                                     </div>
                                     <div class="mt-6 space-y-2">
-                                        <p class="font-semibold text-gray-800">Contact: <span class="font-normal">{{ $property->contact_name }}</span></p>
+
+                                        <!-- Contact -->
+                                        <p class="font-semibold text-gray-800">Contact: <span
+                                                class="font-normal">{{ $property->contact_name }}</span></p>
                                         <p class="font-semibold text-gray-800">Contact Number:
                                             <span class="font-normal">{{ $property->contact_number }}</span>
                                         </p>
                                     </div>
-
-
                                 </div>
-
                             </div>
-
-
-
                         </div>
                     </section>
 
@@ -204,7 +205,6 @@
             </div>
 
         </section>
-
 
     </main>
 

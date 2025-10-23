@@ -301,6 +301,7 @@
                         </div>
                     </div>
                 </form>
+
                 <!-- Hidden delete form (used by JS dynamically) -->
                 <form id="deleteImageForm" method="POST" style="display:none;">
                     @csrf

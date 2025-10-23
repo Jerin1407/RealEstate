@@ -5,19 +5,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/about', function () {
-    return view('pages.about');
-})->name('about');
-Route::get('/service', function () {
-    return view('pages.service');
-})->name('service');
-Route::get('/home-loan', function () {
-    return view('pages.home_loan');
-})->name('home-loan');
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
-
 Route::get('/attractive-3bhk', function () {
     return view('subpages.attractive_3bhk');
 })->name('attractive-3bhk');
@@ -28,6 +15,9 @@ Route::get('/premium-plot-in-electronic-city', function () {
     return view('subpages.premium_plot_in_electronic_city');
 })->name('premium-plot-in-electronic-city');
 
+Route::get('/reload-captcha', function () {
+    return response()->json(['captcha' => captcha_img('flat')]);
+})->name('reloadCaptcha');
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
@@ -47,6 +37,10 @@ Route::delete('/deleteproperty', [PropertyController::class, 'deleteProperty'])-
 Route::post('/propertyenquiry', [PropertyController::class, 'propertyEnquiry'])->name('propertyEnquiry');
 
 Route::get('/index', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/service', [HomeController::class, 'service'])->name('service');
+Route::get('/home-loan', [HomeController::class, 'homeLoan'])->name('home-loan');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/view-all-villa', [HomeController::class, 'viewAllVilla'])->name('viewAllVilla');
 Route::get('/view-villa-property/{id}', [HomeController::class, 'viewVillaProperty'])->name('viewVillaProperty');
 Route::get('/view-all-flat', [HomeController::class, 'viewAllFlat'])->name('viewAllFlat');

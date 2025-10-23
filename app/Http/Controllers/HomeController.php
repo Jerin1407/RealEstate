@@ -45,6 +45,42 @@ class HomeController extends Controller
         return view('pages.index', compact('villas', 'flats', 'plots', 'commercials', 'categories', 'priceRanges', 'locations'));
     }
 
+    public function about()
+    {
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.about', compact('categories', 'priceRanges', 'locations'));
+    }
+
+    public function service()
+    {
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.service', compact('categories', 'priceRanges', 'locations'));
+    }
+
+    public function homeLoan()
+    {
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.home_loan', compact('categories', 'priceRanges', 'locations'));
+    }
+
+    public function contact()
+    {
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.contact', compact('categories', 'priceRanges', 'locations'));
+    }
+
     public function viewAllVilla()
     {
         // Fetch all villas (category_id = 1)

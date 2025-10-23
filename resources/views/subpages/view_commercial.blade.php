@@ -17,23 +17,30 @@
                             <img src="{{ asset('uploads/property/' . $img->filename) }}"
                                 @click="selectedImage = '{{ asset('uploads/property/' . $img->filename) }}'"
                                 class="w-24 h-20 object-cover rounded cursor-pointer border-2"
-                                :class="selectedImage === '{{ asset('uploads/property/' . $img->filename) }}' ? 'border-red-500' :
+                                :class="selectedImage === '{{ asset('uploads/property/' . $img->filename) }}' ?
+                                    'border-red-500' :
                                     'border-gray-200'">
                         @endforeach
                     </div>
                 </div>
 
-                <!-- Property Description -->
                 <div>
+
+                    <!-- Property Code -->
                     <h3 class="text-red-600 font-bold text-lg mb-2">{{ $commercial->property_code }}</h3>
+
+                    <!-- Property Title -->
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">
                         {{ $commercial->property_title }}
                     </h2>
 
+                    <!-- Property Description -->
                     <h4 class="text-lg font-semibold text-gray-700 mb-2">Property Description</h4>
                     <p class="text-gray-700 leading-relaxed mb-4">
                         {{ strip_tags($commercial->property_description) }}
                     </p>
+
+                    <!-- Price -->
                     <p class="text-gray-700 mb-2"><span class="font-semibold">Asking Price:</span> @php
                         if ($commercial->price >= 10000000) {
                             $formattedPrice = round($commercial->price / 10000000, 2) . ' Cr';
@@ -44,9 +51,11 @@
                         }
                     @endphp
                         ₹ {{ $formattedPrice }} (Negotiable)</p>
+
                     <p class="text-gray-700 mb-2"><span class="font-semibold">Contact:</span> For professional assistance
                         and better deals contact <span class="font-semibold">{{ $commercial->contact_name }}</span>
                     </p>
+
                     <p class="text-gray-700 mb-4">Loan with lowest interest rates available.</p>
                     <p class="mb-6">
                         Search More Villa / Flats @
@@ -54,6 +63,7 @@
                             www.realestatethrissur.com
                         </a>
                     </p>
+
                     <p class="text-gray-700">
                         GODs OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort,
                         Thrissur
@@ -65,6 +75,8 @@
                         </p>
                         <p class="text-xl font-bold text-red-600">{{ $commercial->locality->locality_name ?? 'N/A' }}</p>
                     </div>
+
+                    <!-- Contact -->
                     <div class="mt-6 space-y-2">
                         <p class="font-semibold text-gray-800">Contact: <span
                                 class="font-normal">{{ $commercial->contact_name }}</span>
@@ -123,6 +135,17 @@
 
                     <!-- Captcha -->
                     <div class="border border-gray-300 rounded-lg p-4 text-center">
+                        <div class="flex items-center justify-center gap-3 mb-3">
+                            <span id="captcha-img">{!! captcha_img('flat') !!}</span>
+                            <button type="button" id="reload" class="text-blue-600 underline">Refresh</button>
+                        </div>
+
+                        <label class="block text-gray-700 mb-1">Enter the code above here:</label>
+                        <input type="text" name="captcha" required
+                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    </div>
+                    
+                    {{-- <div class="border border-gray-300 rounded-lg p-4 text-center">
                         <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
                             class="mx-auto mb-2">
                         <label class="block text-gray-700 mb-1">Enter the code above here:</label>
@@ -132,7 +155,7 @@
                             Can't read the image?
                             <a href="#" class="text-blue-600 underline">click here</a> to refresh
                         </p>
-                    </div>
+                    </div> --}}
 
                     <!-- Button -->
                     <button type="submit"
@@ -148,6 +171,7 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
 
     <script>
+        // Success Alert
         @if (session('success_enquiry'))
             const Toast = Swal.mixin({
                 toast: true,
@@ -169,4 +193,34 @@
             });
         @endif
     </script>
+
+    <!-- Refresh Captcha Script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('reloadCaptcha') }}',
+                success: function(data) {
+                    $('#captcha-img').html(data.captcha);
+                }
+            });
+        });
+    </script>
+
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                position: 'top',
+                icon: 'error',
+                title: 'Oops!',
+                text: '{{ $errors->first() }}',
+                confirmButtonColor: '#dc2626',
+                background: '#EF4444', // red color
+                color: '#fff',
+                iconColor: '#fff',
+                toast: true,
+            });
+        </script>
+    @endif
 @endsection

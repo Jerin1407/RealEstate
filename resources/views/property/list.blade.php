@@ -114,7 +114,8 @@
                                         {{ $property->locality->locality_name ?? 'N/A' }}
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ Str::limit(strip_tags($property->property_description), 50) }}</td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $property->posted_by }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $property->user->fullname ?? 'N/A' }}
+                                    </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->post_date }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         ₹{{ number_format($property->price, 2) }}</td>
@@ -147,6 +148,7 @@
 
             <!-- Pagination controls -->
             <div class="flex items-center gap-1">
+
                 <!-- First -->
                 @if ($properties->onFirstPage())
                     <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&laquo;
@@ -319,63 +321,38 @@
             window.location.href = `/editproperty/${propertyId}`;
         });
 
-        // Delete Button
-        // document.getElementById('deleteBtn').addEventListener('click', function() {
-        //     const selected = document.querySelectorAll('.property-checkbox:checked');
-        //     if (selected.length === 0) {
-        //         Swal.fire({
-        //             position: 'top',
-        //             icon: 'warning',
-        //             title: 'Please select atleast one property!',
-        //             showConfirmButton: false,
-        //             timer: 4000,
-        //             background: '#EF4444', // red color
-        //             color: '#fff',
-        //             iconColor: '#fff',
-        //             toast: true,
-        //         });
-        //         return;
-        //     }
-
-        //     Swal.fire({
-        //         position: 'top',
-        //         title: 'Are you sure?',
-        //         text: 'You want to delete selected property(s)?',
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#d33',
-        //         cancelButtonColor: '#3085d6',
-        //         confirmButtonText: 'Yes, delete!',
-        //         cancelButtonText: 'Cancel',
-        //         width: '400px'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             document.getElementById('deleteForm').submit();
-        //         }
-        //     });
-        // });
+        // Delete Property
         document.getElementById('deleteBtn').addEventListener('click', function() {
             const selected = document.querySelectorAll('.property-checkbox:checked');
             const form = document.getElementById('deleteForm');
 
             if (selected.length === 0) {
                 Swal.fire({
-                    icon: 'warning',
-                    title: 'Please select at least one property!',
                     position: 'top',
+                    icon: 'warning',
+                    title: 'Please select atleast one property!',
                     showConfirmButton: false,
-                    timer: 2000
+                    timer: 4000,
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    toast: true,
                 });
                 return;
             }
 
             Swal.fire({
+                position: 'top',
                 title: 'Are you sure?',
                 text: 'You want to delete selected property(s)?',
                 icon: 'warning',
                 showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Yes, delete!',
-                cancelButtonText: 'Cancel'
+                cancelButtonText: 'Cancel',
+                width: '380px',
+                toast: true
             }).then(result => {
                 if (result.isConfirmed) {
                     // Remove previous hidden inputs
@@ -395,17 +372,29 @@
             });
         });
 
+        // Success Alert
         @if (session('success_delete'))
-            Swal.fire({
-                position: 'top',
-                icon: 'success',
-                title: '{{ session('success_delete') }}',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
                 showConfirmButton: false,
-                timer: 2000,
-                width: '300px'
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_delete') }}'
             });
         @endif
 
+        // Error Alert
         @if (session('error_delete'))
             Swal.fire({
                 position: 'top',
@@ -438,10 +427,11 @@
                 // More than one selected
                 Swal.fire({
                     position: 'top',
-                    icon: 'warning',
-                    title: 'Please select only one property!',
+                    icon: 'error',
+                    title: ' Multiple properties selected!',
+                    text: 'Please select only one property to view.',
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 4000,
                     background: '#EF4444', // red color
                     color: '#fff',
                     iconColor: '#fff',
