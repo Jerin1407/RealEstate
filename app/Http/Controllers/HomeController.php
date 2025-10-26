@@ -7,6 +7,9 @@ use App\Models\MyProperties;
 use App\Models\CategoryModel;
 use App\Models\PriceRangeModel;
 use App\Models\LocationModel;
+use App\Models\AreaUnitModel;
+use App\Models\PriceUnitModel;
+use App\Models\UserTypeModel;
 
 class HomeController extends Controller
 {
@@ -277,5 +280,17 @@ class HomeController extends Controller
 
         // Return the same view used for displaying all villas
         return view('pages.searchProperty', compact('villas', 'categories', 'priceRanges'));
+    }
+
+    public function addproperty()
+    {
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+        $priceUnits = PriceUnitModel::all();
+        $areaUnits = AreaUnitModel::all();
+        $userTypes = UserTypeModel::all();
+
+        return view('pages.add_property', compact('categories', 'priceRanges', 'locations', 'priceUnits', 'areaUnits', 'userTypes'));
     }
 }

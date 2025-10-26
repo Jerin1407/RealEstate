@@ -49,10 +49,12 @@
             </button>
 
             <!-- List Property Button (desktop only) -->
-            <button
+            <a href="{{ route('addProperty') }}">
+                <button
                 class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
-                List Property
+                Add Property
             </button>
+            </a>
         </div>
     </div>
 
@@ -87,9 +89,12 @@
             <a href="{{ route('contact') }}" class="text-gray-700 hover:text-primary transition-colors">Contact</a>
 
             <!-- Add "List Property" for mobile -->
-            <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors">
-                List Property
+            <a href="{{ route('addProperty') }}">
+                <button
+                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
+                Add Property
             </button>
+            </a>
         </div>
     </nav>
 </header>

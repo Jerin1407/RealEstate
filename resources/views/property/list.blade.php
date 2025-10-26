@@ -100,10 +100,12 @@
                         <!-- Table Body -->
                         <tbody class="bg-white">
                             @foreach ($properties as $property)
-                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
+                                    onclick="toggleCheckbox(this)">
                                     <td class="px-4 py-3">
                                         <input type="checkbox" name="selected_properties[]"
-                                            value="{{ $property->property_id }}" class="property-checkbox rounded">
+                                            value="{{ $property->property_id }}" class="property-checkbox rounded"
+                                            onclick="event.stopPropagation();">
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_code }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_title }}</td>
@@ -112,16 +114,17 @@
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ $property->locality->locality_name ?? 'N/A' }}
+                                    </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
-                                        {{ Str::limit(strip_tags($property->property_description), 50) }}</td>
+                                        {{ Str::limit(strip_tags($property->property_description), 50) }}
+                                    </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->user->fullname ?? 'N/A' }}
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->post_date }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         ₹{{ number_format($property->price, 2) }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
-                                        {{ $property->is_approved ? 'Active' : 'Inactive' }}
-                                    </td>
+                                        {{ $property->is_approved ? 'Active' : 'Inactive' }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ ucfirst($property->priority) }}</td>
                                 </tr>
                             @endforeach
@@ -443,20 +446,14 @@
                 window.location.href = `/viewproperty/${propertyId}`;
             }
         });
+    </script>
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const searchInput = document.querySelector('input[placeholder="Search..."]');
-            const tableRows = document.querySelectorAll("tbody tr");
-
-            searchInput.addEventListener("keyup", function() {
-                const searchValue = this.value.toLowerCase();
-
-                tableRows.forEach(row => {
-                    const rowText = row.textContent.toLowerCase();
-                    row.style.display = rowText.includes(searchValue) ? "" : "none";
-                });
-            });
-        });
+    <script>
+        function toggleCheckbox(row) {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            row.classList.toggle('bg-gray-100', checkbox.checked);
+        }
     </script>
 </body>
 

@@ -51,6 +51,7 @@ Route::get('/view-all-commercial', [HomeController::class, 'viewAllCommercial'])
 Route::get('/view-commercial-property/{id}', [HomeController::class, 'viewCommercialProperty'])->name('viewcommercialProperty');
 Route::get('/search-location', [HomeController::class, 'searchLocation'])->name('searchLocation');
 Route::get('/search-property', [HomeController::class, 'searchProperty'])->name('searchProperty');
+Route::get('/addproperty', [HomeController::class, 'addProperty'])->name('addProperty');
 
 
 
