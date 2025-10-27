@@ -108,7 +108,7 @@ class PropertyController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
                 $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads'), $filename);
+                $image->move(public_path('uploads/property'), $filename);
 
                 PropertyImageModel::create([
                     'property_id' => $property->property_id,
@@ -180,7 +180,7 @@ class PropertyController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
                 $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads'), $filename);
+                $image->move(public_path('uploads/property'), $filename);
 
                 PropertyImageModel::create([
                     'property_id' => $property->property_id,
@@ -206,7 +206,7 @@ class PropertyController extends Controller
         $image = PropertyImageModel::findOrFail($id);
 
         // Delete the file from 'public/uploads'
-        $filePath = public_path('uploads/' . $image->filename);
+        $filePath = public_path('uploads/property/' . $image->filename);
         if (file_exists($filePath)) {
             unlink($filePath); // delete the file
         }
@@ -231,7 +231,7 @@ class PropertyController extends Controller
                 // Delete all related images
                 $images = PropertyImageModel::where('property_id', $id)->get();
                 foreach ($images as $image) {
-                    $imagePath = public_path('uploads/' . $image->filename);
+                    $imagePath = public_path('uploads/property/' . $image->filename);
                     if (File::exists($imagePath)) {
                         File::delete($imagePath);
                     }

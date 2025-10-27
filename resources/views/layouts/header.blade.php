@@ -48,13 +48,16 @@
                 </svg>
             </button>
 
-            <!-- List Property Button (desktop only) -->
-            <a href="{{ route('addProperty') }}">
-                <button
-                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
-                Add Property
-            </button>
-            </a>
+            <!-- Add Property Button (desktop only) -->
+            @if (Route::currentRouteName() !== 'addProperty')
+                <a href="{{ route('addProperty') }}">
+                    <button
+                        class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
+                        Add Property
+                    </button>
+                </a>
+            @endif
+
         </div>
     </div>
 
@@ -91,9 +94,9 @@
             <!-- Add "List Property" for mobile -->
             <a href="{{ route('addProperty') }}">
                 <button
-                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
-                Add Property
-            </button>
+                    class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
+                    Add Property
+                </button>
             </a>
         </div>
     </nav>

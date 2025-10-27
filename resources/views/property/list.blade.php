@@ -419,8 +419,9 @@
                     position: 'top',
                     icon: 'warning',
                     title: 'No property selected!',
+                    text: 'Please select a property to view.',
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 4000,
                     background: '#EF4444', // red color
                     color: '#fff',
                     iconColor: '#fff',

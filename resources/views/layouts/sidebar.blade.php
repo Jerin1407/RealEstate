@@ -82,7 +82,24 @@
                 style="height: 100%">
                 <nav class="flex flex-col space-y-2">
 
-                    <a href="{{ route('admin') }}" class="hover:text-gray-300 px-3 py-2 rounded">Dashboard</a>
+                    {{-- <a href="{{ route('admin') }}" class="hover:text-gray-300 px-3 py-2 rounded">Dashboard</a> --}}
+
+                    <!-- Dashboard with Dropdown -->
+                    <div class="relative">
+                        <button id="dashboardButton"
+                            class="w-full flex justify-between items-center px-3 py-2 hover:text-gray-300 rounded focus:outline-none">
+                            <span>Dashboard</span>
+                        </button>
+
+                        <!-- Dashboard Submenu (appears below) -->
+                        <div id="dashboardSubMenu" class="ml-4 mt-1 flex flex-col space-y-1 hidden">
+                            <a href="{{ route('admin') }}"
+                                class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
+                                    class="mr-2 text-gray-400">-</span> Admin</a>
+                            <a href="" class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
+                                    class="mr-2 text-gray-400">-</span> Requests</a>
+                        </div>
+                    </div>
                     <a href="{{ route('listproperty') }}" class="hover:text-gray-300 px-3 py-2 rounded">Properties</a>
 
                     <!-- Ads with Popup Submenu -->
@@ -135,5 +152,17 @@
                         document.getElementById('logoutForm').submit();
                     }
                 });
+            });
+        </script>
+
+        <script>
+            // Dashboard dropdown toggle
+            const dashboardButton = document.getElementById('dashboardButton');
+            const dashboardSubMenu = document.getElementById('dashboardSubMenu');
+            const dashboardArrow = document.getElementById('dashboardArrow');
+
+            dashboardButton.addEventListener('click', () => {
+                dashboardSubMenu.classList.toggle('hidden');
+                dashboardArrow.classList.toggle('rotate-90');
             });
         </script>

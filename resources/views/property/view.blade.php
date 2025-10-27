@@ -43,10 +43,10 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="md:flex justify-between items-center">
                         <div class="flex space-x-0 md:space-x-4">
-                            <button class="flex items-center text-gray-600  hover:text-primary text-sm">
+                            {{-- <button class="flex items-center text-gray-600  hover:text-primary text-sm">
                                 <i class="far fa-eye mr-2"></i>
                                 Approved propery
-                            </button>
+                            </button> --}}
                             <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-edit mr-2"></i>
                                 Edit
@@ -171,7 +171,7 @@
                                     </div>
 
 
-                                    <div class="flex justify-between items-center mt-8">
+                                    {{-- <div class="flex justify-between items-center mt-8">
 
                                         <!-- Price -->
                                         <p class="text-xl font-bold">
@@ -191,7 +191,41 @@
                                         <p class="font-semibold text-gray-800">Contact Number:
                                             <span class="font-normal">{{ $property->contact_number }}</span>
                                         </p>
+                                    </div> --}}
+
+                                    <div class="mt-8">
+
+                                        <!-- Price & Location -->
+                                        <div class="flex justify-between items-center">
+                                            <p class="text-xl font-bold">
+                                                Rs. <span class="text-red-600">{{ $property->price }}</span>
+                                            </p>
+                                            <p class="text-xl font-bold text-red-600">
+                                                {{ $property->locality->locality_name ?? 'N/A' }}
+                                            </p>
+                                        </div>
+
+                                        <!-- Contact -->
+                                        <div class="flex justify-between items-center mt-6">
+                                            <div>
+                                                <p class="font-semibold text-gray-800">
+                                                    Contact: <span
+                                                        class="font-normal">{{ $property->contact_name }}</span>
+                                                </p>
+                                                <p class="font-semibold text-gray-800">
+                                                    Contact Number: <span
+                                                        class="font-normal">{{ $property->contact_number }}</span>
+                                                </p>
+                                            </div>
+
+                                            <!-- Approve Button -->
+                                            <a href="{{ route('propertyEnquiry', ['id' => $property->property_id]) }}"
+                                                class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition">
+                                                Approve
+                                            </a>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

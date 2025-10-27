@@ -7,6 +7,7 @@
     <title>Real Estate Thrissur - Find Your Dream Home</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
     <link href="../assets/css/output_2.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 </head>
 
@@ -31,7 +32,7 @@
 
             <!-- Form Container -->
             <div class="p-6">
-                <form class="space-y-6" action="{{ route('saveproperty') }}" method="POST"
+                <form class="space-y-6" action="{{ route('saveProperty') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 
