@@ -25,6 +25,7 @@ Route::post('/login/user', [UserController::class, 'login'])->name('loginUser');
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register/user', [UserController::class, 'register'])->name('registerUser');
 Route::get('/admin', [UserController::class, 'showAdmin'])->name('admin');
+Route::get('/requests', [UserController::class, 'showRequests'])->name('requests');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\CategoryModel;
 use App\Models\LocationModel;
 use App\Models\PriceRangeModel;
+use App\Models\MyProperties;
 
 class UserController extends Controller
 {
@@ -101,5 +102,15 @@ class UserController extends Controller
         $request->session()->flush();
         
         return redirect()->route('login')->with('success_logout', 'Logout successfull!');
+    }
+
+    public function showRequests()
+    {
+        // Fetch with category, user and location relationships
+        $properties = MyProperties::with(['category', 'locality', 'user'])
+            ->orderByDesc('post_date')
+            ->paginate(10);
+
+        return view('users.request', compact('properties'));
     }
 }

@@ -96,7 +96,7 @@
                             <a href="{{ route('admin') }}"
                                 class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
                                     class="mr-2 text-gray-400">-</span> Admin</a>
-                            <a href="" class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
+                            <a href="{{ route('requests') }}" class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
                                     class="mr-2 text-gray-400">-</span> Requests</a>
                         </div>
                     </div>

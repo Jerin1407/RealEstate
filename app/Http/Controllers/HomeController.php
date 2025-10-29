@@ -12,7 +12,7 @@ use App\Models\PriceUnitModel;
 use App\Models\UserTypeModel;
 use App\Models\PropertyImageModel;
 use App\Models\UserModel;
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -299,7 +299,7 @@ class HomeController extends Controller
 
     public function saveProperty(Request $request)
     {
-        // validate inputs
+        // Validate input
         $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|not_in:0',
@@ -311,25 +311,33 @@ class HomeController extends Controller
             'exact_price' => 'nullable|numeric',
             'priority' => 'nullable|string|max:10',
             'amount_for' => 'nullable|not_in:0',
-            'contact_person' => 'nullable|string|max:255',
-            'contact_number' => 'nullable|string|max:20',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'your_name' => 'required|string|max:255',
             'email_id' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'type' => 'required|not_in:0',
-            'captcha' => 'required|captcha',
-        ], [
-            'captcha.captcha' => 'Invalid Captcha !!!'
+            //'captcha' => 'required|captcha',
+        // ], [
+        //     'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
-        // save user
-        $user = UserModel::create([
-            'fullname' => $request->your_name,
-            'email' => $request->email_id,
-            'contact_number' => $request->phone,
-            'user_type_id' => $request->type,
-        ]);
+        $userId = session('user_id');
+        if (!$userId) {
+            // Check if user exists by email
+            $existingUser = UserModel::where('email', $request->email_id)->first();
+            if ($existingUser) {
+                $userId = $existingUser->user_id;
+            } else {
+                // Create new user
+                $user = new UserModel();
+                $user->fullname = $request->your_name;
+                $user->email = $request->email_id;
+                $user->contact_number = $request->phone;
+                $user->user_type_id = $request->type;
+                $user->save();
+                $userId = $user->user_id;
+            }
+        }
 
         // Generate next property code (RT1000 → RT9999)
         $lastProperty = MyProperties::orderBy('property_id', 'desc')->first();
@@ -352,7 +360,7 @@ class HomeController extends Controller
 
         // save property
         $property = new MyProperties();
-        $property->posted_by = $user->user_id;
+        $property->posted_by = $userId;
         $property->locality_id = $request->location;
         $property->category_id = $request->category;
         $property->price_range_id = $request->price_range;
@@ -387,6 +395,6 @@ class HomeController extends Controller
             }
         }
 
-        return redirect()->route('home')->with('success', 'Property saved successfully!!!');
+        return redirect()->route('home')->with('success', 'Property added successfully !!!');
     }
 }
