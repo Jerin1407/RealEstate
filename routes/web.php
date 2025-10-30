@@ -25,7 +25,13 @@ Route::post('/login/user', [UserController::class, 'login'])->name('loginUser');
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register/user', [UserController::class, 'register'])->name('registerUser');
 Route::get('/admin', [UserController::class, 'showAdmin'])->name('admin');
-Route::get('/requests', [UserController::class, 'showRequests'])->name('requests');
+Route::get('/requests', [UserController::class, 'showRequest'])->name('requests');
+Route::get('/edit-request/{id}', [UserController::class, 'editRequest'])->name('editRequest');
+Route::get('/view-request/{id}', [UserController::class, 'viewRequest'])->name('viewRequest');
+Route::post('/update-request/{id}', [UserController::class, 'updateRequest'])->name('updateRequest');
+Route::post('/delete-request-image/{id}', [UserController::class, 'deleteRequestImage'])->name('deleteRequestImage');
+Route::delete('/delete-request/{id}', [UserController::class, 'deleteRequest'])->name('deleteRequest');
+Route::get('/approve-request/{id}', [UserController::class, 'approveRequest'])->name('approveRequest');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');
@@ -34,7 +40,7 @@ Route::get('/editproperty/{id}', [PropertyController::class, 'editProperty'])->n
 Route::get('/viewproperty/{id}', [PropertyController::class, 'viewProperty'])->name('viewproperty');
 Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'])->name('updateproperty');
 Route::post('/deletepropertyimage/{id}', [PropertyController::class, 'deletePropertyImage'])->name('deletePropertyImage');
-Route::delete('/deleteproperty', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
+Route::delete('/deleteproperty/{id}', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
 Route::post('/propertyenquiry', [PropertyController::class, 'propertyEnquiry'])->name('propertyEnquiry');
 
 Route::get('/index', [HomeController::class, 'index'])->name('home');
@@ -50,6 +56,8 @@ Route::get('/view-all-plot', [HomeController::class, 'viewAllPlot'])->name('view
 Route::get('/view-plot-property/{id}', [HomeController::class, 'viewPlotProperty'])->name('viewPlotProperty');
 Route::get('/view-all-commercial', [HomeController::class, 'viewAllCommercial'])->name('viewAllCommercial');
 Route::get('/view-commercial-property/{id}', [HomeController::class, 'viewCommercialProperty'])->name('viewcommercialProperty');
+Route::get('/view-all-rent', [HomeController::class, 'viewAllRent'])->name('viewAllRent');
+Route::get('/view-rent-property/{id}', [HomeController::class, 'viewRentProperty'])->name('viewrentProperty');
 Route::get('/search-location', [HomeController::class, 'searchLocation'])->name('searchLocation');
 Route::get('/search-property', [HomeController::class, 'searchProperty'])->name('searchProperty');
 Route::get('/addHomeproperty', [HomeController::class, 'addProperty'])->name('addProperty');

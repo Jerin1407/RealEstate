@@ -43,12 +43,18 @@ class HomeController extends Controller
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
+        $rents = MyProperties::with(['category', 'locality'])
+            ->where('category_id', 5)
+            //->where('is_approved', 1) // Optional: show only approved commercials
+            ->orderByDesc('post_date')
+            ->take(4)
+            ->get();
 
         $categories = CategoryModel::all();
         $priceRanges = PriceRangeModel::all();
         $locations = LocationModel::all();
 
-        return view('pages.index', compact('villas', 'flats', 'plots', 'commercials', 'categories', 'priceRanges', 'locations'));
+        return view('pages.index', compact('villas', 'flats', 'plots', 'commercials', 'rents', 'categories', 'priceRanges', 'locations'));
     }
 
     public function about()
@@ -207,6 +213,36 @@ class HomeController extends Controller
         return view('subpages.view_commercial', compact('commercial', 'categories', 'priceRanges', 'locations'));
     }
 
+    public function viewAllRent()
+    {
+        // Fetch all rents (category_id = 5)
+        $rents = MyProperties::with(['category', 'locality', 'images'])
+            ->where('category_id', 5)
+            ->orderByDesc('post_date')
+            ->get();
+
+        // Count total rents
+        $rentCount = $rents->count();
+
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('pages.view_rent', compact('rents', 'rentCount', 'categories', 'priceRanges', 'locations'));
+    }
+
+    public function viewRentProperty($id)
+    {
+        // Fetch rent with relationships
+        $rent = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
+
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('subpages.view_rent', compact('rent', 'categories', 'priceRanges', 'locations'));
+    }
+
     public function searchLocation(Request $request)
     {
         $query = $request->get('query', '');
@@ -317,8 +353,8 @@ class HomeController extends Controller
             'phone' => 'required|string|max:20',
             'type' => 'required|not_in:0',
             //'captcha' => 'required|captcha',
-        // ], [
-        //     'captcha.captcha' => 'Invalid Captcha !!!'
+            // ], [
+            //     'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
         $userId = session('user_id');

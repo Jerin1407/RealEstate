@@ -237,7 +237,7 @@
                                                     class="bg-red-500 text-black text-xs px-2 py-1 rounded">✕</button>
                                             </form> --}}
                                             <button type="button"
-                                                onclick="deleteImage('{{ route('deletePropertyImage', $image->property_thumb_id) }}')"
+                                                onclick="deleteImage('{{ route('deleteRequestImage', $image->property_thumb_id) }}')"
                                                 class="bg-red-500 text-black text-xs px-2 py-1 rounded">
                                                 ✕
                                             </button>

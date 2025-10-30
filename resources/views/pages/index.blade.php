@@ -305,6 +305,82 @@
         </div>
     </section>
 
+    <!-- Rental Section -->
+    <section id="rents" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Rental Properties</h3>
+                    <p class="text-gray-600">Affordable and flexible rental options to suit your needs</p>
+                </div>
+
+                @php
+                    $rentalCount = \App\Models\MyProperties::where('category_id', 5)->count();
+                @endphp
+
+                <a href="{{ route('viewAllRent') }}"><button
+                        class="text-primary font-semibold hover:text-red-secondary transition-colors">View
+                        All {{ $rentalCount }}+
+                        →</button></a>
+            </div>
+
+            <!-- Rental Cards -->
+            <div class="overflow-x-auto">
+                <div class="flex space-x-6 pb-4" style="width: max-content;">
+                    @foreach ($rents as $rent)
+                        <div
+                            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-80 flex-shrink-0">
+                            <a href="{{ route('viewrentProperty', ['id' => $rent->property_id]) }}">
+                                <div
+                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                                    @php
+                                        $coverImage = $rent->images->where('is_cover', 1)->first();
+                                    @endphp
+                                    <img src="{{ $coverImage ? asset('uploads/property/' . $coverImage->filename) : asset('images/no-image.jpg') }}"
+                                        alt="{{ $rent->property_title }}" class="h-56 w-full object-cover">
+                                </div>
+
+                                <div class="p-6 md:h-48">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="text-xl font-bold text-gray-800">{{ $rent->property_title }}</h4>
+                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">
+                                            Rental
+                                        </span>
+                                    </div>
+
+                                    <p class="text-gray-600 mb-4">
+                                        {{ strip_tags(Str::limit($rent->property_description, 10)) }}
+                                    </p>
+
+                                    <div class="flex justify-between items-center">
+                                        @php
+                                            if ($rent->price >= 10000000) {
+                                                $formattedPrice = round($rent->price / 10000000, 2) . ' Cr';
+                                            } elseif ($rent->price >= 100000) {
+                                                $formattedPrice = round($rent->price / 100000, 2) . ' L';
+                                            } else {
+                                                $formattedPrice = number_format($rent->price, 0);
+                                            }
+                                        @endphp
+
+                                        <span class="text-2xl font-bold text-primary">
+                                            ₹{{ $formattedPrice }}
+                                        </span>
+
+                                        <button
+                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                            View Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Properties -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -431,7 +507,6 @@
     </section>
 
     <script>
-
         // success alert
         @if (session('success'))
             const Toast = Swal.mixin({

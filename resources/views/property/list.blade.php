@@ -8,6 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
     <link href="./assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -43,7 +44,7 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
-                            <button type="button" id="viewBtn"
+                            {{-- <button type="button" id="viewBtn"
                                 class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
                                 <i class="far fa-eye mr-2"></i>
                                 View
@@ -52,21 +53,21 @@
                                 class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
                                 <i class="fas fa-edit mr-2"></i>
                                 Edit
-                            </button>
+                            </button> --}}
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
                                 <i class="fas fa-download mr-2"></i>
                                 Export
                             </button>
-                            <form id="deleteForm" action="{{ route('deleteproperty') }}" method="POST">
+                            {{-- <form id="deleteForm" action="{{ route('deleteproperty') }}" method="POST">
                                 @csrf
-                                @method('DELETE')
-                                <button type="button" id="deleteBtn"
+                                @method('DELETE') --}}
+                            {{-- <button type="button" id="deleteBtn"
                                     class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
                                     <i class="fas fa-trash mr-2"></i>
                                     Delete
-                                </button>
+                                </button> --}}
                         </div>
-                        </form>
+                        {{-- </form> --}}
                         <a href="{{ route('addproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
                                 <i class="fas fa-plus mr-2"></i>
@@ -83,7 +84,7 @@
                         <!-- Table Header -->
                         <thead class="bg-gray-300 text-black">
                             <tr>
-                                <th></th>
+                                {{-- <th></th> --}}
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property code</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Title</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Category</th>
@@ -94,19 +95,19 @@
                                 <th class="px-4 py-3 text-left text-sm font-medium">Price</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Status</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Priority</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium">Action</th>
                             </tr>
                         </thead>
 
                         <!-- Table Body -->
                         <tbody class="bg-white">
                             @foreach ($properties as $property)
-                                <tr class="border-b border-gray-200 hover:bg-gray-50 cursor-pointer"
-                                    onclick="toggleCheckbox(this)">
-                                    <td class="px-4 py-3">
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    {{-- <td class="px-4 py-3">
                                         <input type="checkbox" name="selected_properties[]"
                                             value="{{ $property->property_id }}" class="property-checkbox rounded"
                                             onclick="event.stopPropagation();">
-                                    </td>
+                                    </td> --}}
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_code }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_title }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
@@ -126,6 +127,31 @@
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ $property->is_approved ? 'Active' : 'Inactive' }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ ucfirst($property->priority) }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        <div class="flex items-center gap-3">
+
+                                            <!-- Edit -->
+                                            <a href="{{ route('editproperty', $property->property_id) }}">
+                                                <i
+                                                    class="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-600"></i>
+                                            </a>
+
+                                            <!-- View -->
+                                            <a href="{{ route('viewproperty', $property->property_id) }}">
+                                                <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
+                                            </a>
+
+                                            <!-- Delete -->
+                                            <form action="{{ route('deleteproperty', $property->property_id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="delete-btn">
+                                                    <i class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -240,7 +266,7 @@
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 4000,
                 timerProgressBar: true,
                 background: '#10B981', // green color
                 color: '#fff',
@@ -262,7 +288,7 @@
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 4000,
                 timerProgressBar: true,
                 background: '#10B981', // green color
                 color: '#fff',
@@ -279,101 +305,101 @@
         @endif
 
         // edit property
-        document.getElementById('editPropertyBtn').addEventListener('click', function(e) {
-            e.preventDefault();
+        // document.getElementById('editPropertyBtn').addEventListener('click', function(e) {
+        //     e.preventDefault();
 
-            // Get all selected checkboxes
-            const selected = document.querySelectorAll('.property-checkbox:checked');
+        //     // Get all selected checkboxes
+        //     const selected = document.querySelectorAll('.property-checkbox:checked');
 
-            // Validate selection
-            if (selected.length === 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'No property selected!',
-                    text: 'Please select a property to edit.',
-                    position: 'top',
-                    background: '#EF4444', // red color
-                    color: '#fff',
-                    iconColor: '#fff',
-                    toast: true,
-                    showConfirmButton: false,
-                    timer: 4000,
-                });
-                return;
-            }
-            if (selected.length > 1) {
-                Swal.fire({
-                    icon: 'error',
-                    title: ' Multiple properties selected!',
-                    text: 'Please select only one property to edit.',
-                    position: 'top',
-                    background: '#EF4444', // red color
-                    color: '#fff',
-                    iconColor: '#fff',
-                    toast: true,
-                    showConfirmButton: false,
-                    timer: 4000,
-                });
-                return;
-            }
+        //     // Validate selection
+        //     if (selected.length === 0) {
+        //         Swal.fire({
+        //             icon: 'warning',
+        //             title: 'No property selected!',
+        //             text: 'Please select a property to edit.',
+        //             position: 'top',
+        //             background: '#EF4444', // red color
+        //             color: '#fff',
+        //             iconColor: '#fff',
+        //             toast: true,
+        //             showConfirmButton: false,
+        //             timer: 4000,
+        //         });
+        //         return;
+        //     }
+        //     if (selected.length > 1) {
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: ' Multiple properties selected!',
+        //             text: 'Please select only one property to edit.',
+        //             position: 'top',
+        //             background: '#EF4444', // red color
+        //             color: '#fff',
+        //             iconColor: '#fff',
+        //             toast: true,
+        //             showConfirmButton: false,
+        //             timer: 4000,
+        //         });
+        //         return;
+        //     }
 
-            // Get selected property ID
-            const propertyId = selected[0].value;
+        //     // Get selected property ID
+        //     const propertyId = selected[0].value;
 
-            // Redirect to edit page
-            window.location.href = `/editproperty/${propertyId}`;
-        });
+        //     // Redirect to edit page
+        //     window.location.href = `/editproperty/${propertyId}`;
+        // });
 
         // Delete Property
-        document.getElementById('deleteBtn').addEventListener('click', function() {
-            const selected = document.querySelectorAll('.property-checkbox:checked');
-            const form = document.getElementById('deleteForm');
+        // document.getElementById('deleteBtn').addEventListener('click', function() {
+        //     const selected = document.querySelectorAll('.property-checkbox:checked');
+        //     const form = document.getElementById('deleteForm');
 
-            if (selected.length === 0) {
-                Swal.fire({
-                    position: 'top',
-                    icon: 'warning',
-                    title: 'Please select atleast one property!',
-                    showConfirmButton: false,
-                    timer: 4000,
-                    background: '#EF4444', // red color
-                    color: '#fff',
-                    iconColor: '#fff',
-                    toast: true,
-                });
-                return;
-            }
+        //     if (selected.length === 0) {
+        //         Swal.fire({
+        //             position: 'top',
+        //             icon: 'warning',
+        //             title: 'Please select atleast one property!',
+        //             showConfirmButton: false,
+        //             timer: 4000,
+        //             background: '#EF4444', // red color
+        //             color: '#fff',
+        //             iconColor: '#fff',
+        //             toast: true,
+        //         });
+        //         return;
+        //     }
 
-            Swal.fire({
-                position: 'top',
-                title: 'Are you sure?',
-                text: 'You want to delete selected property(s)?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete!',
-                cancelButtonText: 'Cancel',
-                width: '380px',
-                toast: true
-            }).then(result => {
-                if (result.isConfirmed) {
-                    // Remove previous hidden inputs
-                    form.querySelectorAll('input[name="selected_properties[]"]').forEach(el => el.remove());
+        //     Swal.fire({
+        //         position: 'top',
+        //         title: 'Are you sure?',
+        //         text: 'You want to delete selected property(s)?',
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#d33',
+        //         cancelButtonColor: '#3085d6',
+        //         confirmButtonText: 'Yes, delete!',
+        //         cancelButtonText: 'Cancel',
+        //         width: '380px',
+        //         toast: true
+        //     }).then(result => {
+        //         if (result.isConfirmed) {
+        //             // Remove previous hidden inputs
+        //             form.querySelectorAll('input[name="selected_properties[]"]').forEach(el => el.remove());
 
-                    // Add selected IDs to form
-                    selected.forEach(cb => {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = 'selected_properties[]';
-                        input.value = cb.value;
-                        form.appendChild(input);
-                    });
+        //             // Add selected IDs to form
+        //             selected.forEach(cb => {
+        //                 const input = document.createElement('input');
+        //                 input.type = 'hidden';
+        //                 input.name = 'selected_properties[]';
+        //                 input.value = cb.value;
+        //                 form.appendChild(input);
+        //             });
 
-                    form.submit();
-                }
-            });
-        });
+        //             form.submit();
+        //         }
+        //     });
+        // });
 
         // Success Alert
         @if (session('success_delete'))
@@ -381,7 +407,7 @@
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 4000,
                 timerProgressBar: true,
                 background: '#10B981', // green color
                 color: '#fff',
@@ -404,58 +430,77 @@
                 icon: 'error',
                 title: '{{ session('error_delete') }}',
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 4000,
                 width: '300px'
             });
         @endif
 
         // View Button
-        document.getElementById('viewBtn').addEventListener('click', function() {
-            const selected = document.querySelectorAll('.property-checkbox:checked');
+        // document.getElementById('viewBtn').addEventListener('click', function() {
+        //     const selected = document.querySelectorAll('.property-checkbox:checked');
 
-            if (selected.length === 0) {
-                // No property selected
-                Swal.fire({
-                    position: 'top',
-                    icon: 'warning',
-                    title: 'No property selected!',
-                    text: 'Please select a property to view.',
-                    showConfirmButton: false,
-                    timer: 4000,
-                    background: '#EF4444', // red color
-                    color: '#fff',
-                    iconColor: '#fff',
-                    toast: true,
-                });
-            } else if (selected.length > 1) {
-                // More than one selected
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: ' Multiple properties selected!',
-                    text: 'Please select only one property to view.',
-                    showConfirmButton: false,
-                    timer: 4000,
-                    background: '#EF4444', // red color
-                    color: '#fff',
-                    iconColor: '#fff',
-                    toast: true,
-                });
-            } else {
-                // Exactly one selected — redirect to view page
-                const propertyId = selected[0].value;
-                window.location.href = `/viewproperty/${propertyId}`;
-            }
-        });
+        //     if (selected.length === 0) {
+        //         // No property selected
+        //         Swal.fire({
+        //             position: 'top',
+        //             icon: 'warning',
+        //             title: 'No property selected!',
+        //             text: 'Please select a property to view.',
+        //             showConfirmButton: false,
+        //             timer: 4000,
+        //             background: '#EF4444', // red color
+        //             color: '#fff',
+        //             iconColor: '#fff',
+        //             toast: true,
+        //         });
+        //     } else if (selected.length > 1) {
+        //         // More than one selected
+        //         Swal.fire({
+        //             position: 'top',
+        //             icon: 'error',
+        //             title: ' Multiple properties selected!',
+        //             text: 'Please select only one property to view.',
+        //             showConfirmButton: false,
+        //             timer: 4000,
+        //             background: '#EF4444', // red color
+        //             color: '#fff',
+        //             iconColor: '#fff',
+        //             toast: true,
+        //         });
+        //     } else {
+        //         // Exactly one selected — redirect to view page
+        //         const propertyId = selected[0].value;
+        //         window.location.href = `/viewproperty/${propertyId}`;
+        //     }
+        // });
     </script>
 
     <script>
-        function toggleCheckbox(row) {
-            const checkbox = row.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-            row.classList.toggle('bg-gray-100', checkbox.checked);
-        }
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                let form = this.closest('form');
+
+                Swal.fire({
+                    position: 'top',
+                    title: 'Are you sure?',
+                    text: 'You want to delete this property?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete!',
+                    cancelButtonText: 'Cancel',
+                    width: '380px',
+                    toast: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
     </script>
+
 </body>
 
 <script src="assets/js/script.js"></script>

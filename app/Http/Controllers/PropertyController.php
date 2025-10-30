@@ -217,34 +217,58 @@ class PropertyController extends Controller
         return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
     }
 
-    public function deleteProperty(Request $request)
+    public function deleteProperty($id)
     {
-        $propertyIds = $request->input('selected_properties', []);
+        $property = MyProperties::find($id);
 
-        if (empty($propertyIds)) {
-            return redirect()->route('listproperty')->with('error_delete', 'No properties selected.');
+        if (!$property) {
+            return redirect()->back()->with('error_delete', 'Property not found!');
         }
 
-        foreach ($propertyIds as $id) {
-            $property = MyProperties::find($id);
-            if ($property) {
-                // Delete all related images
-                $images = PropertyImageModel::where('property_id', $id)->get();
-                foreach ($images as $image) {
-                    $imagePath = public_path('uploads/property/' . $image->filename);
-                    if (File::exists($imagePath)) {
-                        File::delete($imagePath);
-                    }
-                    $image->delete();
-                }
-
-                // Delete property record
-                $property->delete();
+        // Delete related images
+        $images = PropertyImageModel::where('property_id', $id)->get();
+        foreach ($images as $image) {
+            $imagePath = public_path('uploads/property/' . $image->filename);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
             }
+            $image->delete();
         }
 
-        return redirect()->back()->with('success_delete', 'Property deleted successfully!!!');
+        $property->delete();
+
+        return redirect()->back()->with('success_delete', 'Property deleted successfully!');
     }
+
+
+    // public function deleteProperty(Request $request)
+    // {
+    //     $propertyIds = $request->input('selected_properties', []);
+
+    //     if (empty($propertyIds)) {
+    //         return redirect()->route('listproperty')->with('error_delete', 'No properties selected.');
+    //     }
+
+    //     foreach ($propertyIds as $id) {
+    //         $property = MyProperties::find($id);
+    //         if ($property) {
+    //             // Delete all related images
+    //             $images = PropertyImageModel::where('property_id', $id)->get();
+    //             foreach ($images as $image) {
+    //                 $imagePath = public_path('uploads/property/' . $image->filename);
+    //                 if (File::exists($imagePath)) {
+    //                     File::delete($imagePath);
+    //                 }
+    //                 $image->delete();
+    //             }
+
+    //             // Delete property record
+    //             $property->delete();
+    //         }
+    //     }
+
+    //     return redirect()->back()->with('success_delete', 'Property deleted successfully!!!');
+    // }
 
     public function propertyEnquiry(Request $request)
     {

@@ -8,6 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
     <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -217,8 +218,16 @@
                                                         class="font-normal">{{ $property->contact_number }}</span>
                                                 </p>
                                             </div>
+
+                                            <!-- Approve Button -->
+                                            <a href="javascript:void(0);"
+                                                class="approve-btn bg-green-600 hover:bg-green-700 text-red font-semibold px-6 py-2 rounded-lg shadow-md transition"
+                                                data-url="{{ route('approveRequest', $property->property_id) }}">
+                                                Approve
+                                            </a>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -274,6 +283,27 @@
                 }
             }
         })();
+    </script>
+
+    <script>
+        document.querySelectorAll('.approve-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let url = this.getAttribute('data-url');
+
+                Swal.fire({
+                    title: "Approve this property?",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonColor: "#16a34a",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, Approve"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

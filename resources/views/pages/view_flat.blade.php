@@ -23,7 +23,7 @@
                                     <div class="flex justify-between items-start mb-2">
                                         <h4 class="text-xl font-bold text-gray-800">{{ $flat->property_title }}</h4>
                                         <span class="bg-primary text-white px-2 py-1 rounded text-sm">
-                                            {{ $flat->category->category_name ?? 'Flat' }}
+                                            Flat
                                         </span>
                                     </div>
 
