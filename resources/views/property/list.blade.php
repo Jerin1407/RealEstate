@@ -34,7 +34,7 @@
                             </div>
                             <button class="flex items-center text-white hover:text-blue-100">
                                 <i class="fas fa-map-marker-alt mr-1"></i>
-                                <span class="text-sm">View All</span>
+                                <span class="text-sm">View</span>
                             </button>
                         </div>
                     </div>

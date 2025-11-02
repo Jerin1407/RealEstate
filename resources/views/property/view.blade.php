@@ -70,7 +70,7 @@
 
                 <!-- Table -->
                 <div class="overflow-x-auto">
-                    <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: '{{ asset('uploads/' . ($property->images->where('is_cover', 1)->first()->filename ?? 'images/no-image.jpg')) }}' }">
+                    <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: '{{ asset('uploads/property/' . ($property->images->where('is_cover', 1)->first()->filename ?? 'images/no-image.jpg')) }}' }">
                         <div class="max-w-7xl mx-auto grid lg:grid-cols-1 gap-8">
 
                             <!-- Left Side: Image + Property Description -->
@@ -85,10 +85,10 @@
                                     <!-- Thumbnails -->
                                     <div class="flex mt-2 gap-2 overflow-x-auto">
                                         @foreach ($property->images as $img)
-                                            <img src="{{ asset('uploads/' . $img->filename) }}"
-                                                @click="selectedImage = '{{ asset('uploads/' . $img->filename) }}'"
+                                            <img src="{{ asset('uploads/property/' . $img->filename) }}"
+                                                @click="selectedImage = '{{ asset('uploads/property/' . $img->filename) }}'"
                                                 class="w-24 h-20 object-cover rounded cursor-pointer border-2"
-                                                :class="selectedImage === '{{ asset('uploads/' . $img->filename) }}' ?
+                                                :class="selectedImage === '{{ asset('uploads/property/' . $img->filename) }}' ?
                                                     'border-red-500' :
                                                     'border-gray-200'">
                                         @endforeach

@@ -178,7 +178,7 @@ class UserController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
                 $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/property'), $filename);
+                $image->move(public_path('uploads/property/'), $filename);
 
                 PropertyImageModel::create([
                     'property_id' => $property->property_id,
@@ -188,7 +188,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->route('request')->with('success_update', 'Property updated successfully!!!');
+        return redirect()->route('requests')->with('success_update', 'Property updated successfully!!!');
     }
 
     public function viewRequest($id)
@@ -245,6 +245,6 @@ class UserController extends Controller
         $property->is_approved = 1;
         $property->save();
 
-        return redirect()->route('request')->with('success_approve', 'Property approved successfully!');
+        return redirect()->route('requests')->with('success_approve', 'Property approved successfully!');
     }
 }

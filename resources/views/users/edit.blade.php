@@ -32,7 +32,7 @@
 
             <!-- Form Container -->
             <div class="p-6">
-                <form class="space-y-6" action="{{ route('updateproperty', $property->property_id) }}" method="POST"
+                <form class="space-y-6" action="{{ route('updateRequest', $property->property_id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 

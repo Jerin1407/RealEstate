@@ -20,32 +20,32 @@ class HomeController extends Controller
     {
         $villas = MyProperties::with(['category', 'locality'])
             ->where('category_id', 1)
-            //->where('is_approved', 1) // Optional: show only approved villas
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
 
         $flats = MyProperties::with(['category', 'locality'])
             ->where('category_id', 2)
-            //->where('is_approved', 1) // Optional: show only approved flats
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
         $plots = MyProperties::with(['category', 'locality'])
             ->where('category_id', 3)
-            //->where('is_approved', 1) // Optional: show only approved plots
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
         $commercials = MyProperties::with(['category', 'locality'])
             ->where('category_id', 4)
-            //->where('is_approved', 1) // Optional: show only approved commercials
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
         $rents = MyProperties::with(['category', 'locality'])
             ->where('category_id', 5)
-            //->where('is_approved', 1) // Optional: show only approved commercials
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
@@ -98,6 +98,7 @@ class HomeController extends Controller
         // Fetch all villas (category_id = 1)
         $villas = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 1)
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->get();
 
@@ -128,6 +129,7 @@ class HomeController extends Controller
         // Fetch all flats (category_id = 2)
         $flats = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 2)
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->get();
 
@@ -158,6 +160,7 @@ class HomeController extends Controller
         // Fetch all plots (category_id = 3)
         $plots = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 3)
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->get();
 
@@ -188,6 +191,7 @@ class HomeController extends Controller
         // Fetch all commercials (category_id = 4)
         $commercials = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 4)
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->get();
 
@@ -218,6 +222,7 @@ class HomeController extends Controller
         // Fetch all rents (category_id = 5)
         $rents = MyProperties::with(['category', 'locality', 'images'])
             ->where('category_id', 5)
+            ->where('is_approved', 1)
             ->orderByDesc('post_date')
             ->get();
 
@@ -357,22 +362,21 @@ class HomeController extends Controller
             //     'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
-        $userId = session('user_id');
-        if (!$userId) {
-            // Check if user exists by email
-            $existingUser = UserModel::where('email', $request->email_id)->first();
-            if ($existingUser) {
-                $userId = $existingUser->user_id;
-            } else {
-                // Create new user
-                $user = new UserModel();
-                $user->fullname = $request->your_name;
-                $user->email = $request->email_id;
-                $user->contact_number = $request->phone;
-                $user->user_type_id = $request->type;
-                $user->save();
-                $userId = $user->user_id;
-            }
+        // Check if user exists by email
+        $existingUser = UserModel::where('email', $request->email_id)->first();
+
+        if ($existingUser) {
+            $userId = $existingUser->user_id;
+        } else {
+            // Create new user
+            $user = new UserModel();
+            $user->fullname = $request->your_name;
+            $user->email = $request->email_id;
+            $user->contact_number = $request->phone;
+            $user->user_type_id = $request->type;
+            $user->save();
+
+            $userId = $user->user_id;
         }
 
         // Generate next property code (RT1000 → RT9999)

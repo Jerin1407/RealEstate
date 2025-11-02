@@ -42,6 +42,7 @@ Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'
 Route::post('/deletepropertyimage/{id}', [PropertyController::class, 'deletePropertyImage'])->name('deletePropertyImage');
 Route::delete('/deleteproperty/{id}', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
 Route::post('/propertyenquiry', [PropertyController::class, 'propertyEnquiry'])->name('propertyEnquiry');
+//Route::get('/properties/location/{locality_id}', [PropertyController::class, 'filterByLocation'])->name('propertyLocation');
 
 Route::get('/index', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -62,6 +63,3 @@ Route::get('/search-location', [HomeController::class, 'searchLocation'])->name(
 Route::get('/search-property', [HomeController::class, 'searchProperty'])->name('searchProperty');
 Route::get('/addHomeproperty', [HomeController::class, 'addProperty'])->name('addProperty');
 Route::post('/saveHomeproperty', [HomeController::class, 'saveProperty'])->name('saveProperty');
-
-
-

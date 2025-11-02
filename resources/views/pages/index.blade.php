@@ -11,7 +11,7 @@
                 </div>
 
                 @php
-                    $villaCount = \App\Models\MyProperties::where('category_id', 1)->count();
+                    $villaCount = \App\Models\MyProperties::where('category_id', 1)->where('is_approved', 1)->count();
                 @endphp
 
                 <a href="{{ route('viewAllVilla') }}"><button
@@ -87,7 +87,7 @@
                 </div>
 
                 @php
-                    $flatCount = \App\Models\MyProperties::where('category_id', 2)->count();
+                    $flatCount = \App\Models\MyProperties::where('category_id', 2)->where('is_approved', 1)->count();
                 @endphp
 
                 <a href="{{ route('viewAllFlat') }}"><button
@@ -163,7 +163,7 @@
                 </div>
 
                 @php
-                    $plotCount = \App\Models\MyProperties::where('category_id', 3)->count();
+                    $plotCount = \App\Models\MyProperties::where('category_id', 3)->where('is_approved', 1)->count();
                 @endphp
 
                 <a href="{{ route('viewAllPlot') }}"><button
@@ -239,7 +239,7 @@
                 </div>
 
                 @php
-                    $commercialCount = \App\Models\MyProperties::where('category_id', 4)->count();
+                    $commercialCount = \App\Models\MyProperties::where('category_id', 4)->where('is_approved', 1)->count();
                 @endphp
 
                 <a href="{{ route('viewAllCommercial') }}"><button
@@ -315,7 +315,7 @@
                 </div>
 
                 @php
-                    $rentalCount = \App\Models\MyProperties::where('category_id', 5)->count();
+                    $rentalCount = \App\Models\MyProperties::where('category_id', 5)->where('is_approved', 1)->count();
                 @endphp
 
                 <a href="{{ route('viewAllRent') }}"><button

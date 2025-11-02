@@ -108,7 +108,7 @@ class PropertyController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
                 $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/property'), $filename);
+                $image->move(public_path('uploads/property/'), $filename);
 
                 PropertyImageModel::create([
                     'property_id' => $property->property_id,
@@ -180,7 +180,7 @@ class PropertyController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
                 $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('uploads/property'), $filename);
+                $image->move(public_path('uploads/property/'), $filename);
 
                 PropertyImageModel::create([
                     'property_id' => $property->property_id,
