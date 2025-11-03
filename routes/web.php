@@ -42,7 +42,8 @@ Route::post('/updateproperty/{id}', [PropertyController::class, 'updateProperty'
 Route::post('/deletepropertyimage/{id}', [PropertyController::class, 'deletePropertyImage'])->name('deletePropertyImage');
 Route::delete('/deleteproperty/{id}', [PropertyController::class, 'deleteProperty'])->name('deleteproperty');
 Route::post('/propertyenquiry', [PropertyController::class, 'propertyEnquiry'])->name('propertyEnquiry');
-//Route::get('/properties/location/{locality_id}', [PropertyController::class, 'filterByLocation'])->name('propertyLocation');
+Route::get('/filterproperty', [PropertyController::class, 'filterProperty'])->name('filterProperty');
+Route::get('/exportproperty', [PropertyController::class, 'propertyExport'])->name('exportProperty');
 
 Route::get('/index', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');

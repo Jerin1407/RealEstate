@@ -86,10 +86,10 @@
                             <tr>
                                 {{-- <th></th> --}}
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property code</th>
-                                <th class="px-4 py-3 text-left text-sm font-medium">Title</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium">Property Title</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Category</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Location</th>
-                                <th class="px-4 py-3 text-left text-sm font-medium">Description</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium">Property Description</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Added By</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Added On</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Price</th>

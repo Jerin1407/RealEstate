@@ -28,20 +28,24 @@
                     <div class=" md:flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Property List</h1>
                         <div class="flex items-center space-x-4">
-                            <div class="relative">
-                                <input type="text" placeholder="Search..."
-                                    class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
-                            </div>
-                            <button class="flex items-center text-white hover:text-blue-100">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                <span class="text-sm">View</span>
-                            </button>
+                            <form method="GET" action="{{ route('filterProperty') }}" class="flex items-center gap-2">
+                                <div class="relative">
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        placeholder="Search..."
+                                        class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
+                                </div>
+                                <button
+                                    class="flex items-center bg-white-600 hover:bg-white-700 text-white px-3 py-1 rounded text-sm">
+                                    <i class="fas fa-search mr-1"></i>
+                                    View
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
+                <div class="bg-gray-200 p-2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
                             {{-- <button type="button" id="viewBtn"
@@ -54,10 +58,11 @@
                                 <i class="fas fa-edit mr-2"></i>
                                 Edit
                             </button> --}}
-                            <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
-                                <i class="fas fa-download mr-2"></i>
-                                Export
-                            </button>
+                            <form action="{{ route('exportProperty') }}" method="GET" id="exportForm">
+                                <button class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
+                                    <i class="fas fa-download mr-2"></i> Export
+                                </button>
+                            </form>
                             {{-- <form id="deleteForm" action="{{ route('deleteproperty') }}" method="POST">
                                 @csrf
                                 @method('DELETE') --}}
@@ -86,10 +91,10 @@
                             <tr>
                                 {{-- <th></th> --}}
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property code</th>
-                                <th class="px-4 py-3 text-left text-sm font-medium">Title</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium">Property Title</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Category</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Location</th>
-                                <th class="px-4 py-3 text-left text-sm font-medium">Description</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium">Property Description</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Added By</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Added On</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Price</th>
@@ -101,7 +106,7 @@
 
                         <!-- Table Body -->
                         <tbody class="bg-white">
-                            @foreach ($properties as $property)
+                            @forelse ($properties as $property)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
                                     {{-- <td class="px-4 py-3">
                                         <input type="checkbox" name="selected_properties[]"
@@ -153,7 +158,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="11" class="text-center py-6 text-gray-600 text-lg">
+                                        No properties found
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -498,6 +509,26 @@
                     }
                 });
             });
+        });
+    </script>
+
+    <script>
+        document.getElementById('exportForm').addEventListener('submit', function() {
+            setTimeout(() => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Export Successful!',
+                    text: 'Excel file downloaded successfully.',
+                    timer: 4000,
+                    background: '#10B981', // green color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            }, 500);
         });
     </script>
 

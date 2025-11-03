@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
     <link href="./assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">

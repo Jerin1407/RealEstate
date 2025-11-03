@@ -34,6 +34,7 @@
                 @csrf
                 <button type="button" id="logoutBtn"
                     class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i>
                     Logout
                 </button>
             </form>
@@ -96,8 +97,12 @@
                             <a href="{{ route('admin') }}"
                                 class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
                                     class="mr-2 text-gray-400">-</span> Admin</a>
-                            <a href="{{ route('requests') }}" class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
-                                    class="mr-2 text-gray-400">-</span> Requests</a>
+                            @if (session('user_id') == 1)
+                                <a href="{{ route('requests') }}"
+                                    class="block px-4 py-2 rounded hover:text-gray-300 text-sm">
+                                    <span class="mr-2 text-gray-400">-</span> Requests
+                                </a>
+                            @endif
                         </div>
                     </div>
                     <a href="{{ route('listproperty') }}" class="hover:text-gray-300 px-3 py-2 rounded">Properties</a>

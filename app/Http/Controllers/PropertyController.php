@@ -14,6 +14,8 @@ use App\Models\PropertyImageModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PropertyEnquiryMail;
 use Illuminate\Support\Facades\File;
+use App\Exports\PropertiesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PropertyController extends Controller
 {
@@ -308,5 +310,32 @@ class PropertyController extends Controller
         Mail::to('bYw4y@example.com')->send(new PropertyEnquiryMail($data));
 
         return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
+    }
+
+    public function propertyExport()
+    {
+        return Excel::download(new PropertiesExport, 'properties.xlsx');
+    }
+
+    public function filterProperty(Request $request)
+    {
+        $search = $request->input('search');
+
+        $properties = MyProperties::with(['category', 'locality', 'user'])
+            ->when($search, function ($query, $search) {
+                $query->where('property_title', 'like', "%$search%")
+                    ->orWhere('property_code', 'like', "%$search%")
+                    ->orWhereHas('category', function ($q) use ($search) {
+                        $q->where('category_name', 'like', "%$search%");
+                    })
+                    ->orWhereHas('locality', function ($q) use ($search) {
+                        $q->where('locality_name', 'like', "%$search%");
+                    });
+            })
+            ->orderBy('post_date', 'DESC')
+            ->paginate(10)
+            ->appends($request->query());
+
+        return view('property.list', compact('properties'));
     }
 }
