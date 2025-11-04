@@ -11,4 +11,10 @@ class UserModel extends Model
     public $timestamps = false;
 
     protected $fillable = ['user_type_id', 'login_name', 'password', 'fullname', 'contact_number', 'contact_address', 'email'];
+
+    // Relationship with UserType
+    public function userType()
+    {
+        return $this->belongsTo(UserTypeModel::class, 'user_type_id', 'id');
+    }
 }

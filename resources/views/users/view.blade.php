@@ -35,7 +35,7 @@
                         <i class="fas fa-map-marker-alt mr-1"></i>
                         <span class="text-sm">View All</span>
                     </button> -->
-                            <h1 class="font-bold">Status <span class="font-bold text-gray-300">Approved</span></h1>
+                            {{-- <h1 class="font-bold">Status <span class="font-bold text-gray-300">Approved</span></h1> --}}
                         </div>
                     </div>
                 </div>

@@ -20,10 +20,12 @@ class UserController extends Controller
     public function showAdmin()
     {
         if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'Please log in to access the admin page.');
+            return redirect()->route('login')->with('error', 'Please log in to access the page.');
         }
 
-        return view('users.admin');
+        $user = UserModel::with('userType')->find(session('user_id'));
+
+        return view('users.admin', compact('user'));
     }
 
     public function showLoginForm()

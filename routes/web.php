@@ -24,7 +24,7 @@ Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login/user', [UserController::class, 'login'])->name('loginUser');
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register/user', [UserController::class, 'register'])->name('registerUser');
-Route::get('/admin', [UserController::class, 'showAdmin'])->name('admin');
+Route::get('/dashboard', [UserController::class, 'showAdmin'])->name('dashboard');
 Route::get('/requests', [UserController::class, 'showRequest'])->name('requests');
 Route::get('/edit-request/{id}', [UserController::class, 'editRequest'])->name('editRequest');
 Route::get('/view-request/{id}', [UserController::class, 'viewRequest'])->name('viewRequest');

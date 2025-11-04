@@ -26,15 +26,16 @@
             <div class="bg-white shadow-2xl rounded-md overflow-hidden">
                 <div class="bg-gray-700 text-white px-4 py-2 font-semibold">Profile Details</div>
                 <div class="p-4 space-y-3 text-sm">
-                    <div class="flex justify-between"><span>Full Name</span><span class="text-red-600">Realestate
-                            Thrissur</span></div>
-                    <div class="flex justify-between"><span>Address</span><span class="text-red-600">No
-                            Address</span></div>
+                    <div class="flex justify-between"><span>Full Name</span><span
+                            class="text-red-600">{{ $user->fullname ?? 'N/A' }}</span></div>
+                    <div class="flex justify-between"><span>Address</span><span
+                            class="text-red-600">{{ $user->contact_address ?? 'N/A' }}</span></div>
                     <div class="flex justify-between"><span>Contact Number</span><span
-                            class="text-red-600">9745432200</span></div>
+                            class="text-red-600">{{ $user->contact_number ?? 'N/A' }}</span></div>
                     <div class="flex justify-between"><span>Email</span><span
-                            class="text-red-600">vinod@godsownhome.in</span></div>
-                    <div class="flex justify-between"><span>Type</span><span class="text-red-600">Administrator</span>
+                            class="text-red-600">{{ $user->email ?? 'N/A' }}</span></div>
+                    <div class="flex justify-between"><span>Type</span><span
+                            class="text-red-600">{{ $user->userType->type_name ?? 'N/A' }}</span>
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@
 
                         <!-- Dashboard Submenu (appears below) -->
                         <div id="dashboardSubMenu" class="ml-4 mt-1 flex flex-col space-y-1 hidden">
-                            <a href="{{ route('admin') }}"
+                            <a href="{{ route('dashboard') }}"
                                 class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
                                     class="mr-2 text-gray-400">-</span> Admin</a>
                             @if (session('user_id') == 1)
