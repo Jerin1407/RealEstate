@@ -3,6 +3,7 @@
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HotPropertyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/attractive-3bhk', function () {
@@ -32,6 +33,7 @@ Route::post('/update-request/{id}', [UserController::class, 'updateRequest'])->n
 Route::post('/delete-request-image/{id}', [UserController::class, 'deleteRequestImage'])->name('deleteRequestImage');
 Route::delete('/delete-request/{id}', [UserController::class, 'deleteRequest'])->name('deleteRequest');
 Route::get('/approve-request/{id}', [UserController::class, 'approveRequest'])->name('approveRequest');
+Route::get('/listuser', [UserController::class, 'listUser'])->name('listUser');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');
@@ -64,3 +66,15 @@ Route::get('/search-location', [HomeController::class, 'searchLocation'])->name(
 Route::get('/search-property', [HomeController::class, 'searchProperty'])->name('searchProperty');
 Route::get('/addHomeproperty', [HomeController::class, 'addProperty'])->name('addProperty');
 Route::post('/saveHomeproperty', [HomeController::class, 'saveProperty'])->name('saveProperty');
+
+Route::get('/hotproperty', [HotPropertyController::class, 'hotPropertyList'])->name('hotpropertylist');
+Route::get('/addhotproperty', [HotPropertyController::class, 'addHotProperty'])->name('addhotproperty');
+// Route::post('/savehotproperty', [HotPropertyController::class, 'saveHotProperty'])->name('savehotproperty');
+Route::get('/edithotproperty', [HotPropertyController::class, 'editHotProperty'])->name('edithotproperty');
+// Route::get('/viewhotproperty/{id}', [HotPropertyController::class, 'viewHotProperty'])->name('viewhotproperty');
+// Route::post('/updatehotproperty/{id}', [HotPropertyController::class, 'updateHotProperty'])->name('updatehotproperty');
+// Route::post('/deletehotpropertyimage/{id}', [HotPropertyController::class, 'deleteHotPropertyImage'])->name('deleteHotPropertyImage');
+// Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteHotProperty'])->name('deletehotproperty');
+// Route::post('/hotpropertyenquiry', [HotPropertyController::class, 'hotPropertyEnquiry'])->name('hotPropertyEnquiry');
+// Route::get('/filterhotproperty', [HotPropertyController::class, 'filterHotProperty'])->name('filterHotProperty');
+// Route::get('/exporthotproperty', [HotPropertyController::class, 'hotPropertyExport'])->name('exportHotProperty');

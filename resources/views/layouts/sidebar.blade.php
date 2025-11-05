@@ -96,11 +96,11 @@
                         <div id="dashboardSubMenu" class="ml-4 mt-1 flex flex-col space-y-1 hidden">
                             <a href="{{ route('dashboard') }}"
                                 class="block px-4 py-2 rounded hover:text-gray-300 text-sm"><span
-                                    class="mr-2 text-gray-400">-</span> Admin</a>
+                                    class="mr-2 text-gray-400">-</span> Dashboard</a>
                             @if (session('user_id') == 1)
                                 <a href="{{ route('requests') }}"
                                     class="block px-4 py-2 rounded hover:text-gray-300 text-sm">
-                                    <span class="mr-2 text-gray-400">-</span> Requests
+                                    <span class="mr-2 text-gray-400">-</span> Admin Requests
                                 </a>
                             @endif
                         </div>
@@ -121,13 +121,13 @@
                         <!-- Popup Submenu -->
                         <div id="adsSubMenu"
                             class="absolute left-full top-0 mt-0 ml-2 w-48 bg-white text-gray-800 rounded shadow-lg  hidden">
-                            <a href="#" class="block px-4 py-2 hover:bg-primary hover:text-white">Hot
+                            <a href="{{ route('hotpropertylist') }}" class="block px-4 py-2 hover:bg-primary hover:text-white">Hot
                                 Properties</a>
                             <!-- Add more items here -->
                         </div>
                     </div>
 
-                    <a href="#" class="hover:text-gray-300 px-3 py-2 rounded">Users</a>
+                    <a href="{{ route('listUser') }}" class="hover:text-gray-300 px-3 py-2 rounded">Users</a>
                     <a href="#" class="hover:text-gray-300 px-3 py-2 rounded">Localities</a>
                     <a href="#" class="hover:text-gray-300 px-3 py-2 rounded">Change Password</a>
                 </nav>

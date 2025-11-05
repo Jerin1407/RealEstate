@@ -20,12 +20,12 @@ class UserController extends Controller
     public function showAdmin()
     {
         if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'Please log in to access the page.');
+            return redirect()->route('login')->with('error', 'Please login to access the page.');
         }
 
         $user = UserModel::with('userType')->find(session('user_id'));
 
-        return view('users.admin', compact('user'));
+        return view('admin.dashboard', compact('user'));
     }
 
     public function showLoginForm()
@@ -97,7 +97,7 @@ class UserController extends Controller
                 'user_type_id' => $user->user_type_id,
             ]);
 
-            return redirect()->route('admin')->with('success_login', 'Login successfull! Welcome back...');
+            return redirect()->route('dashboard')->with('success_login', 'Login successfull! Welcome back...');
         } else {
             return redirect()->back()->with('error', 'Invalid username or password');
         }
@@ -118,7 +118,7 @@ class UserController extends Controller
             ->orderByDesc('post_date')
             ->paginate(10);
 
-        return view('users.request', compact('properties'));
+        return view('admin.list', compact('properties'));
     }
 
     public function editRequest($id)
@@ -130,7 +130,7 @@ class UserController extends Controller
         $priceUnits = PriceUnitModel::all();
         $areaUnits = AreaUnitModel::all();
 
-        return view('users.edit', compact('property', 'categories', 'locations', 'priceRanges', 'priceUnits', 'areaUnits'));
+        return view('admin.edit', compact('property', 'categories', 'locations', 'priceRanges', 'priceUnits', 'areaUnits'));
     }
 
     public function updateRequest(Request $request, $id)
@@ -197,7 +197,7 @@ class UserController extends Controller
     {
         $property = MyProperties::with(['category', 'locality', 'images'])->findOrFail($id);
 
-        return view('users.view', compact('property'));
+        return view('admin.view', compact('property'));
     }
 
     public function deleteRequestImage($id)
@@ -248,5 +248,13 @@ class UserController extends Controller
         $property->save();
 
         return redirect()->route('requests')->with('success_approve', 'Property approved successfully!');
+    }
+
+    public function listUser()
+    {
+        // Fetch all users with their related user type
+        $users = UserModel::with('userType')->get();
+
+        return view('user.list', compact('users'));
     }
 }

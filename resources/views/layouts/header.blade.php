@@ -48,8 +48,8 @@
                 </svg>
             </button>
 
-            <!-- Add Property Button (desktop only) -->
-            @if (Route::currentRouteName() !== 'addProperty')
+            <!-- Add Property Button -->
+            @if (!in_array(Route::currentRouteName(), ['addProperty', 'login', 'register']))
                 <a href="{{ route('addProperty') }}">
                     <button
                         class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
