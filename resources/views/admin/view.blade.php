@@ -48,24 +48,26 @@
                                 <i class="far fa-eye mr-2"></i>
                                 Approved propery
                             </button> --}}
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
+                            <a href="{{ route('editRequest', $property->property_id) }}">
+                                <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-edit mr-2"></i>
                                 Edit
                             </button>
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
+                            </a>
+                            {{-- <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-download mr-2"></i>
                                 Export
                             </button>
                             <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-trash mr-2"></i>
                                 Refresh
-                            </button>
+                            </button> --}}
                         </div>
-                        <button onclick="window.location.href='add_property.html'"
+                        {{-- <button onclick="window.location.href='add_property.html'"
                             class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
                             <i class="fas fa-plus mr-2"></i>
                             Add Property
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
 

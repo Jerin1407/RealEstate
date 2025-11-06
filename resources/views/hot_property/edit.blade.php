@@ -9,6 +9,7 @@
     <link href="./assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -25,7 +26,7 @@
 
                 <!-- Header -->
                 <div class="bg-red-600 text-white px-6 py-4">
-                    <h1 class="text-xl font-semibold">Hot Property</h1>
+                    <h1 class="text-xl font-semibold">Edit Hot Property</h1>
                 </div>
 
                 <!-- Form -->
@@ -35,66 +36,73 @@
                         <!-- Title Field -->
                         <div class="flex items-start gap-4">
                             <label class="w-32 pt-2 text-gray-700">Title <span class="text-red-500">*</span></label>
-                            <input type="text"
-                                class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" name="title" required
+                                class="w-80 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 
                         <!-- Description Field -->
                         <div class="flex items-start gap-4">
                             <label class="w-32 pt-2 text-gray-700">Description <span
                                     class="text-red-500">*</span></label>
-                            <textarea rows="6"
+                            <textarea rows="6" name="description" id="description"
                                 class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </div>
 
                         <!-- Type Field -->
                         <div class="flex items-start gap-4">
                             <label class="w-32 pt-2 text-gray-700">Type <span class="text-red-500">*</span></label>
-                            <select
-                                class="flex-1 border border-gray-300 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option>Ordinary</option>
+                            <select name="type" required
+                                class="w-80 border border-gray-300 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="0">Select Type</option>
+                                <option value="Ordinary">Ordinary</option>
                             </select>
                         </div>
 
                         <!-- Url Field -->
                         <div class="flex items-start gap-4">
                             <label class="w-32 pt-2 text-gray-700">Url</label>
-                            <input type="text"
-                                class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" name="url" required
+                                class="w-80 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 
                         <!-- Upload Images Section -->
                         <div class="flex items-start gap-4">
-                            <div class="w-32"></div>
-                            <div class="flex-1">
-                                <div class="flex items-center">
-                                    <div class="bg-red-300 text-gray-500 font-semibold px-6 py-3 rounded-l">
-                                        Upload Images
+                            <label class="w-32 pt-2 text-gray-700">Upload Images</label>
+                            <div class="w-72">
+                                <div class="border border-gray-300 rounded p-4">
+                                    <div
+                                        class="md:flex items-center justify-between bg-gradient-to-b from-red-400 to-primary px-4 py-3 rounded mb-3">
+                                        <span class="text-gray-800 font-medium">Upload Images</span>
+
+                                        <!-- Hidden File Input -->
+                                        <input type="file" id="imageUpload" accept="image/*" class="hidden" required
+                                            name="images[]" multiple onchange="previewImage(event)">
+
+                                        <!-- Trigger Button -->
+                                        <button type="button" onclick="document.getElementById('imageUpload').click()"
+                                            class="bg-white hover:bg-primary text-primary hover:text-white px-6 mt-2 md:mt-0 md:py-2 rounded font-medium">
+                                            Add Image
+                                        </button>
                                     </div>
-                                    <label for="imageUpload"
-                                        class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-r cursor-pointer">
-                                        Add Image
-                                    </label>
-                                    <input type="file" id="imageUpload" accept="image/*" multiple class="hidden">
+
+                                    <!-- Preview Uploaded Image -->
+                                    <div id="previewContainer" class="mt-3 flex flex-wrap gap-3"></div>
+
+                                    <div class="bg-primary text-white px-4 py-2 rounded text-sm">
+                                        <span class="font-medium">Maximum : Unlimited</span>
+                                        <span class="md:ml-8 font-medium">Remaining : Unlimited</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Save Button -->
-                        <div class="flex items-start gap-4">
-                            <div class="w-32"></div>
-                            <div class="flex-1">
+                        <div class="flex items-start gap-8">
+                            <div class="col-span-2"></div>
+                            <div class="col-span-10">
                                 <button type="submit"
-                                    class="bg-white hover:bg-gray-50 text-gray-600 font-semibold px-6 py-2 rounded border border-gray-300 flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="lucide lucide-save-icon lucide-save">
-                                        <path
-                                            d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-                                        <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
-                                        <path d="M7 3v4a1 1 0 0 0 1 1h7" />
-                                    </svg>
+                                    class="bg-gray-200 hover:bg-gray-300 text-blue-600 px-6 py-2 rounded text-sm font-medium inline-flex items-center border border-gray-300">
+                                    <i class="far fa-save mr-2"></i>
                                     Save
                                 </button>
                             </div>

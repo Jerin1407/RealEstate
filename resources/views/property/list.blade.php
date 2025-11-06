@@ -169,68 +169,72 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Custom Pagination -->
+            <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+                <div class="flex items-center justify-between flex-wrap gap-4">
+
+                    <!-- Results info -->
+                    <div class="text-sm text-gray-700">
+                        Showing
+                        <span class="font-medium">{{ $properties->firstItem() ?? 0 }}</span> to
+                        <span class="font-medium">{{ $properties->lastItem() ?? 0 }}</span> of
+                        <span class="font-medium">{{ $properties->total() }}</span> results
+                    </div>
+
+                    <!-- Pagination controls -->
+                    <div class="flex items-center gap-1">
+
+                        <!-- First -->
+                        @if ($properties->onFirstPage())
+                            <span
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&laquo;
+                                First</span>
+                            <span
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&lsaquo;
+                                Prev</span>
+                        @else
+                            <a href="{{ $properties->url(1) }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&laquo;
+                                First</a>
+                            <a href="{{ $properties->previousPageUrl() }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&lsaquo;
+                                Prev</a>
+                        @endif
+
+                        <!-- Page Numbers -->
+                        @foreach ($properties->getUrlRange(1, $properties->lastPage()) as $page => $url)
+                            @if ($page == $properties->currentPage())
+                                <span
+                                    class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">{{ $page }}</span>
+                            @elseif ($page > $properties->currentPage() - 2 && $page < $properties->currentPage() + 2)
+                                <a href="{{ $url }}"
+                                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">{{ $page }}</a>
+                            @endif
+                        @endforeach
+
+                        <!-- Next -->
+                        @if ($properties->hasMorePages())
+                            <a href="{{ $properties->nextPageUrl() }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Next
+                                &rsaquo;</a>
+                            <a href="{{ $properties->url($properties->lastPage()) }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Last
+                                &raquo;</a>
+                        @else
+                            <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Next
+                                &rsaquo;</span>
+                            <span
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Last
+                                &raquo;</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </section>
+
     </main>
 
-    </div>
-
-    <!-- Custom Pagination -->
-    <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-
-            <!-- Results info -->
-            <div class="text-sm text-gray-700">
-                Showing
-                <span class="font-medium">{{ $properties->firstItem() ?? 0 }}</span> to
-                <span class="font-medium">{{ $properties->lastItem() ?? 0 }}</span> of
-                <span class="font-medium">{{ $properties->total() }}</span> results
-            </div>
-
-            <!-- Pagination controls -->
-            <div class="flex items-center gap-1">
-
-                <!-- First -->
-                @if ($properties->onFirstPage())
-                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&laquo;
-                        First</span>
-                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&lsaquo;
-                        Prev</span>
-                @else
-                    <a href="{{ $properties->url(1) }}"
-                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&laquo;
-                        First</a>
-                    <a href="{{ $properties->previousPageUrl() }}"
-                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&lsaquo;
-                        Prev</a>
-                @endif
-
-                <!-- Page Numbers -->
-                @foreach ($properties->getUrlRange(1, $properties->lastPage()) as $page => $url)
-                    @if ($page == $properties->currentPage())
-                        <span
-                            class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">{{ $page }}</span>
-                    @elseif ($page > $properties->currentPage() - 2 && $page < $properties->currentPage() + 2)
-                        <a href="{{ $url }}"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">{{ $page }}</a>
-                    @endif
-                @endforeach
-
-                <!-- Next -->
-                @if ($properties->hasMorePages())
-                    <a href="{{ $properties->nextPageUrl() }}"
-                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Next
-                        &rsaquo;</a>
-                    <a href="{{ $properties->url($properties->lastPage()) }}"
-                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Last
-                        &raquo;</a>
-                @else
-                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Next
-                        &rsaquo;</span>
-                    <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Last
-                        &raquo;</span>
-                @endif
-            </div>
-        </div>
     </div>
 
     </section>

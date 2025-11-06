@@ -20,9 +20,9 @@
     <main class="flex-1 p-2 md:p-2 space-y-6 overflow-x-auto">
 
         <!-- Detail Panels -->
-
         <section class="bg-gray-100 ">
             <div class="max-w-full mx-auto bg-white shadow-lg">
+
                 <!-- Header -->
                 <div class="bg-primary text-white px-6 py-4">
                     <div class=" md:flex justify-between items-center">
@@ -86,7 +86,7 @@
                         </thead>
 
                         <tbody class="bg-white">
-                            @foreach ($users as $user)
+                            @forelse ($users as $user)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
                                     {{-- <td class="px-4 py-3"><input type="checkbox" class="rowCheckbox rounded"></td> --}}
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $user->fullname }}</td>
@@ -119,75 +119,80 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="11" class="text-center py-6 text-gray-600 text-lg">
+                                        No users found
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <!-- Custom Pagination -->
             <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
                 <div class="flex items-center justify-between flex-wrap gap-4">
 
                     <!-- Results info -->
                     <div class="text-sm text-gray-700">
-                        Showing <span class="font-medium">1</span> to
-                        <span class="font-medium">10</span> of
-                        <span class="font-medium">45</span> results
+                        Showing
+                        <span class="font-medium">{{ $users->firstItem() ?? 0 }}</span> to
+                        <span class="font-medium">{{ $users->lastItem() ?? 0 }}</span> of
+                        <span class="font-medium">{{ $users->total() }}</span> results
                     </div>
 
                     <!-- Pagination controls -->
                     <div class="flex items-center gap-1">
-                        <!-- First page (disabled state) -->
-                        <!-- <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">
-                                &laquo; First
-                            </span> -->
 
-                        <!-- Previous page (disabled state) -->
-                        <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">
-                            &lsaquo; Prev
-                        </span>
+                        <!-- First -->
+                        @if ($users->onFirstPage())
+                            <span
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&laquo;
+                                First</span>
+                            <span
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">&lsaquo;
+                                Prev</span>
+                        @else
+                            <a href="{{ $users->url(1) }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&laquo;
+                                First</a>
+                            <a href="{{ $users->previousPageUrl() }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">&lsaquo;
+                                Prev</a>
+                        @endif
 
-                        <!-- Page 1 (active) -->
-                        <span class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">
-                            1
-                        </span>
+                        <!-- Page Numbers -->
+                        @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
+                            @if ($page == $users->currentPage())
+                                <span
+                                    class="px-3 py-2 rounded-md text-sm font-medium bg-primary text-white">{{ $page }}</span>
+                            @elseif ($page > $users->currentPage() - 2 && $page < $users->currentPage() + 2)
+                                <a href="{{ $url }}"
+                                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">{{ $page }}</a>
+                            @endif
+                        @endforeach
 
-                        <!-- Page 2 -->
-                        <a href="#"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                            2
-                        </a>
-
-                        <!-- Page 3 -->
-                        <a href="#"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                            3
-                        </a>
-
-                        <!-- Ellipsis -->
-                        <span class="px-3 py-2 text-gray-500">...</span>
-
-                        <!-- Last page -->
-                        <a href="#"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                            5
-                        </a>
-
-                        <!-- Next page (enabled) -->
-                        <a href="#"
-                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                            Next &rsaquo;
-                        </a>
-
-                        <!-- Last page (enabled) -->
-                        <!-- <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
-                                Last &raquo;
-                            </a> -->
+                        <!-- Next -->
+                        @if ($users->hasMorePages())
+                            <a href="{{ $users->nextPageUrl() }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Next
+                                &rsaquo;</a>
+                            <a href="{{ $users->url($users->lastPage()) }}"
+                                class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200">Last
+                                &raquo;</a>
+                        @else
+                            <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Next
+                                &rsaquo;</span>
+                            <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed">Last
+                                &raquo;</span>
+                        @endif
                     </div>
                 </div>
             </div>
 
         </section>
-
 
     </main>
 

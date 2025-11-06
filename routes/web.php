@@ -33,6 +33,7 @@ Route::post('/update-request/{id}', [UserController::class, 'updateRequest'])->n
 Route::post('/delete-request-image/{id}', [UserController::class, 'deleteRequestImage'])->name('deleteRequestImage');
 Route::delete('/delete-request/{id}', [UserController::class, 'deleteRequest'])->name('deleteRequest');
 Route::get('/approve-request/{id}', [UserController::class, 'approveRequest'])->name('approveRequest');
+Route::get('/filter-property', [UserController::class, 'filterRequestProperty'])->name('filterRequestProperty');
 Route::get('/listuser', [UserController::class, 'listUser'])->name('listUser');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');

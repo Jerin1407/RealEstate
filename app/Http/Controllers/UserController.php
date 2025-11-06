@@ -250,10 +250,32 @@ class UserController extends Controller
         return redirect()->route('requests')->with('success_approve', 'Property approved successfully!');
     }
 
+    public function filterRequestProperty(Request $request)
+    {
+        $search = $request->input('search');
+
+        $properties = MyProperties::with(['category', 'locality', 'user'])
+            ->when($search, function ($query, $search) {
+                $query->where('property_title', 'like', "%$search%")
+                    ->orWhere('property_code', 'like', "%$search%")
+                    ->orWhereHas('category', function ($q) use ($search) {
+                        $q->where('category_name', 'like', "%$search%");
+                    })
+                    ->orWhereHas('locality', function ($q) use ($search) {
+                        $q->where('locality_name', 'like', "%$search%");
+                    });
+            })
+            ->orderBy('post_date', 'DESC')
+            ->paginate(10)
+            ->appends($request->query());
+
+        return view('admin.list', compact('properties'));
+    }
+
     public function listUser()
     {
-        // Fetch all users with their related user type
-        $users = UserModel::with('userType')->get();
+        // Fetch users with their related user type and paginate (10 per page)
+        $users = UserModel::with('userType')->paginate(10);
 
         return view('user.list', compact('users'));
     }

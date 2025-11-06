@@ -44,7 +44,7 @@ class PropertyController extends Controller
     {
         // Check login session
         if (!session()->has('user_id')) {
-            return redirect()->route('login')->with('error', 'Please log in before adding a property.');
+            return redirect()->route('login')->with('error', 'Please login before adding a property.');
         }
 
         // validate inputs

@@ -9,6 +9,7 @@
     <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -23,7 +24,7 @@
 
             <!-- Header -->
             <div class="bg-primary text-white px-6 py-4 md:flex justify-between items-center">
-                <h1 class="text-xl font-semibold">Property Add</h1>
+                <h1 class="text-xl font-semibold">Edit Property</h1>
                 <div class="text-sm">
                     <span>Remaining Properties : </span>
                     <span class="text-white font-bold">Unlimited</span>

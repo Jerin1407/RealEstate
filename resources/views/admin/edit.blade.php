@@ -23,7 +23,7 @@
 
             <!-- Header -->
             <div class="bg-primary text-white px-6 py-4 md:flex justify-between items-center">
-                <h1 class="text-xl font-semibold">Property Add</h1>
+                <h1 class="text-xl font-semibold">Edit Property</h1>
                 <div class="text-sm">
                     <span>Remaining Properties : </span>
                     <span class="text-white font-bold">Unlimited</span>

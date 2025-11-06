@@ -34,7 +34,9 @@
                         <i class="fas fa-map-marker-alt mr-1"></i>
                         <span class="text-sm">View All</span>
                     </button> -->
-                            <h1 class="font-bold">Status <span class="font-bold text-gray-300">{{ $property->is_approved ? 'Approved' : 'Pending' }}</span></h1>
+                            <h1 class="font-bold">Status <span
+                                    class="font-bold text-gray-300">{{ $property->is_approved ? 'Approved' : 'Pending' }}</span>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -47,24 +49,26 @@
                                 <i class="far fa-eye mr-2"></i>
                                 Approved propery
                             </button> --}}
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-edit mr-2"></i>
-                                Edit
-                            </button>
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
+                            <a href="{{ route('editproperty', $property->property_id) }}">
+                                <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Edit
+                                </button>
+                            </a>
+                            {{-- <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-download mr-2"></i>
                                 Export
                             </button>
                             <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-trash mr-2"></i>
                                 Refresh
-                            </button>
+                            </button> --}}
                         </div>
-                        <button onclick="window.location.href='add_property.html'"
+                        {{-- <button onclick="window.location.href='add_property.html'"
                             class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
                             <i class="fas fa-plus mr-2"></i>
                             Add Property
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
 
