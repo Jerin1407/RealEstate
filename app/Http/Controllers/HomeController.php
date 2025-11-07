@@ -12,6 +12,7 @@ use App\Models\PriceUnitModel;
 use App\Models\UserTypeModel;
 use App\Models\PropertyImageModel;
 use App\Models\UserModel;
+use App\Models\HotPropertyModel;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -49,12 +50,16 @@ class HomeController extends Controller
             ->orderByDesc('post_date')
             ->take(4)
             ->get();
+        $hotProperties = HotPropertyModel::with(['images', 'coverImage'])
+            ->orderByDesc('add_date')
+            ->take(6)
+            ->get();
 
         $categories = CategoryModel::all();
         $priceRanges = PriceRangeModel::all();
         $locations = LocationModel::all();
 
-        return view('pages.index', compact('villas', 'flats', 'plots', 'commercials', 'rents', 'categories', 'priceRanges', 'locations'));
+        return view('pages.index', compact('villas', 'flats', 'plots', 'commercials', 'rents', 'categories', 'priceRanges', 'locations', 'hotProperties'));
     }
 
     public function about()

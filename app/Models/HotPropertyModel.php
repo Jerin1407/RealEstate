@@ -20,4 +20,17 @@ class HotPropertyModel extends Model
         'add_pdf_img',
         'add_date',
     ];
+
+    // Relationship with images
+    public function images()
+    {
+        return $this->hasMany(PropertyImageModel::class, 'hot_property_id', 'id');
+    }
+
+    // Helper: Get cover image easily
+    public function coverImage()
+    {
+        return $this->hasOne(PropertyImageModel::class, 'hot_property_id', 'id')
+            ->where('is_cover', 1);
+    }
 }

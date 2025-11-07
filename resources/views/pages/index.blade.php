@@ -481,116 +481,37 @@
             <!-- Swiper Container -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <!-- Property 1 -->
-                    <div class="swiper-slide">
-                        <a href="{{ route('attractive-3bhk') }}">
-                            <div
-                                class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    @foreach ($hotProperties as $property)
+                        <div class="swiper-slide">
+                            <a href="">
                                 <div
-                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                    <img src="https://realestatethrissur.com/uploads/hotproperties/4e90e78c-154f-4b97-8740-647cf5b9772e.jpg"
-                                        alt="" class="h-56 w-full object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="text-xl font-bold text-gray-800">Attractive 3BHK,2000SQFT,NEW..</h4>
-                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">Villa</span>
+                                    class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                                    <div
+                                        class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                                        <img src="{{ asset('uploads/hotproperties/' . ($property->coverImage->filename ?? 'default.jpg')) }}"
+                                            alt="{{ $property->title }}" class="h-56 w-full object-cover">
                                     </div>
-                                    <p class="text-gray-600 mb-4">4 BHK • 2500 sq ft • Garden • Parking</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-2xl font-bold text-primary">Furnitured</span>
-                                        <button
-                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                            View Details
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Property 2 -->
-                    <div class="swiper-slide">
-                        <a href="{{ route('modern-flat-in-koramangala') }}">
-                            <div
-                                class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                <div
-                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                    <img src="https://realestatethrissur.com/uploads/hotproperties/2414aec8-9580-4c01-84fa-1609216e7085.jpg"
-                                        alt="" class="h-56 w-full object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="text-xl font-bold text-gray-800">Modern Flat in Koramangala</h4>
-                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">Flat</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">3 BHK • 1800 sq ft • Balcony • Gym</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-2xl font-bold text-primary">Furnitured</span>
-                                        <button
-                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                            View Details
-                                        </button>
+                                    <div class="p-6">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="text-xl font-bold text-gray-800">{{ $property->title }}</h4>
+                                            <span
+                                                class="bg-primary text-white px-2 py-1 rounded text-sm">{{ $property->type }}</span>
+                                        </div>
+                                        <p class="text-gray-600 mb-4">
+                                            {{ Str::limit($property->description, 60) }}
+                                        </p>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-2xl font-bold text-primary">Featured</span>
+                                            <button
+                                                class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                                View Details
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Property 3 -->
-                    <div class="swiper-slide">
-                        <a href="{{ route('premium-plot-in-electronic-city') }}">
-                            <div
-                                class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                <div
-                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                    <img src="https://realestatethrissur.com/uploads/hotproperties/470f452d-1440-4fa8-a544-d593c447a9fd.jpg"
-                                        alt="" class="h-56 w-full object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="text-xl font-bold text-gray-800">Premium Plot in Electronic City</h4>
-                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">Plot</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">1200 sq ft • Corner Plot • BMRDA Approved</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-2xl font-bold text-primary">Furnitured</span>
-                                        <button
-                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                            View Details
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="{{ route('premium-plot-in-electronic-city') }}">
-                            <div
-                                class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                <div
-                                    class="h-48 bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
-                                    <img src="https://realestatethrissur.com/uploads/hotproperties/470f452d-1440-4fa8-a544-d593c447a9fd.jpg"
-                                        alt="" class="h-56 w-full object-cover">
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="text-xl font-bold text-gray-800">Premium Plot in Electronic City</h4>
-                                        <span class="bg-primary text-white px-2 py-1 rounded text-sm">Plot</span>
-                                    </div>
-                                    <p class="text-gray-600 mb-4">1200 sq ft • Corner Plot • BMRDA Approved</p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-2xl font-bold text-primary">Furnitured</span>
-                                        <button
-                                            class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
-                                            View Details
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Navigation arrows -->
@@ -665,7 +586,6 @@
     </script>
 
     <script>
-
         // Swiper JS
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 1,
@@ -693,4 +613,26 @@
             }
         });
     </script>
+
+    <style>
+        /* 🔴 Make the Swiper navigation arrows red */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #e3342f !important;
+            /* Tailwind's red-600 */
+        }
+
+        /* 🔴 Make pagination dots red */
+        .swiper-pagination-bullet {
+            background: #e3342f !important;
+            /* inactive dots */
+            opacity: 0.4;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #e3342f !important;
+            /* active dot */
+            opacity: 1;
+        }
+    </style>
 @endsection

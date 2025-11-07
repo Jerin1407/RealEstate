@@ -100,7 +100,8 @@
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $hotproperty->title }}</td>
                                     <!-- <td class="px-4 py-3 text-sm text-gray-900">Villa</td>
                         <td class="px-4 py-3 text-sm text-gray-900">Veluthur</td> -->
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $hotproperty->description }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ Str::limit(strip_tags($hotproperty->description), 50) }}</td>
                                     <!-- <td class="px-4 py-3 text-sm text-gray-900">Realestate</td> -->
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $hotproperty->add_date }}</td>
                                     <!-- <td class="px-4 py-3 text-sm text-gray-900">₹55,00,000</td> -->
@@ -110,15 +111,20 @@
                                         <div class="flex items-center gap-3">
 
                                             <!-- Edit -->
-                                            <a href="{{ route('edithotproperty') }}">
+                                            <a href="{{ route('edithotproperty', $hotproperty->id) }}">
                                                 <i
                                                     class="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-600"></i>
                                             </a>
 
                                             <!-- Delete -->
-                                            <a href="">
-                                                <i class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i>
-                                            </a>
+                                            <form action="{{ route('deletehotproperty', $hotproperty->id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="delete-btn">
+                                                    <i class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -237,6 +243,110 @@
                 }
             }
         })();
+
+        // success alert
+        @if (session('success_hotproperty'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_hotproperty') }}'
+            });
+        @endif
+
+        // success alert
+        @if (session('update_hotproperty'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('update_hotproperty') }}'
+            });
+        @endif
+
+        // Success Alert
+        @if (session('success_delete'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_delete') }}'
+            });
+        @endif
+
+        // Error Alert
+        @if (session('error_delete'))
+            Swal.fire({
+                position: 'top',
+                icon: 'error',
+                title: '{{ session('error_delete') }}',
+                showConfirmButton: false,
+                timer: 4000,
+                width: '300px'
+            });
+        @endif
+    </script>
+
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                let form = this.closest('form');
+
+                Swal.fire({
+                    position: 'top',
+                    title: 'Are you sure?',
+                    text: 'You want to delete this property?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete!',
+                    cancelButtonText: 'Cancel',
+                    width: '380px',
+                    toast: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

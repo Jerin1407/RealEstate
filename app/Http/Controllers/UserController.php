@@ -275,7 +275,7 @@ class UserController extends Controller
     public function listUser()
     {
         // Fetch users with their related user type and paginate (10 per page)
-        $users = UserModel::with('userType')->paginate(10);
+        $users = UserModel::with('userType', 'userDetails')->paginate(10);
 
         return view('user.list', compact('users'));
     }

@@ -211,7 +211,7 @@
                                     <span class="text-gray-800 font-medium">Upload Images</span>
 
                                     <!-- Hidden File Input -->
-                                    <input type="file" id="imageUpload" accept="image/*" class="hidden" required
+                                    <input type="file" id="imageUpload" accept="image/*" class="hidden"
                                         name="images[]" multiple onchange="previewImage(event)">
 
                                     <!-- Trigger Button -->
@@ -225,6 +225,13 @@
                                 <div id="previewContainer" class="mt-3 flex flex-wrap gap-3">
                                     @foreach ($property->images as $image)
                                         <div class="relative group">
+                                            <div class="absolute top-1 right-1">
+                                                <button type="button"
+                                                    onclick="deleteImage('{{ route('deletePropertyImage', $image->property_thumb_id) }}')"
+                                                    class="bg-red-500 text-red-600 text-xs px-2 py-1 rounded">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </button>
+                                            </div>
                                             <img src="{{ asset('uploads/property/' . $image->filename) }}"
                                                 alt="Property Image" class="w-24 h-24 object-cover rounded border">
 
@@ -237,11 +244,6 @@
                                                 <button type="submit"
                                                     class="bg-red-500 text-black text-xs px-2 py-1 rounded">✕</button>
                                             </form> --}}
-                                            <button type="button"
-                                                onclick="deleteImage('{{ route('deletePropertyImage', $image->property_thumb_id) }}')"
-                                                class="bg-red-500 text-black text-xs px-2 py-1 rounded">
-                                                ✕
-                                            </button>
 
                                         </div>
                                     @endforeach

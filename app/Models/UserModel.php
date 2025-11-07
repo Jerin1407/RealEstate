@@ -17,4 +17,10 @@ class UserModel extends Model
     {
         return $this->belongsTo(UserTypeModel::class, 'user_type_id', 'id');
     }
+
+    // Relationship with UserDetails
+    public function userDetails()
+    {
+        return $this->hasOne(UserDetailsModel::class, 'user_id', 'user_id');
+    }
 }

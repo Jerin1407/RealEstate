@@ -31,7 +31,8 @@
 
                 <!-- Form -->
                 <div class="p-6">
-                    <form class="space-y-6">
+                    <form class="space-y-6" action="{{ route('savehotproperty') }}" enctype="multipart/form-data" method="POST">
+                        @csrf
 
                         <!-- Title Field -->
                         <div class="flex items-start gap-4">

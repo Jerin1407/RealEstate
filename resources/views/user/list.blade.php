@@ -96,7 +96,9 @@
                                         {{ $user->userType->type_name ?? 'N/A' }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ $user->package_name ?? 'Guest Package' }}</td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $user->created_at ?? 'N/A' }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ $user->userDetails && $user->userDetails->register_date ? \Carbon\Carbon::parse($user->userDetails->register_date)->format('d M Y') : 'N/A' }}
+                                    </td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $user->status ?? 'Active' }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         <div class="flex items-center gap-3">

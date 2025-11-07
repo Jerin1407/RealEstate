@@ -68,14 +68,14 @@ Route::get('/search-property', [HomeController::class, 'searchProperty'])->name(
 Route::get('/addHomeproperty', [HomeController::class, 'addProperty'])->name('addProperty');
 Route::post('/saveHomeproperty', [HomeController::class, 'saveProperty'])->name('saveProperty');
 
-Route::get('/hotproperty', [HotPropertyController::class, 'hotPropertyList'])->name('hotpropertylist');
+Route::get('/listhotproperty', [HotPropertyController::class, 'hotPropertyList'])->name('hotpropertylist');
 Route::get('/addhotproperty', [HotPropertyController::class, 'addHotProperty'])->name('addhotproperty');
-// Route::post('/savehotproperty', [HotPropertyController::class, 'saveHotProperty'])->name('savehotproperty');
-Route::get('/edithotproperty', [HotPropertyController::class, 'editHotProperty'])->name('edithotproperty');
+Route::post('/savehotproperty', [HotPropertyController::class, 'saveHotProperty'])->name('savehotproperty');
+Route::get('/edithotproperty/{id}', [HotPropertyController::class, 'editHotProperty'])->name('edithotproperty');
 // Route::get('/viewhotproperty/{id}', [HotPropertyController::class, 'viewHotProperty'])->name('viewhotproperty');
-// Route::post('/updatehotproperty/{id}', [HotPropertyController::class, 'updateHotProperty'])->name('updatehotproperty');
-// Route::post('/deletehotpropertyimage/{id}', [HotPropertyController::class, 'deleteHotPropertyImage'])->name('deleteHotPropertyImage');
-// Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteHotProperty'])->name('deletehotproperty');
+Route::post('/updatehotproperty/{id}', [HotPropertyController::class, 'updateHotProperty'])->name('updatehotproperty');
+Route::post('/deletehotpropertyimage/{id}', [HotPropertyController::class, 'deleteHotPropertyImage'])->name('deleteHotPropertyImage');
+Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteHotProperty'])->name('deletehotproperty');
 // Route::post('/hotpropertyenquiry', [HotPropertyController::class, 'hotPropertyEnquiry'])->name('hotPropertyEnquiry');
 // Route::get('/filterhotproperty', [HotPropertyController::class, 'filterHotProperty'])->name('filterHotProperty');
 // Route::get('/exporthotproperty', [HotPropertyController::class, 'hotPropertyExport'])->name('exportHotProperty');

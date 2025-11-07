@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Thrissur - Find Your Dream Home</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
-    <link href="./assets/css/output_2.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
+    <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
@@ -31,12 +31,14 @@
 
                 <!-- Form -->
                 <div class="p-6">
-                    <form class="space-y-6">
+                    <form class="space-y-6" action="{{ route('updatehotproperty', $hotProperty->id) }}"
+                        enctype="multipart/form-data" method="POST">
+                        @csrf
 
                         <!-- Title Field -->
                         <div class="flex items-start gap-4">
                             <label class="w-32 pt-2 text-gray-700">Title <span class="text-red-500">*</span></label>
-                            <input type="text" name="title" required
+                            <input type="text" name="title" value="{{ $hotProperty->title }}" required
                                 class="w-80 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 
@@ -45,7 +47,7 @@
                             <label class="w-32 pt-2 text-gray-700">Description <span
                                     class="text-red-500">*</span></label>
                             <textarea rows="6" name="description" id="description"
-                                class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ $hotProperty->description }}</textarea>
                         </div>
 
                         <!-- Type Field -->
@@ -54,14 +56,15 @@
                             <select name="type" required
                                 class="w-80 border border-gray-300 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select Type</option>
-                                <option value="Ordinary">Ordinary</option>
+                                <option value="Ordinary" {{ $hotProperty->type == 'Ordinary' ? 'selected' : '' }}>
+                                    Ordinary</option>
                             </select>
                         </div>
 
                         <!-- Url Field -->
                         <div class="flex items-start gap-4">
                             <label class="w-32 pt-2 text-gray-700">Url</label>
-                            <input type="text" name="url" required
+                            <input type="text" name="url" value="{{ $hotProperty->url }}" required
                                 class="w-80 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
 
@@ -75,7 +78,7 @@
                                         <span class="text-gray-800 font-medium">Upload Images</span>
 
                                         <!-- Hidden File Input -->
-                                        <input type="file" id="imageUpload" accept="image/*" class="hidden" required
+                                        <input type="file" id="imageUpload" accept="image/*" class="hidden"
                                             name="images[]" multiple onchange="previewImage(event)">
 
                                         <!-- Trigger Button -->
@@ -86,7 +89,21 @@
                                     </div>
 
                                     <!-- Preview Uploaded Image -->
-                                    <div id="previewContainer" class="mt-3 flex flex-wrap gap-3"></div>
+                                    <div id="previewContainer" class="mt-3 flex flex-wrap gap-3">
+                                        @foreach ($hotProperty->images as $image)
+                                            <div class="relative group">
+                                                <div class="absolute top-1 right-1">
+                                                    <button type="button"
+                                                        onclick="deleteImage('{{ route('deleteHotPropertyImage', $image->property_thumb_id) }}')"
+                                                        class="bg-red-500 text-red-600 text-xs px-2 py-1 rounded">
+                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                    </button>
+                                                </div>
+                                                <img src="{{ asset('uploads/hotproperties/' . $image->filename) }}"
+                                                    alt="Property Image" class="w-24 h-24 object-cover rounded border">
+                                            </div>
+                                        @endforeach
+                                    </div>
 
                                     <div class="bg-primary text-white px-4 py-2 rounded text-sm">
                                         <span class="font-medium">Maximum : Unlimited</span>
@@ -107,6 +124,12 @@
                                 </button>
                             </div>
                         </div>
+                    </form>
+
+                    <!-- Hidden delete form (used by JS dynamically) -->
+                    <form id="deleteImageForm" method="POST" style="display:none;">
+                        @csrf
+                        @method('POST')
                     </form>
                 </div>
             </div>
@@ -151,9 +174,49 @@
                 }
             }
         })();
+
+        // Delete Property Image
+        function deleteImage(actionUrl) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Are you want to delete this image?',
+                icon: 'warning',
+                toast: true,
+                position: 'top',
+                showConfirmButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                timerProgressBar: true,
+                width: '380px', // smaller toast size
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.getElementById('deleteImageForm');
+                    form.action = actionUrl;
+                    form.submit();
+                }
+            });
+        }
+
+        // alert success
+        @if (session('success_deleteImage'))
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                title: '{{ session('success_deleteImage') }}',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        @endif
     </script>
 </body>
 
-<script src="assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </html>

@@ -12,6 +12,7 @@ class PropertyImageModel extends Model
 
     protected $fillable = [
         'property_id',
+        'hot_property_id',
         'filename',
         'is_cover'
     ];
