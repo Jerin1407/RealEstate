@@ -13,6 +13,7 @@ use App\Models\MyProperties;
 use App\Models\PriceUnitModel;
 use App\Models\AreaUnitModel;
 use App\Models\PropertyImageModel;
+use App\Models\UserTypeModel;
 use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
@@ -278,5 +279,24 @@ class UserController extends Controller
         $users = UserModel::with('userType', 'userDetails')->paginate(10);
 
         return view('user.list', compact('users'));
+    }
+
+    public function addUser()
+    {
+        $userTypes = UserTypeModel::all();
+
+        return view('user.add', compact('userTypes'));
+    }
+
+    public function editUser()
+    {
+        $userTypes = UserTypeModel::all();
+
+        return view('user.edit', compact('userTypes'));
+    }
+
+    public function viewUser()
+    {
+        return view('user.view');
     }
 }

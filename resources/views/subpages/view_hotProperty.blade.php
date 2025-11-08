@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: 'https://realestatethrissur.com/uploads/hotproperties/4e90e78c-154f-4b97-8740-647cf5b9772e.jpg' }">
+    <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: '{{ asset('uploads/hotproperties/' . ($hotProperties->images->where('is_cover', 1)->first()->filename ?? 'images/no-image.jpg')) }}' }">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
 
             <!-- Left Side: Image + Property Description -->
@@ -14,15 +14,14 @@
 
                     <!-- Thumbnails -->
                     <div class="flex mt-2 gap-2 overflow-x-auto">
-                        <template
-                            x-for="img in [
-     'https://realestatethrissur.com/uploads/hotproperties/4e90e78c-154f-4b97-8740-647cf5b9772e.jpg',
-            ]"
-                            :key="img">
-                            <img :src="img" @click="selectedImage = img"
+                        @foreach ($hotProperties->images as $img)
+                            <img src="{{ asset('uploads/hotproperties/' . $img->filename) }}"
+                                @click="selectedImage = '{{ asset('uploads/hotproperties/' . $img->filename) }}'"
                                 class="w-24 h-20 object-cover rounded cursor-pointer border-2"
-                                :class="selectedImage === img ? 'border-red-500' : 'border-gray-200'">
-                        </template>
+                                :class="selectedImage === '{{ asset('uploads/hotproperties/' . $img->filename) }}' ?
+                                    'border-red-500' :
+                                    'border-gray-200'">
+                        @endforeach
                     </div>
                 </div>
 
@@ -31,67 +30,63 @@
                     <div class="max-w-4xl mx-auto">
 
                         <!-- Property ID -->
-                        <p class="text-red-600 font-bold mb-2">Furnitured</p>
+                        <p class="text-red-600 font-bold mb-2">Featured Property</p>
 
                         <!-- Title -->
                         <h2 class="text-xl font-bold text-gray-900 mb-4">
-                            THRISSUR
+                            {{ $hotProperties->title }}
                         </h2>
 
                         <!-- Key Facts -->
-                        <!-- <h3 class="text-lg font-semibold text-gray-800 mb-2">KEY FACTS</h3>
-              <p class="text-gray-700 mb-4">
-                3 bedroom 2000SqFt, Commercial Villa available for rent Poothole near Thrissur.
-              </p> -->
+                         {{-- <h3 class="text-lg font-semibold text-gray-800 mb-2">KEY FACTS</h3>
+                      <p class="text-gray-700 mb-4">
+                        3 bedroom 2000SqFt, Commercial Villa available for rent Poothole near Thrissur.
+                      </p>  --}}
 
                         <!-- Rent -->
-                        <!-- <p class="text-gray-700 mb-4">
-                <span class="font-semibold">Rent Per Month:</span> ₹ 32000/-
-              </p> -->
+                        {{-- <p class="text-gray-700 mb-4">
+                        <span class="font-semibold">Rent Per Month:</span> ₹ 32000/-
+                      </p> --}}
 
                         <!-- Villa details -->
-                        <!-- <p class="text-gray-700 mb-4">
-                <span class="font-semibold">Villa comprises of:</span><br>
-                Ground floor- Sitout, formal living area, dining hall, Three bedrooms with attached Washroom,
-                one spacious kitchen, work area with smokeless stove, common toilet exists.
-              </p> -->
+                         <p class="text-gray-700 mb-4">
+                        <span class="font-semibold">Property comprises of:</span><br>
+                        {{ $hotProperties->description }}
+                      </p> 
 
                         <!-- Assistance -->
-                        <!-- <p class="text-gray-700 mb-4">
-                For Professional assistance and for Better Deals contact <span class="font-semibold">GOD’s OWN Properties Pvt. Ltd</span> @
-                <span class="font-bold">9447111233</span>.
-              </p> -->
+                         <p class="text-gray-700 mb-4">
+                        For Professional assistance and for Better Deals contact <span class="font-semibold">GOD’s OWN Properties Pvt. Ltd</span> @
+                        <span class="font-bold">9447111233</span>.
+                      </p> 
 
                         <!-- More listings -->
-                        <!-- <p class="text-gray-700 mb-4">
-                Search More Villa / Flats @ <a href="https://www.realestatethrissur.com" class="text-blue-600 underline">www.realestatethrissur.com</a>
-              </p> -->
+                         <p class="text-gray-700 mb-4">
+                        Search More Villa / Flats @ <a href="https://www.realestatethrissur.com" class="text-blue-600 underline">www.realestatethrissur.com</a>
+                      </p> 
 
                         <!-- Address -->
-                        <!-- <p class="text-gray-700 mb-6">
-                GOD’s OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort, Thrissur
-              </p> -->
+                         <p class="text-gray-700 mb-6">
+                        GOD’s OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort, Thrissur
+                      </p> 
 
                         <!-- Price + Location -->
-                        <!-- <div class="flex justify-between items-center  py-4">
-                <p class="text-lg font-bold text-red-600">Rs. 32000</p>
-                <p class="text-lg font-bold text-red-600">Poothole</p>
-              </div> -->
+                        {{-- <div class="flex justify-between items-center  py-4">
+                        <p class="text-lg font-bold text-red-600">Rs. 32000</p>
+                        <p class="text-lg font-bold text-red-600">Poothole</p>
+                      </div>  --}}
                         <!-- Contact Details -->
-                        <!-- <div class="mt-6 space-y-2">
-                  <p class="text-gray-700 font-medium">
-                    <span class="font-semibold">Contact</span> : GOD’s OWN Properties
-                  </p>
-                  <p class="text-gray-700 font-medium">
-                    <span class="font-semibold">Contact Number</span> :
-                    <a href="tel:+919447112333" class="text-gray-900 font-bold">9447112333</a>
-                  </p>
-                </div> -->
+                        <div class="mt-6 space-y-2">
+                          <p class="text-gray-700 font-medium">
+                            <span class="font-semibold">Contact</span> : GOD’s OWN Properties
+                          </p>
+                          <p class="text-gray-700 font-medium">
+                            <span class="font-semibold">Contact Number</span> :
+                            <a href="tel:+919447112333" class="text-gray-900 font-bold">9447112333</a>
+                          </p>
+                        </div>
                     </div>
                 </section>
-
-
-
 
             </div>
 

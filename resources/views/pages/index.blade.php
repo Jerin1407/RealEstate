@@ -483,7 +483,7 @@
                 <div class="swiper-wrapper">
                     @foreach ($hotProperties as $property)
                         <div class="swiper-slide">
-                            <a href="">
+                            <a href="{{ route('viewhotProperty', ['id' => $property->id]) }}">
                                 <div
                                     class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                                     <div

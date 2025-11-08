@@ -6,16 +6,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotPropertyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/attractive-3bhk', function () {
-    return view('subpages.attractive_3bhk');
-})->name('attractive-3bhk');
-Route::get('/modern-flat-in-koramangala', function () {
-    return view('subpages.modern_flat_in_koramangala');
-})->name('modern-flat-in-koramangala');
-Route::get('/premium-plot-in-electronic-city', function () {
-    return view('subpages.premium_plot_in_electronic_city');
-})->name('premium-plot-in-electronic-city');
-
 Route::get('/reload-captcha', function () {
     return response()->json(['captcha' => captcha_img('flat')]);
 })->name('reloadCaptcha');
@@ -35,6 +25,12 @@ Route::delete('/delete-request/{id}', [UserController::class, 'deleteRequest'])-
 Route::get('/approve-request/{id}', [UserController::class, 'approveRequest'])->name('approveRequest');
 Route::get('/filter-property', [UserController::class, 'filterRequestProperty'])->name('filterRequestProperty');
 Route::get('/listuser', [UserController::class, 'listUser'])->name('listUser');
+Route::get('/adduser', [UserController::class, 'addUser'])->name('addUser');
+// Route::post('/saveuser', [UserController::class, 'saveUser'])->name('saveUser');
+Route::get('/edituser', [UserController::class, 'editUser'])->name('editUser');
+Route::get('/viewuser', [UserController::class, 'viewUser'])->name('viewUser');
+// Route::post('/updateuser/{id}', [UserController::class, 'updateUser'])->name('updateUser');
+// Route::delete('/deleteuser/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');
@@ -63,6 +59,7 @@ Route::get('/view-all-commercial', [HomeController::class, 'viewAllCommercial'])
 Route::get('/view-commercial-property/{id}', [HomeController::class, 'viewCommercialProperty'])->name('viewcommercialProperty');
 Route::get('/view-all-rent', [HomeController::class, 'viewAllRent'])->name('viewAllRent');
 Route::get('/view-rent-property/{id}', [HomeController::class, 'viewRentProperty'])->name('viewrentProperty');
+Route::get('/view-hot-property/{id}', [HomeController::class, 'viewHotProperty'])->name('viewhotProperty');
 Route::get('/search-location', [HomeController::class, 'searchLocation'])->name('searchLocation');
 Route::get('/search-property', [HomeController::class, 'searchProperty'])->name('searchProperty');
 Route::get('/addHomeproperty', [HomeController::class, 'addProperty'])->name('addProperty');
@@ -72,7 +69,6 @@ Route::get('/listhotproperty', [HotPropertyController::class, 'hotPropertyList']
 Route::get('/addhotproperty', [HotPropertyController::class, 'addHotProperty'])->name('addhotproperty');
 Route::post('/savehotproperty', [HotPropertyController::class, 'saveHotProperty'])->name('savehotproperty');
 Route::get('/edithotproperty/{id}', [HotPropertyController::class, 'editHotProperty'])->name('edithotproperty');
-// Route::get('/viewhotproperty/{id}', [HotPropertyController::class, 'viewHotProperty'])->name('viewhotproperty');
 Route::post('/updatehotproperty/{id}', [HotPropertyController::class, 'updateHotProperty'])->name('updatehotproperty');
 Route::post('/deletehotpropertyimage/{id}', [HotPropertyController::class, 'deleteHotPropertyImage'])->name('deleteHotPropertyImage');
 Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteHotProperty'])->name('deletehotproperty');

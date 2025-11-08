@@ -253,6 +253,17 @@ class HomeController extends Controller
         return view('subpages.view_rent', compact('rent', 'categories', 'priceRanges', 'locations'));
     }
 
+    public function viewHotProperty($id)
+    {
+        $hotProperties = HotPropertyModel::with(['coverImage', 'images'])->findOrFail($id);
+
+        $categories = CategoryModel::all();
+        $priceRanges = PriceRangeModel::all();
+        $locations = LocationModel::all();
+
+        return view('subpages.view_hotProperty', compact('hotProperties', 'categories', 'priceRanges', 'locations'));
+    }
+
     public function searchLocation(Request $request)
     {
         $query = $request->get('query', '');

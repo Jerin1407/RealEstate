@@ -58,11 +58,13 @@
                                         Delete User
                                     </button> --}}
                         </div>
-                        <button onclick="window.location.href='add_property.html'"
-                            class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
-                            <i class="fas fa-plus mr-2"></i>
-                            Add User
-                        </button>
+                        <a href="{{ route('addUser') }}">
+                            <button 
+                                class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
+                                <i class="fas fa-plus mr-2"></i>
+                                Add User
+                            </button>
+                        </a>
                     </div>
                 </div>
 
@@ -104,13 +106,13 @@
                                         <div class="flex items-center gap-3">
 
                                             <!-- Edit -->
-                                            <a href="">
+                                            <a href="{{ route('editUser') }}">
                                                 <i
                                                     class="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-600"></i>
                                             </a>
 
                                             <!-- View -->
-                                            <a href="">
+                                            <a href="{{ route('viewUser') }}">
                                                 <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
                                             </a>
 
