@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class UserDetailsModel extends Model
 {
     protected $table = 'user_details';
-    protected $primaryKey = 'user_details_id ';
+    protected $primaryKey = 'user_details_id';
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id ',
-        'user_package_id ',
+        'user_id',
+        'user_package_id',
         'rem_properties',
         'is_active',
         'is_post_disabled',

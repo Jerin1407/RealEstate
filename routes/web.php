@@ -4,6 +4,8 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotPropertyController;
+use App\Http\Controllers\LocalityController;
+use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/reload-captcha', function () {
@@ -26,9 +28,9 @@ Route::get('/approve-request/{id}', [UserController::class, 'approveRequest'])->
 Route::get('/filter-property', [UserController::class, 'filterRequestProperty'])->name('filterRequestProperty');
 Route::get('/listuser', [UserController::class, 'listUser'])->name('listUser');
 Route::get('/adduser', [UserController::class, 'addUser'])->name('addUser');
-// Route::post('/saveuser', [UserController::class, 'saveUser'])->name('saveUser');
-Route::get('/edituser', [UserController::class, 'editUser'])->name('editUser');
-Route::get('/viewuser', [UserController::class, 'viewUser'])->name('viewUser');
+Route::post('/saveuser', [UserController::class, 'saveUser'])->name('saveUser');
+Route::get('/edituser/{id}', [UserController::class, 'editUser'])->name('editUser');
+Route::get('/viewuser/{id}', [UserController::class, 'viewUser'])->name('viewUser');
 // Route::post('/updateuser/{id}', [UserController::class, 'updateUser'])->name('updateUser');
 // Route::delete('/deleteuser/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
 
@@ -75,3 +77,10 @@ Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteH
 // Route::post('/hotpropertyenquiry', [HotPropertyController::class, 'hotPropertyEnquiry'])->name('hotPropertyEnquiry');
 // Route::get('/filterhotproperty', [HotPropertyController::class, 'filterHotProperty'])->name('filterHotProperty');
 // Route::get('/exporthotproperty', [HotPropertyController::class, 'hotPropertyExport'])->name('exportHotProperty');
+
+Route::get('/listlocality', [LocalityController::class, 'listLocality'])->name('listlocality');
+Route::post('/updatelocality', [LocalityController::class, 'updateLocality'])->name('updateLocality');
+Route::delete('/deletelocality/{id}', [LocalityController::class, 'deleteLocality'])->name('deleteLocality');
+
+Route::get('/showChangePassword', [PasswordController::class, 'index'])->name('showChangePassword');
+Route::post('/updatePassword', [PasswordController::class, 'updatePassword'])->name('updatePassword');

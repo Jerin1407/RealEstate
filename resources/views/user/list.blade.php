@@ -106,13 +106,13 @@
                                         <div class="flex items-center gap-3">
 
                                             <!-- Edit -->
-                                            <a href="{{ route('editUser') }}">
+                                            <a href="{{ route('editUser', $user->user_id) }}">
                                                 <i
                                                     class="fa-solid fa-pen-to-square cursor-pointer hover:text-blue-600"></i>
                                             </a>
 
                                             <!-- View -->
-                                            <a href="{{ route('viewUser') }}">
+                                            <a href="{{ route('viewUser', $user->user_id) }}">
                                                 <i class="fa-solid fa-eye cursor-pointer hover:text-green-600"></i>
                                             </a>
 
@@ -239,6 +239,28 @@
                 }
             }
         })();
+
+        // Success Alert
+        @if (session('success_add'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_add') }}'
+            });
+        @endif
     </script>
 </body>
 

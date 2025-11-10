@@ -13,6 +13,7 @@ use App\Models\MyProperties;
 use App\Models\PriceUnitModel;
 use App\Models\AreaUnitModel;
 use App\Models\PropertyImageModel;
+use App\Models\UserDetailsModel;
 use App\Models\UserTypeModel;
 use Illuminate\Support\Facades\File;
 
@@ -59,13 +60,10 @@ class UserController extends Controller
 
         // Save user
         $user = new UserModel();
-        $user->user_type_id = 1;
         $user->login_name = $request->username;
         // $user->password = Hash::make($request->password);
         $user->password = $request->password;
         $user->fullname = $request->fullname;
-        $user->contact_number = '';
-        $user->contact_address = '';
         $user->email = $request->email;
         $user->save();
 
@@ -288,15 +286,53 @@ class UserController extends Controller
         return view('user.add', compact('userTypes'));
     }
 
-    public function editUser()
+    public function saveUser(Request $request)
     {
-        $userTypes = UserTypeModel::all();
+        // Validate inputs
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'login_name' => 'required|string|max:255|unique:users,login_name',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'contact_number' => 'required|string|max:20',
+            'user_type_id' => 'required|integer|not_in:0',
+            'contact_address' => 'required|string|max:255',
+        ]);
 
-        return view('user.edit', compact('userTypes'));
+        // Save user
+        $user = new UserModel();
+        $user->user_type_id = $request->user_type_id;
+        $user->login_name = $request->login_name;
+        $user->password = $request->password;
+        $user->fullname = $request->fullname;
+        $user->contact_number = $request->contact_number;
+        $user->email = $request->email;
+        $user->contact_address = $request->contact_address;
+        $user->save();
+
+        // Save user details
+        $userDetails = new UserDetailsModel();
+        $userDetails->user_id = $user->user_id;
+        $userDetails->register_date = now()->format('Y-m-d');
+        $userDetails->is_active = 0;
+        $userDetails->is_post_disabled = 0;
+        $userDetails->save();
+
+        return redirect()->route('listUser')->with('success_add', 'User saved successfully!!!');
     }
 
-    public function viewUser()
+    public function editUser($id)
     {
-        return view('user.view');
+        $user = UserModel::with('userType')->findOrFail($id);
+        $userTypes = UserTypeModel::all();
+
+        return view('user.edit', compact('userTypes', 'user'));
+    }
+
+    public function viewUser($id)
+    {
+        $user = UserModel::with('userType', 'userDetails')->findOrFail($id);
+
+        return view('user.view', compact('user'));
     }
 }

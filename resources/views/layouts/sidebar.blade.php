@@ -128,8 +128,8 @@
                     </div>
 
                     <a href="{{ route('listUser') }}" class="hover:text-gray-300 px-3 py-2 rounded">Users</a>
-                    <a href="#" class="hover:text-gray-300 px-3 py-2 rounded">Localities</a>
-                    <a href="#" class="hover:text-gray-300 px-3 py-2 rounded">Change Password</a>
+                    <a href="{{ route('listlocality') }}" class="hover:text-gray-300 px-3 py-2 rounded">Localities</a>
+                    <a href="{{ route('showChangePassword') }}" class="hover:text-gray-300 px-3 py-2 rounded">Change Password</a>
                 </nav>
             </div>
         </div>

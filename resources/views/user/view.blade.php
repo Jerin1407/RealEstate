@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Thrissur - Find Your Dream Home</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
-    <link href="./assets/css/output_2.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
+    <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
 </head>
@@ -45,31 +45,32 @@
                     <div class="p-6 space-y-3">
                         <div class="text-sm">
                             <span class="font-medium">Full Name :</span>
-                            <span class="ml-2">priyanga rajan</span>
+                            <span class="ml-2">{{ $user->fullname }}</span>
                         </div>
 
                         <div class="text-sm">
                             <span class="font-medium">Login Name :</span>
-                            <span class="ml-2">catchraji96@gmail.com</span>
+                            <span class="ml-2">{{ $user->login_name }}</span>
                         </div>
 
                         <div class="text-sm">
                             <span class="font-medium">Email :</span>
-                            <span class="ml-2">catchraji96@gmail.com</span>
+                            <span class="ml-2">{{ $user->email }}</span>
                         </div>
 
                         <div class="text-sm">
                             <span class="font-medium">User Type:</span>
-                            <span class="ml-2">priyanga rajan</span>
+                            <span class="ml-2">{{ $user->userType->type_name }}</span>
                         </div>
 
                         <div class="text-sm">
                             <span class="font-medium">Contact Number :</span>
-                            <span class="ml-2">8939723905</span>
+                            <span class="ml-2">{{ $user->contact_number }}</span>
                         </div>
 
                         <div class="text-sm">
                             <span class="font-medium">Address:</span>
+                            <span class="ml-2">{{ $user->contact_address }}</span>
                         </div>
                     </div>
                 </div>
@@ -120,6 +121,6 @@
     </script>
 </body>
 
-<script src="assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </html>

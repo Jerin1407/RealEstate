@@ -26,14 +26,13 @@
 
             <!-- Form Content -->
             <div class="p-6">
-                <form class="space-y-4">
+                <form class="space-y-4" action="{{ route('saveUser') }}" method="POST">
+                    @csrf
+
                     <!-- Row 1 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {{-- <label class="block text-sm font-medium mb-1">User ID</label> --}}
-                        <input type="hidden" name="user_id"
-                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                            readonly>
 
+                        <!-- Full Name -->
                         <div>
                             <label class="block text-sm font-medium mb-1">Full Name <span
                                     class="text-red-500">*</span></label>
@@ -42,6 +41,7 @@
                                 required>
                         </div>
 
+                        <!-- Login Name -->
                         <div>
                             <label class="block text-sm font-medium mb-1">Login Name <span
                                     class="text-red-500">*</span></label>
@@ -50,6 +50,7 @@
                                 required>
                         </div>
 
+                        <!-- Email -->
                         <div>
                             <label class="block text-sm font-medium mb-1">Email <span
                                     class="text-red-500">*</span></label>
@@ -62,6 +63,8 @@
 
                     <!-- Row 2 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                        <!-- Password -->
                         <div>
                             <label class="block text-sm font-medium mb-1">Password <span
                                     class="text-red-500">*</span></label>
@@ -70,6 +73,7 @@
                                 required>
                         </div>
 
+                        <!-- Contact Number -->
                         <div>
                             <label class="block text-sm font-medium mb-1">Contact Number <span
                                     class="text-red-500">*</span></label>
@@ -78,6 +82,7 @@
                                 required>
                         </div>
 
+                        <!-- User Type -->
                         <div>
                             <label class="block text-sm font-medium mb-1">User Type <span
                                     class="text-red-500">*</span></label>
@@ -95,16 +100,18 @@
 
                     <!-- Row 3 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        <!-- Contact Address -->
                         <div>
                             <label class="block text-sm font-medium mb-1">Contact Address <span
                                     class="text-red-500">*</span></label>
                             <textarea name="contact_address" rows="3"
-                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
+                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
                         </div>
 
                     </div>
 
-                    <!-- Submit Button -->
+                    <!-- Action Button -->
                     <div class="flex justify-end gap-2 pt-4">
                         <button type="reset"
                             class="px-6 py-2 border border-gray-400 bg-white text-sm hover:bg-gray-50 rounded">
