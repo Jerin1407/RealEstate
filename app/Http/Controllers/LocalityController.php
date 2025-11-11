@@ -14,6 +14,22 @@ class LocalityController extends Controller
         return view('localities.list', compact('localities'));
     }
 
+    public function addLocality(Request $request)
+    {
+        // Validate input
+        $request->validate([
+            'locality_name' => 'required|string|max:255',
+        ]);
+
+        // Save locality
+        $locality = new LocationModel();
+        $locality->locality_name = $request->locality_name;
+        $locality->save();
+
+        // Redirect or return success
+        return redirect()->back()->with('success_add', 'Locality added successfully!');
+    }
+
     public function updateLocality(Request $request)
     {
         $request->validate([

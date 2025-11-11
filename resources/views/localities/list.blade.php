@@ -45,13 +45,19 @@
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
                             <div class="flex items-center space-x-4">
-                                <div class="relative">
-                                    <input type="text" placeholder="Locality Name..."
-                                        class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
-                                </div>
-                                <button class="flex items-center text-black hover:text-red-100">
-                                    <span class="text-sm">Save</span>
-                                </button>
+                                <form action="{{ route('addLocality') }}" method="POST"
+                                    class="flex items-center gap-2">
+                                    @csrf
+                                    <div class="relative">
+                                        <input type="text" name="locality_name" placeholder="Locality Name..."
+                                            class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm"
+                                            required>
+                                    </div>
+                                    <button type="submit"
+                                        class="flex items-center text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                                        <span class="text-sm">Save</span>
+                                    </button>
+                                </form>
                             </div>
                             {{-- <button class="flex items-center text-gray-600 hover:text-primary text-sm">
                                         <i class="far fa-eye mr-2"></i>
@@ -137,7 +143,8 @@
                                             </button>
 
                                             <!-- Delete -->
-                                            <form action="{{ route('deleteLocality', $locality->locality_id) }}" method="POST">
+                                            <form action="{{ route('deleteLocality', $locality->locality_id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="delete-btn">

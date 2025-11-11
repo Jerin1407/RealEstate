@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Thrissur - Find Your Dream Home</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
-    <link href="./assets/css/output_2.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
+    <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
@@ -108,9 +108,53 @@
                 }
             }
         })();
+
+        // Success message
+            @if (session('success'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#10B981', // green color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('success') }}'
+                });
+            @endif
+
+            // Error message
+            @if (session('error'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#EF4444', // red color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ session('error') }}'
+                });
+            @endif
     </script>
 </body>
 
-<script src="assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </html>

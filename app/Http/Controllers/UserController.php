@@ -21,13 +21,54 @@ class UserController extends Controller
 {
     public function showAdmin()
     {
+        // if (!session()->has('user_id')) {
+        //     return redirect()->route('login')->with('error', 'Please login to access the page.');
+        // }
+
+        // $user = UserModel::with('userType')->find(session('user_id'));
+
+        // return view('admin.dashboard', compact('user'));
+
         if (!session()->has('user_id')) {
             return redirect()->route('login')->with('error', 'Please login to access the page.');
         }
 
-        $user = UserModel::with('userType')->find(session('user_id'));
+        // Load user, userDetails, and package in one go
+        $user = UserModel::with(['userDetails.package', 'userType'])->find(session('user_id'));
 
-        return view('admin.dashboard', compact('user'));
+        // Fetch package info
+        $details = $user->userDetails;
+        $package = $details?->package;
+
+        // Handle "Admin" users (no package assigned)
+        $packageName = $package->package_name ?? 'Admin';
+        $renewDate = $details?->renew_date ?? 'Unlimited';
+
+        // Handle allowed and remaining properties
+        $allowedProperties = $package?->is_unlimited_properties ? 'Unlimited' : ($package->property_count ?? 'N/A');
+        $remainingProperties = $details?->rem_properties ?? 'Unlimited';
+
+        // Calculate property stats if you have a properties table
+        $myProperties = MyProperties::where('posted_by', $user->user_id)->count();
+        $approvedProperties = MyProperties::where('posted_by', $user->user_id)->where('is_approved', 1)->count() ?? 0;
+        $notApprovedProperties = $myProperties - $approvedProperties;
+
+        $properties = MyProperties::where('posted_by', $user->user_id)
+            ->orderBy('property_id', 'desc')
+            ->limit(8)
+            ->get();
+
+        return view('admin.dashboard', compact(
+            'user',
+            'packageName',
+            'renewDate',
+            'allowedProperties',
+            'remainingProperties',
+            'myProperties',
+            'approvedProperties',
+            'notApprovedProperties',
+            'properties'
+        ));
     }
 
     public function showLoginForm()
@@ -309,14 +350,15 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->contact_address = $request->contact_address;
         $user->save();
+        dd($user);
 
         // Save user details
-        $userDetails = new UserDetailsModel();
-        $userDetails->user_id = $user->user_id;
-        $userDetails->register_date = now()->format('Y-m-d');
-        $userDetails->is_active = 0;
-        $userDetails->is_post_disabled = 0;
-        $userDetails->save();
+        // $userDetails = new UserDetailsModel();
+        // $userDetails->user_id = $user->user_id;
+        // $userDetails->register_date = now()->format('Y-m-d');
+        // $userDetails->is_active = 1;
+        // $userDetails->is_post_disabled = 0;
+        // $userDetails->save();
 
         return redirect()->route('listUser')->with('success_add', 'User saved successfully!!!');
     }

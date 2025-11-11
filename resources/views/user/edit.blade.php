@@ -34,27 +34,27 @@
 
                         <!-- Full Name -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Full Name <span
+                            <label for="fullname" class="block text-sm font-medium mb-1">Full Name <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="fullname" value="{{ $user->fullname }}"
+                            <input id="fullname" type="text" name="fullname"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- Login Name -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Login Name <span
+                            <label for="login_name" class="block text-sm font-medium mb-1">Login Name <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="login_name" value="{{ $user->login_name }}"
+                            <input id="login_name" type="text" name="login_name"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- Email -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Email <span
+                            <label for="email" class="block text-sm font-medium mb-1">Email <span
                                     class="text-red-500">*</span></label>
-                            <input type="email" name="email" value="{{ $user->email }}"
+                            <input id="email" type="email" name="email"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -66,34 +66,32 @@
 
                         <!-- Password -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Password <span
+                            <label for="password" class="block text-sm font-medium mb-1">Password <span
                                     class="text-red-500">*</span></label>
-                            <input type="password" name="password" value="{{ $user->password }}"
+                            <input id="password" type="password" name="password"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- Contact Number -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Contact Number <span
+                            <label for="contact_number" class="block text-sm font-medium mb-1">Contact Number <span
                                     class="text-red-500">*</span></label>
-                            <input type="tel" name="contact_number" value="{{ $user->contact_number }}"
+                            <input id="contact_number" type="tel" name="contact_number"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- User Type -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">User Type <span
+                            <label for="user_type_id" class="block text-sm font-medium mb-1">User Type <span
                                     class="text-red-500">*</span></label>
-                            <select name="user_type_id"
+                            <select id="user_type_id" name="user_type_id"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                                 <option value="0">Select User Type</option>
                                 @foreach ($userTypes as $userType)
-                                    <option value="{{ $userType->id }}"
-                                        {{ $userType->id == $user->user_type_id? 'selected' : '' }}>
-                                        {{ $userType->type_name }}
+                                    <option value="{{ $userType->id }}">{{ $userType->type_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -105,10 +103,10 @@
 
                         <!-- Contact Address -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Contact Address <span
+                            <label for="contact_address" class="block text-sm font-medium mb-1">Contact Address <span
                                     class="text-red-500">*</span></label>
-                            <textarea name="contact_address" rows="3"
-                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary" required>{{ $user->contact_address }}</textarea>
+                            <textarea id="contact_address" name="contact_address" rows="3"
+                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
                         </div>
 
                     </div>

@@ -44,35 +44,52 @@
             <div class="bg-white shadow-2xl rounded-md overflow-hidden">
                 <div class="bg-gray-700 text-white px-4 py-2 font-semibold">Package Details</div>
                 <div class="p-4 space-y-3 text-sm">
-                    <div class="flex justify-between"><span>Package Name</span><span class="text-red-600">Admin</span>
+                    <div class="flex justify-between">
+                        <span>Package Name</span>
+                        <span class="text-red-600">{{ $packageName }}</span>
                     </div>
-                    <div class="flex justify-between"><span>Renewal Date</span><span
-                            class="text-red-600">Unlimited</span></div>
-                    <div class="flex justify-between"><span>Allowed Properties</span><span
-                            class="text-red-600">Unlimited</span></div>
-                    <div class="flex justify-between"><span>Remaining Properties</span><span
-                            class="text-red-600">Unlimited</span></div>
-                    <div class="flex justify-between"><span>My Properties</span><span class="text-red-600">529</span>
+                    <div class="flex justify-between">
+                        <span>Renewal Date</span>
+                        <span class="text-red-600">{{ $renewDate }}</span>
                     </div>
-                    <div class="flex justify-between"><span>Approved Properties</span><span
-                            class="text-red-600">529</span></div>
-                    <div class="flex justify-between"><span>Not Approved Properties</span><span
-                            class="text-red-600">0</span></div>
+                    <div class="flex justify-between">
+                        <span>Allowed Properties</span>
+                        <span class="text-red-600">{{ $allowedProperties }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Remaining Properties</span>
+                        <span class="text-red-600">{{ $remainingProperties }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>My Properties</span>
+                        <span class="text-red-600">{{ $myProperties }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Approved Properties</span>
+                        <span class="text-red-600">{{ $approvedProperties }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Not Approved Properties</span>
+                        <span class="text-red-600">{{ $notApprovedProperties }}</span>
+                    </div>
                 </div>
             </div>
+
 
             <!-- My Properties -->
             <div class="bg-white shadow-2xl rounded-md overflow-hidden">
                 <div class="bg-gray-700 text-white px-4 py-2 font-semibold">My Properties</div>
                 <div class="p-4 space-y-2 text-sm max-h-96 overflow-y-auto">
-                    <div class="text-red-600">RT6173 - Ollur 5cent,1800 Sqft, New Villa</div>
-                    <div class="text-red-600">RT6172 - Olari 1500 Sqft, 3cent,5 BHK</div>
-                    <div class="text-red-600">RT6171 - Punkunnam 1000SqFt, 2BHK flat</div>
-                    <div class="text-red-600">RT6170 - 2bhk Semi furnished flat near...</div>
-                    <div class="text-red-600">RT6169 - Semifurnished 1000Sqft, 3bhk</div>
-                    <div class="text-red-600">RT6168 - Mannuthy 2100 SqFt, 5 cent, 4bhk</div>
-                    <div class="text-red-600">RT6167 - Stunning 1720 SqFt 4bhk, 4.1...</div>
-                    <div class="text-red-600">RT6166 - 2bhk Semi Furnished 820SqFt...</div>
+                    @forelse ($properties as $property)
+                        <div>
+                            <a href="{{ route('viewproperty', $property->property_id) }}"
+                                class="text-red-600 hover:text-blue-600 transition">
+                                {{ $property->property_code }} - {{ Str::limit(strip_tags($property->property_title), 40) }}
+                            </a>
+                        </div>
+                    @empty
+                        <div class="text-gray-500">No properties found.</div>
+                    @endforelse
                 </div>
             </div>
 

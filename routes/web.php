@@ -79,6 +79,7 @@ Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteH
 // Route::get('/exporthotproperty', [HotPropertyController::class, 'hotPropertyExport'])->name('exportHotProperty');
 
 Route::get('/listlocality', [LocalityController::class, 'listLocality'])->name('listlocality');
+Route::post('/addlocality', [LocalityController::class, 'addLocality'])->name('addLocality');
 Route::post('/updatelocality', [LocalityController::class, 'updateLocality'])->name('updateLocality');
 Route::delete('/deletelocality/{id}', [LocalityController::class, 'deleteLocality'])->name('deleteLocality');
 

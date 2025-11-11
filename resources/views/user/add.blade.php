@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Thrissur - Find Your Dream Home</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/images/logo 1.svg" />
-    <link href="./assets/css/output_2.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
+    <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
 </head>
@@ -26,7 +26,7 @@
 
             <!-- Form Content -->
             <div class="p-6">
-                <form class="space-y-4" action="{{ route('saveUser') }}" method="POST">
+                <form class="space-y-4" action="{{ route('saveUser') }}" enctype="multipart/form-data" method="POST">
                     @csrf
 
                     <!-- Row 1 -->
@@ -34,27 +34,27 @@
 
                         <!-- Full Name -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Full Name <span
+                            <label for="fullname" class="block text-sm font-medium mb-1">Full Name <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="fullname"
+                            <input id="fullname" type="text" name="fullname"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- Login Name -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Login Name <span
+                            <label for="login_name" class="block text-sm font-medium mb-1">Login Name <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="login_name"
+                            <input id="login_name" type="text" name="login_name"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- Email -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Email <span
+                            <label for="email" class="block text-sm font-medium mb-1">Email <span
                                     class="text-red-500">*</span></label>
-                            <input type="email" name="email"
+                            <input id="email" type="email" name="email"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -66,27 +66,27 @@
 
                         <!-- Password -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Password <span
+                            <label for="password" class="block text-sm font-medium mb-1">Password <span
                                     class="text-red-500">*</span></label>
-                            <input type="password" name="password"
+                            <input id="password" type="password" name="password"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- Contact Number -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Contact Number <span
+                            <label for="contact_number" class="block text-sm font-medium mb-1">Contact Number <span
                                     class="text-red-500">*</span></label>
-                            <input type="tel" name="contact_number"
+                            <input id="contact_number" type="tel" name="contact_number"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
 
                         <!-- User Type -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">User Type <span
+                            <label for="user_type_id" class="block text-sm font-medium mb-1">User Type <span
                                     class="text-red-500">*</span></label>
-                            <select name="user_type_id"
+                            <select id="user_type_id" name="user_type_id"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                                 <option value="0">Select User Type</option>
@@ -103,9 +103,9 @@
 
                         <!-- Contact Address -->
                         <div>
-                            <label class="block text-sm font-medium mb-1">Contact Address <span
+                            <label for="contact_address" class="block text-sm font-medium mb-1">Contact Address <span
                                     class="text-red-500">*</span></label>
-                            <textarea name="contact_address" rows="3"
+                            <textarea id="contact_address" name="contact_address" rows="3" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
                         </div>
 
@@ -169,6 +169,6 @@
     </script>
 </body>
 
-<script src="assets/js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </html>

@@ -27,7 +27,7 @@
             <!-- Content Area -->
             <div class="p-6 border-2 border-gray-300">
                 <!-- Action Buttons -->
-                <div class="flex justify-end gap-2 mb-6">
+                {{-- <div class="flex justify-end gap-2 mb-6">
                     <div class="relative">
                         <input type="text" placeholder="Search..."
                             class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
@@ -38,7 +38,7 @@
                     <button class="px-4 py-1 border border-gray-400 bg-white text-sm hover:bg-gray-50">
                         View All
                     </button>
-                </div>
+                </div> --}}
 
                 <!-- User Details Box -->
                 <div class="">
