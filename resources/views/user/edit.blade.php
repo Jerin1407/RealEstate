@@ -25,9 +25,21 @@
                 <h1 class="text-lg font-medium">Edit User Form</h1>
             </div>
 
+            <!-- Error Messages -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <!-- Form Content -->
             <div class="p-6">
-                <form class="space-y-4">
+                <form class="space-y-4" action="{{ route('updateUser', $user->user_id) }}" enctype="multipart/form-data" method="POST">
+                    @csrf
 
                     <!-- Row 1 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -36,7 +48,7 @@
                         <div>
                             <label for="fullname" class="block text-sm font-medium mb-1">Full Name <span
                                     class="text-red-500">*</span></label>
-                            <input id="fullname" type="text" name="fullname"
+                            <input id="fullname" type="text" name="fullname" value="{{ $user->fullname }}"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -45,7 +57,7 @@
                         <div>
                             <label for="login_name" class="block text-sm font-medium mb-1">Login Name <span
                                     class="text-red-500">*</span></label>
-                            <input id="login_name" type="text" name="login_name"
+                            <input id="login_name" type="text" name="login_name" value="{{ $user->login_name }}"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -54,7 +66,7 @@
                         <div>
                             <label for="email" class="block text-sm font-medium mb-1">Email <span
                                     class="text-red-500">*</span></label>
-                            <input id="email" type="email" name="email"
+                            <input id="email" type="email" name="email" value="{{ $user->email }}"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -68,7 +80,7 @@
                         <div>
                             <label for="password" class="block text-sm font-medium mb-1">Password <span
                                     class="text-red-500">*</span></label>
-                            <input id="password" type="password" name="password"
+                            <input id="password" type="password" name="password" value="{{ $user->password }}"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -78,6 +90,7 @@
                             <label for="contact_number" class="block text-sm font-medium mb-1">Contact Number <span
                                     class="text-red-500">*</span></label>
                             <input id="contact_number" type="tel" name="contact_number"
+                                value="{{ $user->contact_number }}"
                                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                                 required>
                         </div>
@@ -91,7 +104,9 @@
                                 required>
                                 <option value="0">Select User Type</option>
                                 @foreach ($userTypes as $userType)
-                                    <option value="{{ $userType->id }}">{{ $userType->type_name }}
+                                    <option value="{{ $userType->id }}"
+                                        {{ $userType->id == $user->user_type_id ? 'selected' : '' }}>
+                                        {{ $userType->type_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -105,8 +120,8 @@
                         <div>
                             <label for="contact_address" class="block text-sm font-medium mb-1">Contact Address <span
                                     class="text-red-500">*</span></label>
-                            <textarea id="contact_address" name="contact_address" rows="3"
-                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                            <textarea id="contact_address" name="contact_address" rows="3" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary">{{ $user->contact_address }}</textarea>
                         </div>
 
                     </div>

@@ -28,14 +28,18 @@
                     <div class=" md:flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Users List</h1>
                         <div class="flex items-center space-x-4">
-                            <div class="relative">
-                                <input type="text" placeholder="Search..."
-                                    class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
-                            </div>
-                            <button class="flex items-center text-white hover:text-blue-100">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                <span class="text-sm">View All</span>
-                            </button>
+                            <form method="GET" action="{{ route('filterUser') }}" class="flex items-center gap-2">
+                                <div class="relative">
+                                    <input type="text" name="search" value="{{ request('search') }}"
+                                        placeholder="Search..."
+                                        class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
+                                </div>
+                                <button
+                                    class="flex items-center bg-white-600 hover:bg-white-700 text-white px-3 py-1 rounded text-sm">
+                                    <i class="fas fa-search mr-1"></i>
+                                    View
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -59,8 +63,7 @@
                                     </button> --}}
                         </div>
                         <a href="{{ route('addUser') }}">
-                            <button 
-                                class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
+                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
                                 <i class="fas fa-plus mr-2"></i>
                                 Add User
                             </button>
@@ -117,9 +120,14 @@
                                             </a>
 
                                             <!-- Delete -->
-                                            <button type="button" class="delete-btn">
-                                                <i class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i>
-                                            </button>
+                                            <form action="{{ route('deleteUser', $user->user_id) }}"
+                                                method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="delete-btn">
+                                                    <i class="fa-solid fa-trash cursor-pointer hover:text-red-600"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -261,6 +269,76 @@
                 title: '{{ session('success_add') }}'
             });
         @endif
+
+        // Success Alert
+        @if (session('success_update'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_update') }}'
+            });
+        @endif
+    </script>
+
+    <script>
+        // Success Alert
+        @if (session('success_delete'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success_delete') }}'
+            });
+        @endif
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                let form = this.closest('form');
+
+                Swal.fire({
+                    position: 'top',
+                    title: 'Are you sure?',
+                    text: 'You want to delete this user?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete!',
+                    cancelButtonText: 'Cancel',
+                    width: '380px',
+                    toast: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

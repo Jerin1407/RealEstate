@@ -16,6 +16,7 @@ use App\Models\PropertyImageModel;
 use App\Models\UserDetailsModel;
 use App\Models\UserTypeModel;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -340,27 +341,33 @@ class UserController extends Controller
             'contact_address' => 'required|string|max:255',
         ]);
 
-        // Save user
-        $user = new UserModel();
-        $user->user_type_id = $request->user_type_id;
-        $user->login_name = $request->login_name;
-        $user->password = $request->password;
-        $user->fullname = $request->fullname;
-        $user->contact_number = $request->contact_number;
-        $user->email = $request->email;
-        $user->contact_address = $request->contact_address;
-        $user->save();
-        dd($user);
+        // dd($request->all());
 
-        // Save user details
-        // $userDetails = new UserDetailsModel();
-        // $userDetails->user_id = $user->user_id;
-        // $userDetails->register_date = now()->format('Y-m-d');
-        // $userDetails->is_active = 1;
-        // $userDetails->is_post_disabled = 0;
-        // $userDetails->save();
+        try {
+            // Save user
+            $user = new UserModel();
+            $user->user_type_id = $request->user_type_id;
+            $user->login_name = $request->login_name;
+            $user->password = $request->password;
+            $user->fullname = $request->fullname;
+            $user->contact_number = $request->contact_number;
+            $user->email = $request->email;
+            $user->contact_address = $request->contact_address;
+            $user->save();
 
-        return redirect()->route('listUser')->with('success_add', 'User saved successfully!!!');
+            // Save user details
+            $userDetails = new UserDetailsModel();
+            $userDetails->user_id = $user->user_id;
+            $userDetails->register_date = now()->format('Y-m-d H:i:s');
+            $userDetails->is_active = 1;
+            $userDetails->is_post_disabled = 0;
+            $userDetails->save();
+
+            return redirect()->route('listUser')->with('success_add', 'User saved successfully!!!');
+        } catch (\Exception $e) {
+            Log::error('Error saving user: ' . $e->getMessage());
+            return back()->with('error', 'Error saving user: ' . $e->getMessage());
+        }
     }
 
     public function editUser($id)
@@ -371,10 +378,84 @@ class UserController extends Controller
         return view('user.edit', compact('userTypes', 'user'));
     }
 
+    public function updateUser(Request $request, $id)
+    {
+        // Validate inputs
+        $request->validate([
+            'fullname' => 'required|string|max:255',
+            'login_name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'contact_number' => 'required|string|max:20',
+            'user_type_id' => 'required|integer|not_in:0',
+            'contact_address' => 'required|string|max:255',
+        ]);
+
+        // dd($request->all());
+
+        // Find the user
+        $user = UserModel::findOrFail($id);
+
+        try {
+            // Update user
+            $user->user_type_id = $request->user_type_id;
+            $user->login_name = $request->login_name;
+            $user->password = $request->password;
+            $user->fullname = $request->fullname;
+            $user->contact_number = $request->contact_number;
+            $user->email = $request->email;
+            $user->contact_address = $request->contact_address;
+            $user->save();
+
+            $userDetails = UserDetailsModel::where('user_id', $id)->first();
+
+            // Update user details
+            $userDetails->renew_date = now()->format('Y-m-d H:i:s');
+            $userDetails->save();
+
+            return redirect()->route('listUser')->with('success_update', 'User updated successfully!!!');
+        } catch (\Exception $e) {
+            Log::error('Error saving user: ' . $e->getMessage());
+            return back()->with('error', 'Error saving user: ' . $e->getMessage());
+        }
+    }
+
     public function viewUser($id)
     {
         $user = UserModel::with('userType', 'userDetails')->findOrFail($id);
 
         return view('user.view', compact('user'));
+    }
+
+    public function deleteUser($id)
+    {
+        // Find the user
+        $user = UserModel::findOrFail($id);
+
+        // Delete user details
+        UserDetailsModel::where('user_id', $id)->delete();
+
+        // Delete the user
+        $user->delete();
+
+        return redirect()->route('listUser')->with('success_delete', 'User deleted successfully!!!');
+    }
+
+    public function filterUser(Request $request)
+    {
+        $search = $request->input('search');
+
+        $users = UserModel::with(['userType', 'userDetails'])
+            ->when($search, function ($query, $search) {
+                $query->where('fullname', 'LIKE', "%{$search}%")
+                    ->orWhere('login_name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('contact_number', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('fullname', 'asc')
+            ->paginate(10)
+            ->appends(['search' => $search]);
+
+        return view('user.list', compact('users', 'search'));
     }
 }

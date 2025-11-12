@@ -31,8 +31,9 @@ Route::get('/adduser', [UserController::class, 'addUser'])->name('addUser');
 Route::post('/saveuser', [UserController::class, 'saveUser'])->name('saveUser');
 Route::get('/edituser/{id}', [UserController::class, 'editUser'])->name('editUser');
 Route::get('/viewuser/{id}', [UserController::class, 'viewUser'])->name('viewUser');
-// Route::post('/updateuser/{id}', [UserController::class, 'updateUser'])->name('updateUser');
-// Route::delete('/deleteuser/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+Route::post('/updateuser/{id}', [UserController::class, 'updateUser'])->name('updateUser');
+Route::delete('/deleteuser/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+Route::get('/filteruser', [UserController::class, 'filterUser'])->name('filterUser');
 
 Route::get('/listproperty', [PropertyController::class, 'listProperty'])->name('listproperty');
 Route::get('/addproperty', [PropertyController::class, 'addProperty'])->name('addproperty');
