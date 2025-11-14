@@ -23,6 +23,7 @@ class PropertyController extends Controller
     {
         // Fetch with category, user and location relationships
         $properties = MyProperties::with(['category', 'locality', 'user'])
+            ->where('is_active', 1)
             ->orderByDesc('post_date')
             ->paginate(10);
 
@@ -237,7 +238,8 @@ class PropertyController extends Controller
             $image->delete();
         }
 
-        $property->delete();
+        $property->is_active = 0;
+        $property->save();
 
         return redirect()->back()->with('success_delete', 'Property deleted successfully!');
     }

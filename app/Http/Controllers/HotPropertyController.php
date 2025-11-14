@@ -11,7 +11,8 @@ class HotPropertyController extends Controller
 {
     public function hotPropertyList()
     {
-        $hotProperties = HotPropertyModel::paginate(10);
+        $hotProperties = HotPropertyModel::where('is_active', 1)
+        ->paginate(10);
 
         return view('hot_property.list', compact('hotProperties'));
     }
@@ -39,6 +40,7 @@ class HotPropertyController extends Controller
         $hotProperty->type = $request->type;
         $hotProperty->url = $request->url;
         $hotProperty->add_date = now()->format('Y-m-d H:i:s');
+        $hotProperty->is_active = 1;
         $hotProperty->save();
 
         // Save uploaded images
@@ -84,7 +86,7 @@ class HotPropertyController extends Controller
         $hotProperty->description = strip_tags($request->description);
         $hotProperty->type = $request->type;
         $hotProperty->url = $request->url;
-        $hotProperty->add_date = now()->format('Y-m-d H:i:s');
+        $hotProperty->modified_date = now()->format('Y-m-d H:i:s');
         $hotProperty->save();
 
         // Save uploaded images
@@ -139,7 +141,8 @@ class HotPropertyController extends Controller
             $image->delete();
         }
 
-        $hotProperty->delete();
+        $hotProperty->is_active = 0;
+        $hotProperty->save();
 
         return redirect()->back()->with('success_delete', 'Hot property deleted successfully!');
     }

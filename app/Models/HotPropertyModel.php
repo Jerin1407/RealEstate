@@ -19,6 +19,8 @@ class HotPropertyModel extends Model
         'add_thumb_pdf',
         'add_pdf_img',
         'add_date',
+        'modified_date',
+        'is_active'
     ];
 
     // Relationship with images

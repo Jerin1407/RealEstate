@@ -100,11 +100,12 @@
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ $user->userType->type_name ?? 'N/A' }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
-                                        {{ $user->package_name ?? 'Guest Package' }}</td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">
-                                        {{ $user->userDetails && $user->userDetails->register_date ? \Carbon\Carbon::parse($user->userDetails->register_date)->format('d M Y') : 'N/A' }}
+                                        {{ $user->userDetails->package->package_name ?? 'N/A' }}
                                     </td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $user->status ?? 'Active' }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">
+                                        {{ $user->userDetails->register_date ?? 'N/A' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $user->status ?? 'N/A' }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         <div class="flex items-center gap-3">
 
@@ -120,8 +121,8 @@
                                             </a>
 
                                             <!-- Delete -->
-                                            <form action="{{ route('deleteUser', $user->user_id) }}"
-                                                method="POST" class="delete-form">
+                                            <form action="{{ route('deleteUser', $user->user_id) }}" method="POST"
+                                                class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="delete-btn">

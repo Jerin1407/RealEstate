@@ -29,6 +29,7 @@ class MyProperties extends Model
         'modified_date',
         'is_approved',
         'is_modified',
+        'is_active',
         'priority',
     ];
 

@@ -331,7 +331,7 @@
                 Swal.fire({
                     position: 'top',
                     title: 'Are you sure?',
-                    text: 'You want to delete this property?',
+                    text: 'You want to delete this hot property?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

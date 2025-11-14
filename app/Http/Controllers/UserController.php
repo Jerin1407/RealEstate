@@ -316,7 +316,9 @@ class UserController extends Controller
     public function listUser()
     {
         // Fetch users with their related user type and paginate (10 per page)
-        $users = UserModel::with('userType', 'userDetails')->paginate(10);
+        $users = UserModel::with('userType', 'userDetails.package')
+            ->where('is_active', 1)
+            ->paginate(10);
 
         return view('user.list', compact('users'));
     }
@@ -352,6 +354,7 @@ class UserController extends Controller
             $user->fullname = $request->fullname;
             $user->contact_number = $request->contact_number;
             $user->email = $request->email;
+            $user->is_active = 1;
             $user->contact_address = $request->contact_address;
             $user->save();
 
@@ -360,6 +363,8 @@ class UserController extends Controller
             $userDetails->user_id = $user->user_id;
             $userDetails->register_date = now()->format('Y-m-d H:i:s');
             $userDetails->is_active = 1;
+            $userDetails->user_package_id = 2;
+            $userDetails->rem_properties = 2;
             $userDetails->is_post_disabled = 0;
             $userDetails->save();
 
@@ -429,14 +434,17 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
-        // Find the user
+        // Find user
         $user = UserModel::findOrFail($id);
 
-        // Delete user details
-        UserDetailsModel::where('user_id', $id)->delete();
+        // Deactivate user
+        $user->is_active = 0;
+        $user->save();
 
-        // Delete the user
-        $user->delete();
+        // Deactivate user details
+        UserDetailsModel::where('user_id', $id)->update([
+            'is_active' => 0
+        ]);
 
         return redirect()->route('listUser')->with('success_delete', 'User deleted successfully!!!');
     }

@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $primaryKey = 'user_id';
     public $timestamps = false;
 
-    protected $fillable = ['user_type_id', 'login_name', 'password', 'fullname', 'contact_number', 'contact_address', 'email'];
+    protected $fillable = ['user_type_id', 'login_name', 'password', 'fullname', 'contact_number', 'contact_address', 'email', 'is_active'];
 
     // Relationship with UserType
     public function userType()
