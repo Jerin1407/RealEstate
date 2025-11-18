@@ -50,9 +50,9 @@
                             </button> --}}
                             <a href="{{ route('editRequest', $property->property_id) }}">
                                 <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-edit mr-2"></i>
-                                Edit
-                            </button>
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Edit
+                                </button>
                             </a>
                             {{-- <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                 <i class="fas fa-download mr-2"></i>
@@ -164,15 +164,29 @@
 
                                             <!-- Link -->
                                             <p class="mt-6 text-gray-700">
-                                                Search More Villas / Flats @
-                                                <a href="https://www.realestatethrissur.com" target="_blank"
-                                                    class="font-medium text-blue-600 hover:underline">
-                                                    www.realestatethrissur.com
-                                                </a>
+                                                @if ($property->youtubeurl)
+                                                    @php
+                                                        // Extract YouTube Video ID from URL
+                                                        preg_match(
+                                                            '/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w\-]+)/',
+                                                            $property->youtubeurl,
+                                                            $matches,
+                                                        );
+                                                        $videoId = $matches[1] ?? null;
+                                                    @endphp
+
+                                                    @if ($videoId)
+                                                        <div class="mt-4">
+                                                            <iframe width="100%" height="450"
+                                                                src="https://www.youtube.com/embed/{{ $videoId }}"
+                                                                title="YouTube video" frameborder="0" allowfullscreen>
+                                                            </iframe>
+                                                        </div>
+                                                    @endif
+                                                @endif
                                             </p>
                                         </div>
                                     </div>
-
 
                                     {{-- <div class="flex justify-between items-center mt-8">
 

@@ -311,6 +311,8 @@ class PropertyController extends Controller
         // Send email
         Mail::to('bYw4y@example.com')->send(new PropertyEnquiryMail($data));
 
+      // Mail::to('jerinrichard@gmail.com')->send(new PropertyEnquiryMail($data));
+
         return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
     }
 

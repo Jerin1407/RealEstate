@@ -12,6 +12,7 @@ class PropertyEnquire extends Model
 
     protected $fillable = [
         'property_id',
+        'hot_property_id',
         'fullname',
         'contact_number',
         'email',

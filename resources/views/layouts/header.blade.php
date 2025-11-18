@@ -24,11 +24,11 @@
                 </button>
 
                 <div id="properties-menu" class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-md hidden">
-                    <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">House/Villas</a>
-                    <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Rent/Lease Properties</a>
-                    <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Flats</a>
-                    <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Residential Plots</a>
-                    <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">All</a>
+                    <a href="{{ route('viewAllVilla') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">House/Villas</a>
+                    <a href="{{ route('viewAllRent') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Rent/Lease Properties</a>
+                    <a href="{{ route('viewAllFlat') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Flats</a>
+                    <a href="{{ route('viewAllPlot') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Residential Plots</a>
+                    <a href="{{ route('home') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">All</a>
                 </div>
             </div>
 
@@ -78,12 +78,12 @@
                 </button>
 
                 <div id="mobile-properties-menu" class="hidden mt-2 flex flex-col space-y-2">
-                    <a href="" class="text-gray-700 hover:text-primary transition-colors">House/Villas</a>
-                    <a href="" class="text-gray-700 hover:text-primary transition-colors">Rent/Lease
+                    <a href="{{ route('viewAllVilla') }}" class="text-gray-700 hover:text-primary transition-colors">House/Villas</a>
+                    <a href="{{ route('viewAllRent') }}" class="text-gray-700 hover:text-primary transition-colors">Rent/Lease
                         Properties</a>
-                    <a href="" class="text-gray-700 hover:text-primary transition-colors">Flats</a>
-                    <a href="" class="text-gray-700 hover:text-primary transition-colors">Residential Plots</a>
-                    <a href="" class="text-gray-700 hover:text-primary transition-colors">All</a>
+                    <a href="{{ route('viewAllFlat') }}"" class="text-gray-700 hover:text-primary transition-colors">Flats</a>
+                    <a href="{{ route('viewAllPlot') }}" class="text-gray-700 hover:text-primary transition-colors">Residential Plots</a>
+                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-primary transition-colors">All</a>
                 </div>
             </div>
 

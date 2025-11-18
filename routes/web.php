@@ -75,7 +75,7 @@ Route::get('/edithotproperty/{id}', [HotPropertyController::class, 'editHotPrope
 Route::post('/updatehotproperty/{id}', [HotPropertyController::class, 'updateHotProperty'])->name('updatehotproperty');
 Route::post('/deletehotpropertyimage/{id}', [HotPropertyController::class, 'deleteHotPropertyImage'])->name('deleteHotPropertyImage');
 Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteHotProperty'])->name('deletehotproperty');
-// Route::post('/hotpropertyenquiry', [HotPropertyController::class, 'hotPropertyEnquiry'])->name('hotPropertyEnquiry');
+Route::post('/hotpropertyenquiry', [HotPropertyController::class, 'hotPropertyEnquiry'])->name('hotPropertyEnquiry');
 // Route::get('/filterhotproperty', [HotPropertyController::class, 'filterHotProperty'])->name('filterHotProperty');
 // Route::get('/exporthotproperty', [HotPropertyController::class, 'hotPropertyExport'])->name('exportHotProperty');
 

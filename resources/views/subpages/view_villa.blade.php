@@ -53,21 +53,36 @@
                     @endphp
                         ₹ {{ $formattedPrice }} (Negotiable)</p>
                     <p class="text-gray-700 mb-2"><span class="font-semibold">Contact:</span> For professional assistance
-                        and better deals contact <span class="font-semibold">GOD’s
-                            OWN Properties
-                            Pvt. Ltd</span>
+                        and better deals contact <span class="font-semibold">{{ $villa->contact_name }}</span>
                     </p>
                     <p class="text-gray-700 mb-4">Loan with lowest interest rates available.</p>
-                    <p class="mb-6">
-                        Search More Villa / Flats @
-                        <a href="https://www.realestatethrissur.com" target="_blank" class="text-blue-600 underline">
-                            www.realestatethrissur.com
-                        </a>
-                    </p>
-                    <p class="text-gray-700">
+                    @if ($villa->youtubeurl)
+                        @php
+                            // Extract YouTube Video ID from URL
+                            preg_match(
+                                '/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w\-]+)/',
+                                $villa->youtubeurl,
+                                $matches,
+                            );
+                            $videoId = $matches[1] ?? null;
+                        @endphp
+
+                        @if ($videoId)
+                            <div class="mt-4">
+                                <iframe width="100%" height="450"
+                                    src="https://www.youtube.com/embed/{{ $videoId }}" title="YouTube video"
+                                    frameborder="0" allowfullscreen>
+                                </iframe>
+                            </div>
+                        @endif
+                    @endif
+                    
+                    <div class="mt-4">
+                        <p class="text-gray-700">
                         GODs OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort,
                         Thrissur
                     </p>
+                    </div>
 
                     <div class="flex justify-between items-center mt-8">
                         <p class="text-xl font-bold">

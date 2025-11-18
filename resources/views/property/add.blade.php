@@ -266,7 +266,7 @@
                     </div>
 
                     <!-- Terms and Conditions -->
-                    <div class="md:grid grid-cols-12 gap-4 items-center">
+                    {{-- <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700"></label>
                         <div class="col-span-10">
                             <div class="flex items-center space-x-2">
@@ -278,7 +278,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Save Button -->
                     <div class="md:grid grid-cols-12 gap-4">

@@ -6,13 +6,16 @@ use App\Models\HotPropertyModel;
 use Illuminate\Http\Request;
 use App\Models\PropertyImageModel;
 use Illuminate\Support\Facades\File;
+use App\Models\PropertyEnquire;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HotPropertyEnquiryMail;
 
 class HotPropertyController extends Controller
 {
     public function hotPropertyList()
     {
         $hotProperties = HotPropertyModel::where('is_active', 1)
-        ->paginate(10);
+            ->paginate(10);
 
         return view('hot_property.list', compact('hotProperties'));
     }
@@ -145,5 +148,43 @@ class HotPropertyController extends Controller
         $hotProperty->save();
 
         return redirect()->back()->with('success_delete', 'Hot property deleted successfully!');
+    }
+
+    public function hotPropertyEnquiry(Request $request)
+    {
+        $request->validate([
+            'hot_property_id' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'number' => 'required|string|max:20',
+            'message' => 'required|string',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.captcha' => 'Invalid Captcha !!!'
+        ]);
+
+        PropertyEnquire::create([
+            'hot_property_id' => $request->hot_property_id,
+            'fullname' => $request->name,
+            'contact_number' => $request->number,
+            'email' => $request->email,
+            'message' => $request->message,
+            'created_at' => now(),
+        ]);
+
+        // Prepare email data
+        $data = [
+            'hot_property_id' => $request->hot_property_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'number' => $request->number,
+            'message' => $request->message,
+        ];
+
+        // Send email
+        Mail::to('bYw4y@example.com')->send(new HotPropertyEnquiryMail($data));
+      //  Mail::to('jerinrichard@gmail.com')->send(new HotPropertyEnquiryMail($data));
+
+        return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
     }
 }

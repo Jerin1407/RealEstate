@@ -57,17 +57,33 @@
                     </p>
 
                     <p class="text-gray-700 mb-4">Loan with lowest interest rates available.</p>
-                    <p class="mb-6">
-                        Search More Villa / Flats @
-                        <a href="https://www.realestatethrissur.com" target="_blank" class="text-blue-600 underline">
-                            www.realestatethrissur.com
-                        </a>
-                    </p>
+                    @if ($commercial->youtubeurl)
+                        @php
+                            // Extract YouTube Video ID from URL
+                            preg_match(
+                                '/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w\-]+)/',
+                                $commercial->youtubeurl,
+                                $matches,
+                            );
+                            $videoId = $matches[1] ?? null;
+                        @endphp
 
-                    <p class="text-gray-700">
-                        GODs OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort,
-                        Thrissur
-                    </p>
+                        @if ($videoId)
+                            <div class="mt-4">
+                                <iframe width="100%" height="450"
+                                    src="https://www.youtube.com/embed/{{ $videoId }}" title="YouTube video"
+                                    frameborder="0" allowfullscreen>
+                                </iframe>
+                            </div>
+                        @endif
+                    @endif
+
+                    <div class="mt-4">
+                        <p class="text-gray-700">
+                            GODs OWN Properties & Developers Pvt. Ltd., Ground Floor, N.P.Tower, Guruvayur Road, Westfort,
+                            Thrissur
+                        </p>
+                    </div>
 
                     <div class="flex justify-between items-center mt-8">
                         <p class="text-xl font-bold">
@@ -144,7 +160,7 @@
                         <input type="text" name="captcha" required
                             class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
-                    
+
                     {{-- <div class="border border-gray-300 rounded-lg p-4 text-center">
                         <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
                             class="mx-auto mb-2">

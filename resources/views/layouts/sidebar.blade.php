@@ -3,62 +3,81 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
 
         <!-- Logo -->
-        <div class="flex items-center space-x-2">
-            <img src="https://realestatethrissur.com/images/logo.png" alt="Logo" class="h-12">
-        </div>
+        <a href="{{ route('home') }}">
+            <div class="flex items-center space-x-2">
+                <img src="https://realestatethrissur.com/images/logo.png" alt="Logo" class="h-12">
+            </div>
+        </a>
 
         <!-- Desktop Menu -->
         <nav class="hidden md:flex space-x-8">
-            <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
-            <a href="about.html" class="text-gray-700 hover:text-primary transition-colors">About Us</a>
-            <a href="#properties" class="text-gray-700 hover:text-primary transition-colors">Properties</a>
-            <a href="service.html" class="text-gray-700 hover:text-primary transition-colors">Service</a>
-            <a href="home-loan.html" class="text-gray-700 hover:text-primary transition-colors">Home loan</a>
-            <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">Contact Us</a>
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
+            <a href="{{ route('about') }}" class="nav-link">About Us</a>
+            <a href="#properties" class="nav-link">Properties</a>
+            <a href="{{ route('service') }}" class="nav-link">Service</a>
+            <a href="{{ route('home-loan') }}" class="nav-link">Home loan</a>
+            <a href="{{ route('contact') }}" class="nav-link">Contact Us</a>
         </nav>
 
-        <!-- Right Side: List Property + Mobile Menu Button -->
+        <!-- Right Side -->
         <div class="flex items-center space-x-4">
 
             <!-- Mobile Hamburger -->
             <button id="menu-btn" class="md:hidden text-gray-800 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
-            <h1 id="admin" class="font-bold text-primary">Welcome {{ session('fullname') }}</h1>
 
-            <!-- List Property Button (desktop only) -->
-            <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+            <!-- Desktop Welcome -->
+            <h1 id="admin" class="font-bold text-primary hidden md:block">
+                Welcome {{ session('fullname') }}
+            </h1>
+
+            <!-- Desktop Logout -->
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="hidden md:block">
                 @csrf
                 <button type="button" id="logoutBtn"
-                    class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
+                    class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors">
                     <i class="fa-solid fa-right-from-bracket mr-1"></i>
                     Logout
                 </button>
             </form>
-            <!-- <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
-        List Property
-      </button> -->
         </div>
     </div>
 
     <!-- Mobile Dropdown -->
-    <nav id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg z-40">
+    <nav id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg z-40 transition-all duration-300 ease-in-out">
+
         <div class="flex flex-col space-y-4 p-6 text-center">
 
-            <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
-            <a href="about.html" class="text-gray-700 hover:text-primary transition-colors">About Us</a>
-            <a href="#properties" class="text-gray-700 hover:text-primary transition-colors">Properties</a>
-            <a href="service.html" class="text-gray-700 hover:text-primary transition-colors">Service</a>
-            <a href="home-loan.html" class="text-gray-700 hover:text-primary transition-colors">Home loan</a>
-            <a href="#contact" class="text-gray-700 hover:text-primary transition-colors">Contact Us</a>
+            <!-- MOBILE Welcome -->
+            <h1 class="font-bold text-primary text-lg">
+                Welcome {{ session('fullname') }}
+            </h1>
 
-            <!-- Add "List Property" for mobile -->
-            <!-- <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors">
-        List Property
-      </button> -->
+            <!-- MOBILE Logout Button -->
+            <form id="logoutForm_mobile" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="button" id="logoutBtn_mobile"
+                    class="bg-primary text-white w-full py-2 rounded-lg hover:bg-secondary transition-colors">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i>
+                    Logout
+                </button>
+            </form>
+
+            <hr>
+
+            <!-- Mobile Menu Links -->
+            <a href="{{ route('home') }}" class="mobile-link">Home</a>
+            <a href="{{ route('about') }}" class="mobile-link">About Us</a>
+            <a href="#properties" class="mobile-link">Properties</a>
+            <a href="{{ route('service') }}" class="mobile-link">Service</a>
+            <a href="{{ route('home-loan') }}" class="mobile-link">Home loan</a>
+            <a href="{{ route('contact') }}" class="mobile-link">Contact Us</a>
+
         </div>
     </nav>
 </header>
@@ -82,8 +101,6 @@
             <div class="w-60 bg-gradient-to-b from-primary to-secondary text-white min-h-screen p-5"
                 style="height: 100%">
                 <nav class="flex flex-col space-y-2">
-
-                    {{-- <a href="{{ route('admin') }}" class="hover:text-gray-300 px-3 py-2 rounded">Dashboard</a> --}}
 
                     <!-- Dashboard with Dropdown -->
                     <div class="relative">
@@ -121,15 +138,18 @@
                         <!-- Popup Submenu -->
                         <div id="adsSubMenu"
                             class="absolute left-full top-0 mt-0 ml-2 w-48 bg-white text-gray-800 rounded shadow-lg  hidden">
-                            <a href="{{ route('hotpropertylist') }}" class="block px-4 py-2 hover:bg-primary hover:text-white">Hot
+                            <a href="{{ route('hotpropertylist') }}"
+                                class="block px-4 py-2 hover:bg-primary hover:text-white">Hot
                                 Properties</a>
                             <!-- Add more items here -->
                         </div>
                     </div>
 
                     <a href="{{ route('listUser') }}" class="hover:text-gray-300 px-3 py-2 rounded">Users</a>
-                    <a href="{{ route('listlocality') }}" class="hover:text-gray-300 px-3 py-2 rounded">Localities</a>
-                    <a href="{{ route('showChangePassword') }}" class="hover:text-gray-300 px-3 py-2 rounded">Change Password</a>
+                    <a href="{{ route('listlocality') }}"
+                        class="hover:text-gray-300 px-3 py-2 rounded">Localities</a>
+                    <a href="{{ route('showChangePassword') }}" class="hover:text-gray-300 px-3 py-2 rounded">Change
+                        Password</a>
                 </nav>
             </div>
         </div>
@@ -155,6 +175,32 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById('logoutForm').submit();
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            document.getElementById('logoutBtn_mobile').addEventListener('click', function(e) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, logout',
+                    cancelButtonText: 'Cancel',
+                    timerProgressBar: true,
+                    background: '#EF4444', // red
+                    color: '#fff',
+                    iconColor: '#fff'
+                });
+
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Are you sure you want to logout?'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('logoutForm_mobile').submit();
                     }
                 });
             });

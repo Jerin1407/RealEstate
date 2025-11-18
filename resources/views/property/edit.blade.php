@@ -222,7 +222,7 @@
                                 </div>
 
                                 <!-- Preview Uploaded Image -->
-                                <div id="previewContainer" class="mt-3 flex flex-wrap gap-3">
+                                {{-- <div id="previewContainer" class="mt-3 flex flex-wrap gap-3">
                                     @foreach ($property->images as $image)
                                         <div class="relative group">
                                             <div class="absolute top-1 right-1">
@@ -245,6 +245,22 @@
                                                     class="bg-red-500 text-black text-xs px-2 py-1 rounded">✕</button>
                                             </form> --}}
 
+                                {{-- </div> --}}
+                                {{-- @endforeach --}}
+                                {{-- </div> --}}
+
+                                <div id="previewContainer" class="mt-3 flex flex-wrap gap-3">
+                                    @foreach ($property->images as $image)
+                                        <div class="relative group existing-image">
+                                            <div class="absolute top-1 right-1">
+                                                <button type="button"
+                                                    onclick="deleteImage('{{ route('deletePropertyImage', $image->property_thumb_id) }}')"
+                                                    class="bg-red-500 text-red-600 text-xs px-2 py-1 rounded">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </button>
+                                            </div>
+                                            <img src="{{ asset('uploads/property/' . $image->filename) }}"
+                                                class="w-24 h-24 object-cover rounded border">
                                         </div>
                                     @endforeach
                                 </div>
@@ -262,7 +278,6 @@
                         <label class="col-span-2 text-sm text-gray-700">Contact Person</label>
                         <div class="col-span-4">
                             <input type="text" name="contact_person" value="{{ $property->contact_name }}"
-                                required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
@@ -272,13 +287,12 @@
                         <label class="col-span-2 text-sm text-gray-700">Contact Number</label>
                         <div class="col-span-4">
                             <input type="number" name="contact_number" value="{{ $property->contact_number }}"
-                                required
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
 
                     <!-- Terms and Conditions -->
-                    <div class="md:grid grid-cols-12 gap-4 items-center mt-6">
+                    {{-- <div class="md:grid grid-cols-12 gap-4 items-center mt-6">
                         <label class="col-span-2 text-sm text-gray-700"></label>
                         <div class="col-span-10">
                             <div class="flex items-center space-x-2">
@@ -290,7 +304,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Save Button -->
                     <div class="md:grid grid-cols-12 gap-4 mt-6">

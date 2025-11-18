@@ -13,20 +13,20 @@
             <div class="text-center md:text-start">
                 <h5 class="text-lg font-semibold  mb-4">Quick Links</h5>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="{{ route('home') }}" class="hover:text-primary transition-colors">Home</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Properties</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-primary transition-colors">About Us</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-primary transition-colors">Contact</a></li>
                 </ul>
             </div>
 
             <div class="text-center md:text-start">
                 <h5 class="text-lg font-semibold mb-4">Property Types</h5>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-primary transition-colors">Villas</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Flats</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Plots</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Commercial</a></li>
+                    <li><a href="{{ route('viewAllVilla') }}" class="hover:text-primary transition-colors">Villas</a></li>
+                    <li><a href="{{ route('viewAllFlat') }}" class="hover:text-primary transition-colors">Flats</a></li>
+                    <li><a href="{{ route('viewAllPlot') }}" class="hover:text-primary transition-colors">Plots</a></li>
+                    <li><a href="{{ route('viewAllCommercial') }}" class="hover:text-primary transition-colors">Commercial</a></li>
                 </ul>
             </div>
 

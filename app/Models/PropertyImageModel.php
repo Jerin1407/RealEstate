@@ -14,6 +14,7 @@ class PropertyImageModel extends Model
         'property_id',
         'hot_property_id',
         'filename',
-        'is_cover'
+        'is_cover',
+        'is_active',
     ];
 }

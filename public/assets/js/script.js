@@ -20,26 +20,52 @@ const adsButton = document.getElementById('adsButton');
         });
 
 // add property
+// function previewImage(event) {
+//     const files = event.target.files;
+//     const previewContainer = document.getElementById('previewContainer');
+//     previewContainer.innerHTML = ""; // clear old previews
+
+//     for (let i = 0; i < files.length; i++) {
+//       const file = files[i];
+//       const reader = new FileReader();
+
+//       reader.onload = function(e) {
+//         const img = document.createElement('img');
+//         img.src = e.target.result;
+//         img.className = "w-24 h-24 object-cover rounded border";
+//         previewContainer.appendChild(img);
+//       };
+
+//       reader.readAsDataURL(file);
+//     }
+//   }
+
 function previewImage(event) {
     const files = event.target.files;
     const previewContainer = document.getElementById('previewContainer');
-    previewContainer.innerHTML = ""; // clear old previews
+
+    // Remove only previous NEW previews, not existing images
+    document.querySelectorAll('.new-preview').forEach(el => el.remove());
 
     for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
+        const file = files[i];
+        const reader = new FileReader();
 
-      reader.onload = function(e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.className = "w-24 h-24 object-cover rounded border";
-        previewContainer.appendChild(img);
-      };
+        reader.onload = function(e) {
+            const div = document.createElement("div");
+            div.classList.add("relative", "new-preview");
 
-      reader.readAsDataURL(file);
+            div.innerHTML = `
+                <img src="${e.target.result}" 
+                     class="w-24 h-24 object-cover rounded border">
+            `;
+
+            previewContainer.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
     }
-  }
-
+}
 
    ClassicEditor
         .create(document.querySelector('#description'), {
