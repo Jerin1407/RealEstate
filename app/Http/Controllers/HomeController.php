@@ -13,7 +13,6 @@ use App\Models\UserTypeModel;
 use App\Models\PropertyImageModel;
 use App\Models\UserModel;
 use App\Models\HotPropertyModel;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -255,6 +254,7 @@ class HomeController extends Controller
 
     public function viewHotProperty($id)
     {
+        // Fetch hot property with relationships
         $hotProperties = HotPropertyModel::with(['coverImage', 'images'])->findOrFail($id);
 
         $categories = CategoryModel::all();
@@ -271,7 +271,7 @@ class HomeController extends Controller
         $locations = LocationModel::where('locality_name', 'like', "%{$query}%")
             ->orderBy('locality_name')
             ->take(10)
-            ->get(['locality_name']); // only fetch needed column
+            ->get(['locality_name']);
 
         return response()->json($locations);
     }
@@ -338,7 +338,6 @@ class HomeController extends Controller
         $categories = CategoryModel::all();
         $priceRanges = PriceRangeModel::all();
 
-        // Return the same view used for displaying all villas
         return view('pages.searchProperty', compact('villas', 'categories', 'priceRanges'));
     }
 
@@ -373,9 +372,9 @@ class HomeController extends Controller
             'email_id' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'type' => 'required|not_in:0',
-            //'captcha' => 'required|captcha',
-            // ], [
-            //     'captcha.captcha' => 'Invalid Captcha !!!'
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
         // Check if user exists by email

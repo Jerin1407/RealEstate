@@ -67,6 +67,33 @@ function previewImage(event) {
     }
 }
 
+function previewImage(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('previewContainer_Request');
+
+    // Remove only previous NEW previews, not existing images
+    document.querySelectorAll('.new-preview').forEach(el => el.remove());
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const div = document.createElement("div");
+            div.classList.add("relative", "new-preview");
+
+            div.innerHTML = `
+                <img src="${e.target.result}" 
+                     class="w-24 h-24 object-cover rounded border">
+            `;
+
+            previewContainer.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
    ClassicEditor
         .create(document.querySelector('#description'), {
             toolbar: [

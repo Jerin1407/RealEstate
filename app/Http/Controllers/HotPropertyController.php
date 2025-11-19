@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\HotPropertyModel;
 use Illuminate\Http\Request;
 use App\Models\PropertyImageModel;
-use Illuminate\Support\Facades\File;
 use App\Models\PropertyEnquire;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HotPropertyEnquiryMail;
@@ -36,7 +35,7 @@ class HotPropertyController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // save hot property details
+        // save hot property
         $hotProperty = new HotPropertyModel();
         $hotProperty->title = $request->title;
         $hotProperty->description = strip_tags($request->description);
@@ -60,7 +59,7 @@ class HotPropertyController extends Controller
             }
         }
 
-        return redirect()->route('hotpropertylist')->with('success_hotproperty', 'Hot property saved successfully.');
+        return redirect()->route('hotpropertylist')->with('success_hotproperty', 'Hot Property saved successfully !!!');
     }
 
     public function editHotProperty($id)
@@ -84,7 +83,7 @@ class HotPropertyController extends Controller
         // Find the hot property by id
         $hotProperty = HotPropertyModel::findOrFail($id);
 
-        // update hot property details
+        // update hot property
         $hotProperty->title = $request->title;
         $hotProperty->description = strip_tags($request->description);
         $hotProperty->type = $request->type;
@@ -106,7 +105,7 @@ class HotPropertyController extends Controller
             }
         }
 
-        return redirect()->route('hotpropertylist')->with('update_hotproperty', 'Hot property updated successfully.');
+        return redirect()->route('hotpropertylist')->with('update_hotproperty', 'Hot Property updated successfully !!!');
     }
 
     public function deleteHotPropertyImage($id)
@@ -114,16 +113,11 @@ class HotPropertyController extends Controller
         // Find the image record
         $image = PropertyImageModel::findOrFail($id);
 
-        // Delete the file from 'public/uploads'
-        $filePath = public_path('uploads/hotproperties/' . $image->filename);
-        if (file_exists($filePath)) {
-            unlink($filePath); // delete the file
-        }
+        // Updating is_active to 0
+        $image->is_active = 0;
+        $image->save();
 
-        // Delete the database record
-        $image->delete();
-
-        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
+        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully !!!');
     }
 
     public function deleteHotProperty($id)
@@ -131,27 +125,27 @@ class HotPropertyController extends Controller
         $hotProperty = HotPropertyModel::find($id);
 
         if (!$hotProperty) {
-            return redirect()->back()->with('error_delete', 'Hot property not found!');
+            return redirect()->back()->with('error_delete', 'Hot Property not found!');
         }
 
         // Delete related images
         $images = PropertyImageModel::where('hot_property_id', $id)->get();
         foreach ($images as $image) {
-            $imagePath = public_path('uploads/hotproperties/' . $image->filename);
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
-            }
-            $image->delete();
+
+            // Updating is_active to 0
+            $image->is_active = 0;
+            $image->save();
         }
 
         $hotProperty->is_active = 0;
         $hotProperty->save();
 
-        return redirect()->back()->with('success_delete', 'Hot property deleted successfully!');
+        return redirect()->back()->with('success_delete', 'Hot Property deleted successfully !!!');
     }
 
     public function hotPropertyEnquiry(Request $request)
     {
+        // validate inputs
         $request->validate([
             'hot_property_id' => 'required|integer',
             'name' => 'required|string|max:255',
@@ -163,6 +157,7 @@ class HotPropertyController extends Controller
             'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
+        // save enquiry
         PropertyEnquire::create([
             'hot_property_id' => $request->hot_property_id,
             'fullname' => $request->name,
@@ -183,8 +178,7 @@ class HotPropertyController extends Controller
 
         // Send email
         Mail::to('bYw4y@example.com')->send(new HotPropertyEnquiryMail($data));
-      //  Mail::to('jerinrichard@gmail.com')->send(new HotPropertyEnquiryMail($data));
 
-        return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
+        return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully !!!');
     }
 }

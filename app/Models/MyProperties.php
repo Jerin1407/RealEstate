@@ -48,7 +48,7 @@ class MyProperties extends Model
     // Relationship with Image
     public function images()
     {
-        return $this->hasMany(PropertyImageModel::class, 'property_id', 'property_id');
+        return $this->hasMany(PropertyImageModel::class, 'property_id', 'property_id')->where('is_active', 1);
     }
 
     // Relationship with User

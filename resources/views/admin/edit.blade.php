@@ -9,6 +9,7 @@
     <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/ec593fe317.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -221,27 +222,18 @@
                                 </div>
 
                                 <!-- Preview Uploaded Image -->
-                                <div id="previewContainer" class="mt-3 flex flex-wrap gap-3">
+                                <div id="previewContainer_Request" class="mt-3 flex flex-wrap gap-3">
                                     @foreach ($property->images as $image)
-                                        <div class="relative group">
+                                        <div class="relative group existing-image">
+                                            <div class="absolute top-1 right-1">
+                                                <button type="button"
+                                                    onclick="deleteImage('{{ route('deleteRequestImage', $image->property_thumb_id) }}')"
+                                                    class="bg-red-500 text-red-600 text-xs px-2 py-1 rounded">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </button>
+                                            </div>
                                             <img src="{{ asset('uploads/property/' . $image->filename) }}"
-                                                alt="Property Image" class="w-24 h-24 object-cover rounded border">
-
-                                            <!-- Delete Image -->
-                                            {{-- <form
-                                                action="{{ route('deletePropertyImage', $image->property_thumb_id) }}"
-                                                method="POST" class="absolute top-1 right-1">
-                                                @csrf
-                                                @method('POST')
-                                                <button type="submit"
-                                                    class="bg-red-500 text-black text-xs px-2 py-1 rounded">✕</button>
-                                            </form> --}}
-                                            <button type="button"
-                                                onclick="deleteImage('{{ route('deleteRequestImage', $image->property_thumb_id) }}')"
-                                                class="bg-red-500 text-black text-xs px-2 py-1 rounded">
-                                                ✕
-                                            </button>
-
+                                                class="w-24 h-24 object-cover rounded border">
                                         </div>
                                     @endforeach
                                 </div>
@@ -275,7 +267,7 @@
                     </div>
 
                     <!-- Terms and Conditions -->
-                    <div class="md:grid grid-cols-12 gap-4 items-center mt-6">
+                    {{-- <div class="md:grid grid-cols-12 gap-4 items-center mt-6">
                         <label class="col-span-2 text-sm text-gray-700"></label>
                         <div class="col-span-10">
                             <div class="flex items-center space-x-2">
@@ -287,7 +279,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Save Button -->
                     <div class="md:grid grid-cols-12 gap-4 mt-6">

@@ -39,6 +39,6 @@ class PasswordController extends Controller
         $user->password = $request->new_password;
         $user->save();
 
-        return redirect()->back()->with('success', 'Password updated successfully!');
+        return redirect()->back()->with('success', 'Password updated successfully !!!');
     }
 }

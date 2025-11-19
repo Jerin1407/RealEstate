@@ -13,7 +13,6 @@ use App\Models\PropertyEnquire;
 use App\Models\PropertyImageModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PropertyEnquiryMail;
-use Illuminate\Support\Facades\File;
 use App\Exports\PropertiesExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -121,7 +120,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('listproperty')->with('success', 'Property saved successfully!!!');
+        return redirect()->route('listproperty')->with('success', 'Property saved successfully !!!');
     }
 
     public function editProperty($id)
@@ -193,7 +192,7 @@ class PropertyController extends Controller
             }
         }
 
-        return redirect()->route('listproperty')->with('success_update', 'Property updated successfully!!!');
+        return redirect()->route('listproperty')->with('success_update', 'Property updated successfully !!!');
     }
 
     public function viewProperty($id)
@@ -208,16 +207,11 @@ class PropertyController extends Controller
         // Find the image record
         $image = PropertyImageModel::findOrFail($id);
 
-        // Delete the file from 'public/uploads'
-        $filePath = public_path('uploads/property/' . $image->filename);
-        if (file_exists($filePath)) {
-            unlink($filePath); // delete the file
-        }
+        // Updating is_active to 0
+        $image->is_active = 0;
+        $image->save();
 
-        // Delete the database record
-        $image->delete();
-
-        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
+        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully !!!');
     }
 
     public function deleteProperty($id)
@@ -231,51 +225,21 @@ class PropertyController extends Controller
         // Delete related images
         $images = PropertyImageModel::where('property_id', $id)->get();
         foreach ($images as $image) {
-            $imagePath = public_path('uploads/property/' . $image->filename);
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
-            }
-            $image->delete();
+
+            // Updating is_active to 0
+            $image->is_active = 0;
+            $image->save();
         }
 
         $property->is_active = 0;
         $property->save();
 
-        return redirect()->back()->with('success_delete', 'Property deleted successfully!');
+        return redirect()->back()->with('success_delete', 'Property deleted successfully !!!');
     }
-
-
-    // public function deleteProperty(Request $request)
-    // {
-    //     $propertyIds = $request->input('selected_properties', []);
-
-    //     if (empty($propertyIds)) {
-    //         return redirect()->route('listproperty')->with('error_delete', 'No properties selected.');
-    //     }
-
-    //     foreach ($propertyIds as $id) {
-    //         $property = MyProperties::find($id);
-    //         if ($property) {
-    //             // Delete all related images
-    //             $images = PropertyImageModel::where('property_id', $id)->get();
-    //             foreach ($images as $image) {
-    //                 $imagePath = public_path('uploads/property/' . $image->filename);
-    //                 if (File::exists($imagePath)) {
-    //                     File::delete($imagePath);
-    //                 }
-    //                 $image->delete();
-    //             }
-
-    //             // Delete property record
-    //             $property->delete();
-    //         }
-    //     }
-
-    //     return redirect()->back()->with('success_delete', 'Property deleted successfully!!!');
-    // }
 
     public function propertyEnquiry(Request $request)
     {
+        // Validate inputs
         $request->validate([
             'property_id' => 'required|integer',
             'property_code' => 'required|string|max:255',
@@ -288,6 +252,7 @@ class PropertyController extends Controller
             'captcha.captcha' => 'Invalid Captcha !!!'
         ]);
 
+        // save enquiry
         PropertyEnquire::create([
             'property_id' => $request->property_id,
             'property_code' => $request->property_code,
@@ -311,9 +276,7 @@ class PropertyController extends Controller
         // Send email
         Mail::to('bYw4y@example.com')->send(new PropertyEnquiryMail($data));
 
-      // Mail::to('jerinrichard@gmail.com')->send(new PropertyEnquiryMail($data));
-
-        return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully!');
+        return redirect()->back()->with('success_enquiry', 'Your enquiry has been submitted successfully !!!');
     }
 
     public function propertyExport()

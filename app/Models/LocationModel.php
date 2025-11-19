@@ -11,6 +11,7 @@ class LocationModel extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'locality_name'
+        'locality_name',
+        'is_active',
     ];
 }

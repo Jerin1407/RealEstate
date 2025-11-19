@@ -22,14 +22,6 @@ class UserController extends Controller
 {
     public function showAdmin()
     {
-        // if (!session()->has('user_id')) {
-        //     return redirect()->route('login')->with('error', 'Please login to access the page.');
-        // }
-
-        // $user = UserModel::with('userType')->find(session('user_id'));
-
-        // return view('admin.dashboard', compact('user'));
-
         if (!session()->has('user_id')) {
             return redirect()->route('login')->with('error', 'Please login to access the page.');
         }
@@ -148,7 +140,7 @@ class UserController extends Controller
     {
         $request->session()->flush();
 
-        return redirect()->route('login')->with('success_logout', 'Logout successfull!');
+        return redirect()->route('login')->with('success_logout', 'Logout successfull !!!');
     }
 
     public function showRequest()
@@ -247,13 +239,14 @@ class UserController extends Controller
         $image = PropertyImageModel::findOrFail($id);
 
         // Delete the file from 'public/uploads'
-        $filePath = public_path('uploads/property/' . $image->filename);
-        if (file_exists($filePath)) {
-            unlink($filePath); // delete the file
-        }
+        // $filePath = public_path('uploads/property/' . $image->filename);
+        // if (file_exists($filePath)) {
+        //     unlink($filePath); // delete the file
+        // }
 
-        // Delete the database record
-        $image->delete();
+        // Delete the image
+        $image->is_active = 0;
+        $image->save();
 
         return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
     }
@@ -269,14 +262,18 @@ class UserController extends Controller
         // Delete related images
         $images = PropertyImageModel::where('property_id', $id)->get();
         foreach ($images as $image) {
-            $imagePath = public_path('uploads/property/' . $image->filename);
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
-            }
-            $image->delete();
+
+            // $imagePath = public_path('uploads/property/' . $image->filename);
+            // if (File::exists($imagePath)) {
+            //     File::delete($imagePath);
+            // }
+
+            $image->is_active = 0;
+            $image->save();
         }
 
-        $property->delete();
+        $property->is_active = 0;
+        $property->save();
 
         return redirect()->back()->with('success_delete', 'Property deleted successfully!');
     }
