@@ -20,6 +20,7 @@ class UserDetailsModel extends Model
         'renew_date',
     ];
 
+    // Relationship with User Package
     public function package()
     {
         return $this->belongsTo(UserPackagesModel::class, 'user_package_id', 'package_id');

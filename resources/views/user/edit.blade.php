@@ -38,7 +38,8 @@
 
             <!-- Form Content -->
             <div class="p-6">
-                <form class="space-y-4" action="{{ route('updateUser', $user->user_id) }}" enctype="multipart/form-data" method="POST">
+                <form class="space-y-4" action="{{ route('updateUser', $user->user_id) }}" enctype="multipart/form-data"
+                    method="POST">
                     @csrf
 
                     <!-- Row 1 -->

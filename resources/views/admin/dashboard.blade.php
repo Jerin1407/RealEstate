@@ -84,7 +84,8 @@
                         <div>
                             <a href="{{ route('viewproperty', $property->property_id) }}"
                                 class="text-red-600 hover:text-blue-600 transition">
-                                {{ $property->property_code }} - {{ Str::limit(strip_tags($property->property_title), 40) }}
+                                {{ $property->property_code }} -
+                                {{ Str::limit(strip_tags($property->property_title), 40) }}
                             </a>
                         </div>
                     @empty

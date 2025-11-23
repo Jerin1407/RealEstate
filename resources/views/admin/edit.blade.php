@@ -266,21 +266,6 @@
                         </div>
                     </div>
 
-                    <!-- Terms and Conditions -->
-                    {{-- <div class="md:grid grid-cols-12 gap-4 items-center mt-6">
-                        <label class="col-span-2 text-sm text-gray-700"></label>
-                        <div class="col-span-10">
-                            <div class="flex items-center space-x-2">
-                                <input type="checkbox" id="terms" class="w-4 h-4 border-gray-300 rounded"
-                                    required>
-                                <label for="terms" class="text-sm text-gray-700">
-                                    Click to Agree <a href="#" class="text-blue-600 hover:underline">Terms and
-                                        Conditions</a>
-                                </label>
-                            </div>
-                        </div>
-                    </div> --}}
-
                     <!-- Save Button -->
                     <div class="md:grid grid-cols-12 gap-4 mt-6">
                         <div class="col-span-2"></div>

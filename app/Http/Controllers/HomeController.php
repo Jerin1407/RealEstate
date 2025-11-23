@@ -8,11 +8,14 @@ use App\Models\CategoryModel;
 use App\Models\PriceRangeModel;
 use App\Models\LocationModel;
 use App\Models\AreaUnitModel;
+use App\Models\ContactModel;
+use App\Models\HomeLoanModel;
 use App\Models\PriceUnitModel;
 use App\Models\UserTypeModel;
 use App\Models\PropertyImageModel;
 use App\Models\UserModel;
 use App\Models\HotPropertyModel;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -88,6 +91,40 @@ class HomeController extends Controller
         return view('pages.home_loan', compact('categories', 'priceRanges', 'locations'));
     }
 
+    public function saveHomeLoan(Request $request)
+    {
+        // Validate inputs
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'mobile' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'loan' => 'required|string|max:255',
+            'comments' => 'required|string|max:255',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.captcha' => 'Invalid Captcha !!!'
+        ]);
+
+        // dd($request->all());
+
+        try {
+            // Save Home Loan
+            $home = new HomeLoanModel();
+            $home->fullname = $request->name;
+            $home->contact_number = $request->mobile;
+            $home->email = $request->email;
+            $home->loan_amount = $request->loan;
+            $home->comments = $request->comments;
+            $home->created_at = now()->format('Y-m-d H:i:s');
+            $home->save();
+
+            return redirect()->back()->with('success', 'Home loan applied successfully !!!');
+        } catch (\Exception $e) {
+            Log::error('Error saving user: ' . $e->getMessage());
+            return back()->with('error', 'Error saving user: ' . $e->getMessage());
+        }
+    }
+
     public function contact()
     {
         $categories = CategoryModel::all();
@@ -95,6 +132,38 @@ class HomeController extends Controller
         $locations = LocationModel::all();
 
         return view('pages.contact', compact('categories', 'priceRanges', 'locations'));
+    }
+
+    public function saveContact(Request $request)
+    {
+        // Validate inputs
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string|max:255',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.captcha' => 'Invalid Captcha !!!'
+        ]);
+
+        // dd($request->all());
+
+        try {
+            // Save Contact
+            $contact = new ContactModel();
+            $contact->fullname = $request->name;
+            $contact->contact_number = $request->phone;
+            $contact->email = $request->email;
+            $contact->message = $request->message;
+            $contact->created_at = now()->format('Y-m-d H:i:s');
+            $contact->save();
+
+            return redirect()->back()->with('success', 'Contact saved successfully !!!');
+        } catch (\Exception $e) {
+            Log::error('Error saving user: ' . $e->getMessage());
+            return back()->with('error', 'Error saving user: ' . $e->getMessage());
+        }
     }
 
     public function viewAllVilla()

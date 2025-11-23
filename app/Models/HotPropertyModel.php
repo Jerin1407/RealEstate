@@ -29,7 +29,7 @@ class HotPropertyModel extends Model
         return $this->hasMany(PropertyImageModel::class, 'hot_property_id', 'id');
     }
 
-    // Helper: Get cover image easily
+    // Relationship with cover image
     public function coverImage()
     {
         return $this->hasOne(PropertyImageModel::class, 'hot_property_id', 'id')

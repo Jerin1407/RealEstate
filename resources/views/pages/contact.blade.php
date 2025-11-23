@@ -10,48 +10,47 @@
                 <!-- Heading -->
                 <h2 class="text-2xl font-bold text-red-600 mb-6">Contact US</h2>
 
-                <form class="space-y-6">
+                <form class="space-y-6" action="{{ route('saveContact') }}" method="POST">
+                    @csrf
 
                     <!-- Name -->
                     <div class="flex items-center justify-between">
                         <label for="name" class="w-1/3 font-medium text-gray-700">Name*</label>
-                        <input type="text" id="name"
+                        <input type="text" id="name" name="name" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
                     <!-- Email -->
                     <div class="flex items-center justify-between">
                         <label for="email" class="w-1/3 font-medium text-gray-700">Email*</label>
-                        <input type="email" id="email"
+                        <input type="email" id="email" name="email" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
                     <!-- Message -->
                     <div class="flex items-start justify-between">
                         <label for="message" class="w-1/3 font-medium text-gray-700">Message*</label>
-                        <textarea id="message" rows="4"
+                        <textarea id="message" rows="4" name="message"
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                     </div>
 
                     <!-- Phone -->
                     <div class="flex items-center justify-between">
                         <label for="phone" class="w-1/3 font-medium text-gray-700">Phone*</label>
-                        <input type="text" id="phone"
+                        <input type="text" id="phone" name="phone" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
                     <!-- Captcha -->
                     <div class="space-y-2">
-                        <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
-                            class="rounded-md">
-                        <div>
-                            <label for="captcha" class="block font-medium text-gray-700">Enter the code above here
-                                :</label>
-                            <input type="text" id="captcha"
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <div class="flex items-center justify-center gap-3 mb-3">
+                            <span id="captcha-img">{!! captcha_img('flat') !!}</span>
+                            <button type="button" id="reload" class="text-blue-600 underline">Refresh</button>
                         </div>
-                        <p class="text-sm text-gray-600">Can't read the image? <a href="#"
-                                class="text-blue-600 hover:underline">click here</a> to refresh</p>
+
+                        <label class="block text-gray-700 mb-1">Enter the code above here:</label>
+                        <input type="text" name="captcha" required
+                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
                     <!-- Button -->
@@ -76,4 +75,59 @@
 
         </div>
     </section>
+
+    <script>
+        // Success Alert
+        @if (session('success'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            });
+        @endif
+    </script>
+
+    <!-- Refresh Captcha Script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('reloadCaptcha') }}',
+                success: function(data) {
+                    $('#captcha-img').html(data.captcha);
+                }
+            });
+        });
+    </script>
+
+    <!-- Error Alert -->
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                position: 'top',
+                icon: 'error',
+                title: 'Oops!',
+                text: '{{ $errors->first() }}',
+                confirmButtonColor: '#dc2626',
+                background: '#EF4444', // red color
+                color: '#fff',
+                iconColor: '#fff',
+                toast: true,
+            });
+        </script>
+    @endif
 @endsection

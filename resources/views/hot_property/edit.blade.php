@@ -175,7 +175,7 @@
             }
         })();
 
-        // Delete Property Image
+        // Delete Alert
         function deleteImage(actionUrl) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -200,7 +200,7 @@
             });
         }
 
-        // alert success
+        // Success Alert
         @if (session('success_deleteImage'))
             Swal.fire({
                 toast: true,

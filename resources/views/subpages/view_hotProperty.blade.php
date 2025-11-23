@@ -37,18 +37,7 @@
                             {{ $hotProperties->title }}
                         </h2>
 
-                        <!-- Key Facts -->
-                        {{-- <h3 class="text-lg font-semibold text-gray-800 mb-2">KEY FACTS</h3>
-                      <p class="text-gray-700 mb-4">
-                        3 bedroom 2000SqFt, Commercial Villa available for rent Poothole near Thrissur.
-                      </p>  --}}
-
-                        <!-- Rent -->
-                        {{-- <p class="text-gray-700 mb-4">
-                        <span class="font-semibold">Rent Per Month:</span> ₹ 32000/-
-                      </p> --}}
-
-                        <!-- Villa details -->
+                        <!-- Property details -->
                         <p class="text-gray-700 mb-4">
                             <span class="font-semibold">Property comprises of:</span><br>
                             {{ $hotProperties->description }}
@@ -60,6 +49,8 @@
                                 Properties Pvt. Ltd</span> @
                             <span class="font-bold">9447111233</span>.
                         </p>
+
+                        <!-- Youtube Link -->
                         @if ($hotProperties->youtubeurl)
                             @php
                                 // Extract YouTube Video ID from URL
@@ -209,6 +200,7 @@
         });
     </script>
 
+    <!-- Error Alert -->
     @if ($errors->any())
         <script>
             Swal.fire({

@@ -56,6 +56,7 @@
                     </p>
                     <p class="text-gray-700 mb-4">Loan with lowest interest rates available.</p>
 
+                    <!-- Youtube Link -->
                     @if ($flat->youtubeurl)
                         @php
                             // Extract YouTube Video ID from URL
@@ -84,6 +85,7 @@
                         </p>
                     </div>
 
+                    <!-- Price & Location -->
                     <div class="flex justify-between items-center mt-8">
                         <p class="text-xl font-bold">
                             Rs. <span class="text-red-600">{{ $flat->price }}</span>
@@ -160,18 +162,6 @@
                             class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
-                    {{-- <div class="border border-gray-300 rounded-lg p-4 text-center">
-                        <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
-                            class="mx-auto mb-2">
-                        <label class="block text-gray-700 mb-1">Enter the code above here:</label>
-                        <input type="text" required
-                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <p class="text-xs text-gray-500 mt-2">
-                            Can't read the image?
-                            <a href="#" class="text-blue-600 underline">click here</a> to refresh
-                        </p>
-                    </div> --}}
-
                     <!-- Button -->
                     <button type="submit"
                         class="w-full bg-red-600 text-white py-2 rounded-md font-semibold hover:bg-red-700 transition">
@@ -223,6 +213,7 @@
         });
     </script>
 
+    <!-- Error Alert -->
     @if ($errors->any())
         <script>
             Swal.fire({

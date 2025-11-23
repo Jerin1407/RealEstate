@@ -33,7 +33,7 @@
 
             <!-- Forgot Password -->
             <div class="mt-4 text-center">
-                <a href="#" class="text-red-600 hover:underline text-sm">Forgot Password</a>
+                <a href="{{ route('listforgotpassword') }}" class="text-red-600 hover:underline text-sm">Forgot Password</a>
             </div>
             <div class="mt-2 text-center">
                 <span>Don't have an account?</span><a href="{{ route('register') }}"
@@ -42,7 +42,51 @@
         </div>
 
         <script>
-            // Success message
+            // Success alert
+            @if (session('success_register'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#10B981', // green color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('success_register') }}'
+                });
+            @endif
+
+            // Success alert
+            @if (session('success_reset'))
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#10B981', // green color
+                    color: '#fff',
+                    iconColor: '#fff',
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ session('success_reset') }}'
+                });
+            @endif
+
+            // Success alert
             @if (session('success_logout'))
                 const Toast = Swal.mixin({
                     toast: true,
@@ -64,7 +108,7 @@
                 });
             @endif
 
-            // Error message
+            // Error alert
             @if (session('error'))
                 const Toast = Swal.mixin({
                     toast: true,
@@ -83,28 +127,6 @@
                 Toast.fire({
                     icon: 'error',
                     title: '{{ session('error') }}'
-                });
-            @endif
-
-            // Error message
-            @if (session('error_update'))
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    background: '#EF4444', // red color
-                    color: '#fff',
-                    iconColor: '#fff',
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                });
-                Toast.fire({
-                    icon: 'error',
-                    title: '{{ session('error_update') }}'
                 });
             @endif
         </script>

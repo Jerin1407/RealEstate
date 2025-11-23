@@ -24,10 +24,14 @@
                 </button>
 
                 <div id="properties-menu" class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-md hidden">
-                    <a href="{{ route('viewAllVilla') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">House/Villas</a>
-                    <a href="{{ route('viewAllRent') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Rent/Lease Properties</a>
-                    <a href="{{ route('viewAllFlat') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Flats</a>
-                    <a href="{{ route('viewAllPlot') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Residential Plots</a>
+                    <a href="{{ route('viewAllVilla') }}"
+                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100">House/Villas</a>
+                    <a href="{{ route('viewAllRent') }}"
+                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Rent/Lease Properties</a>
+                    <a href="{{ route('viewAllFlat') }}"
+                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Flats</a>
+                    <a href="{{ route('viewAllPlot') }}"
+                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Residential Plots</a>
                     <a href="{{ route('home') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">All</a>
                 </div>
             </div>
@@ -49,7 +53,7 @@
             </button>
 
             <!-- Add Property Button -->
-            @if (!in_array(Route::currentRouteName(), ['addProperty', 'login', 'register']))
+            @if (!in_array(Route::currentRouteName(), ['addProperty', 'login', 'register', 'listforgotpassword','resetpassword']))
                 <a href="{{ route('addProperty') }}">
                     <button
                         class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
@@ -78,11 +82,15 @@
                 </button>
 
                 <div id="mobile-properties-menu" class="hidden mt-2 flex flex-col space-y-2">
-                    <a href="{{ route('viewAllVilla') }}" class="text-gray-700 hover:text-primary transition-colors">House/Villas</a>
-                    <a href="{{ route('viewAllRent') }}" class="text-gray-700 hover:text-primary transition-colors">Rent/Lease
+                    <a href="{{ route('viewAllVilla') }}"
+                        class="text-gray-700 hover:text-primary transition-colors">House/Villas</a>
+                    <a href="{{ route('viewAllRent') }}"
+                        class="text-gray-700 hover:text-primary transition-colors">Rent/Lease
                         Properties</a>
-                    <a href="{{ route('viewAllFlat') }}"" class="text-gray-700 hover:text-primary transition-colors">Flats</a>
-                    <a href="{{ route('viewAllPlot') }}" class="text-gray-700 hover:text-primary transition-colors">Residential Plots</a>
+                    <a href="{{ route('viewAllFlat') }}"
+                        class="text-gray-700 hover:text-primary transition-colors">Flats</a>
+                    <a href="{{ route('viewAllPlot') }}"
+                        class="text-gray-700 hover:text-primary transition-colors">Residential Plots</a>
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-primary transition-colors">All</a>
                 </div>
             </div>
@@ -91,7 +99,7 @@
             <a href="{{ route('home-loan') }}" class="text-gray-700 hover:text-primary transition-colors">Home loan</a>
             <a href="{{ route('contact') }}" class="text-gray-700 hover:text-primary transition-colors">Contact</a>
 
-            <!-- Add "List Property" for mobile -->
+            <!-- Add "Add Property" for mobile -->
             <a href="{{ route('addProperty') }}">
                 <button
                     class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition-colors hidden md:block">
@@ -162,8 +170,6 @@
                             <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                         @endforeach
                     </select>
-                    {{-- <input type="text" placeholder="Location"
-                    class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary"> --}}
                     <div class="relative w-full max-w-sm">
                         <input type="text" name="location" id="locationInput" placeholder="Search Location..."
                             class="p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-primary w-full">

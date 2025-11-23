@@ -15,7 +15,6 @@ use App\Models\AreaUnitModel;
 use App\Models\PropertyImageModel;
 use App\Models\UserDetailsModel;
 use App\Models\UserTypeModel;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -34,7 +33,7 @@ class UserController extends Controller
         $package = $details?->package;
 
         // Handle "Admin" users (no package assigned)
-        $packageName = $package->package_name ?? 'Admin';
+        $packageName = $package->package_name ?? 'Guest Package';
         $renewDate = $details?->renew_date ?? 'Unlimited';
 
         // Handle allowed and remaining properties
@@ -101,7 +100,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Registered successfully. Please login !!!');
+        return redirect()->route('login')->with('success_register', 'Registered successfully. Please login !!!');
     }
 
     public function login(Request $request)
@@ -223,7 +222,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->route('requests')->with('success_update', 'Property updated successfully!!!');
+        return redirect()->route('requests')->with('success_update', 'Property updated successfully !!!');
     }
 
     public function viewRequest($id)
@@ -238,17 +237,11 @@ class UserController extends Controller
         // Find the image record
         $image = PropertyImageModel::findOrFail($id);
 
-        // Delete the file from 'public/uploads'
-        // $filePath = public_path('uploads/property/' . $image->filename);
-        // if (file_exists($filePath)) {
-        //     unlink($filePath); // delete the file
-        // }
-
-        // Delete the image
+        // Updating is_active to 0
         $image->is_active = 0;
         $image->save();
 
-        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully!!!');
+        return redirect()->back()->with('success_deleteImage', 'Image deleted successfully !!!');
     }
 
     public function deleteRequest($id)
@@ -263,11 +256,7 @@ class UserController extends Controller
         $images = PropertyImageModel::where('property_id', $id)->get();
         foreach ($images as $image) {
 
-            // $imagePath = public_path('uploads/property/' . $image->filename);
-            // if (File::exists($imagePath)) {
-            //     File::delete($imagePath);
-            // }
-
+            // Updating is_active to 0
             $image->is_active = 0;
             $image->save();
         }
@@ -275,7 +264,7 @@ class UserController extends Controller
         $property->is_active = 0;
         $property->save();
 
-        return redirect()->back()->with('success_delete', 'Property deleted successfully!');
+        return redirect()->back()->with('success_delete', 'Property deleted successfully !!!');
     }
 
     public function approveRequest($id)
@@ -285,7 +274,7 @@ class UserController extends Controller
         $property->is_approved = 1;
         $property->save();
 
-        return redirect()->route('requests')->with('success_approve', 'Property approved successfully!');
+        return redirect()->route('requests')->with('success_approve', 'Property approved successfully !!!');
     }
 
     public function filterRequestProperty(Request $request)
@@ -312,7 +301,7 @@ class UserController extends Controller
 
     public function listUser()
     {
-        // Fetch users with their related user type and paginate (10 per page)
+        // Fetch users with their related user type, user details and paginate (10 per page)
         $users = UserModel::with('userType', 'userDetails.package')
             ->where('is_active', 1)
             ->paginate(10);
@@ -365,7 +354,7 @@ class UserController extends Controller
             $userDetails->is_post_disabled = 0;
             $userDetails->save();
 
-            return redirect()->route('listUser')->with('success_add', 'User saved successfully!!!');
+            return redirect()->route('listUser')->with('success_add', 'User saved successfully !!!');
         } catch (\Exception $e) {
             Log::error('Error saving user: ' . $e->getMessage());
             return back()->with('error', 'Error saving user: ' . $e->getMessage());
@@ -415,7 +404,7 @@ class UserController extends Controller
             $userDetails->renew_date = now()->format('Y-m-d H:i:s');
             $userDetails->save();
 
-            return redirect()->route('listUser')->with('success_update', 'User updated successfully!!!');
+            return redirect()->route('listUser')->with('success_update', 'User updated successfully !!!');
         } catch (\Exception $e) {
             Log::error('Error saving user: ' . $e->getMessage());
             return back()->with('error', 'Error saving user: ' . $e->getMessage());
@@ -434,16 +423,16 @@ class UserController extends Controller
         // Find user
         $user = UserModel::findOrFail($id);
 
-        // Deactivate user
+        // Updating user is_active to 0
         $user->is_active = 0;
         $user->save();
 
-        // Deactivate user details
+        // Updating user details is_active to 0
         UserDetailsModel::where('user_id', $id)->update([
             'is_active' => 0
         ]);
 
-        return redirect()->route('listUser')->with('success_delete', 'User deleted successfully!!!');
+        return redirect()->route('listUser')->with('success_delete', 'User deleted successfully !!!');
     }
 
     public function filterUser(Request $request)

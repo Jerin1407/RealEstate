@@ -56,52 +56,69 @@
         <section class="px-6 py-10 bg-white text-gray-800 border-2 border-red-500 rounded-sm">
             <div class=" rounded-md p-8 max-w-3xl mx-auto">
 
+                <!-- Error Messages -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <h2 class="text-2xl font-bold text-red-600 text-center mb-8">
                     HOME LOAN ENQUIRY
                 </h2>
 
-                <form class="space-y-6">
+                <form class="space-y-6" action="{{ route('saveHomeLoan') }}" method="POST">
+                    @csrf
+
+                    <!-- Name -->
                     <div class="flex items-center justify-between">
                         <label for="name" class="w-1/3 font-medium text-gray-700">Name*</label>
-                        <input type="text" id="name"
+                        <input type="text" id="name" name="name" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
+                    <!-- Mobile -->
                     <div class="flex items-center justify-between">
                         <label for="mobile" class="w-1/3 font-medium text-gray-700">Mobile*</label>
-                        <input type="text" id="mobile"
+                        <input type="text" id="mobile" name="mobile" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
+                    <!-- Email -->
                     <div class="flex items-center justify-between">
                         <label for="email" class="w-1/3 font-medium text-gray-700">Email*</label>
-                        <input type="email" id="email"
+                        <input type="email" id="email" name="email" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
+                    <!-- Loan Amount -->
                     <div class="flex items-center justify-between">
                         <label for="loan" class="w-1/3 font-medium text-gray-700">Loan Amount*</label>
-                        <input type="text" id="loan"
+                        <input type="text" id="loan" name="loan" required
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
+                    <!-- Comments -->
                     <div class="flex items-start justify-between">
                         <label for="comments" class="w-1/3 font-medium text-gray-700">Comments</label>
-                        <textarea id="comments" rows="4"
+                        <textarea id="comments" rows="4" name="comments"
                             class="w-2/3 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                     </div>
 
+                    <!-- Captcha -->
                     <div class="space-y-2">
-                        <img src="https://realestatethrissur.com/captcha_code_file.php?rand=1126003486" alt="captcha"
-                            class="rounded-md">
-                        <div>
-                            <label for="captcha" class="block font-medium text-gray-700">Enter the code above here
-                                :</label>
-                            <input type="text" id="captcha"
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <div class="flex items-center justify-center gap-3 mb-3">
+                            <span id="captcha-img">{!! captcha_img('flat') !!}</span>
+                            <button type="button" id="reload" class="text-blue-600 underline">Refresh</button>
                         </div>
-                        <p class="text-sm text-gray-600">Can't read the image? <a href="#"
-                                class="text-blue-600 hover:underline">click here</a> to refresh</p>
+
+                        <label class="block text-gray-700 mb-1">Enter the code above here:</label>
+                        <input type="text" name="captcha" required
+                            class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
                     </div>
 
                     <div class="text-center">
@@ -114,4 +131,59 @@
             </div>
         </section>
     </section>
+
+    <script>
+        // Success Alert
+        @if (session('success'))
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#10B981', // green color
+                color: '#fff',
+                iconColor: '#fff',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session('success') }}'
+            });
+        @endif
+    </script>
+
+    <!-- Refresh Captcha Script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('reloadCaptcha') }}',
+                success: function(data) {
+                    $('#captcha-img').html(data.captcha);
+                }
+            });
+        });
+    </script>
+
+    <!-- Error Alert -->
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                position: 'top',
+                icon: 'error',
+                title: 'Oops!',
+                text: '{{ $errors->first() }}',
+                confirmButtonColor: '#dc2626',
+                background: '#EF4444', // red color
+                color: '#fff',
+                iconColor: '#fff',
+                toast: true,
+            });
+        </script>
+    @endif
 @endsection

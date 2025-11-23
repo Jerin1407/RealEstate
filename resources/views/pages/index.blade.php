@@ -615,14 +615,13 @@
     </script>
 
     <style>
-        /* 🔴 Make the Swiper navigation arrows red */
+        /* Make the Swiper navigation arrows red */
         .swiper-button-next,
         .swiper-button-prev {
             color: #e3342f !important;
-            /* Tailwind's red-600 */
         }
 
-        /* 🔴 Make pagination dots red */
+        /* Make pagination dots red */
         .swiper-pagination-bullet {
             background: #e3342f !important;
             /* inactive dots */

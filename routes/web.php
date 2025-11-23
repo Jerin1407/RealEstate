@@ -7,6 +7,7 @@ use App\Http\Controllers\HotPropertyController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 Route::get('/reload-captcha', function () {
     return response()->json(['captcha' => captcha_img('flat')]);
@@ -51,7 +52,9 @@ Route::get('/index', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/service', [HomeController::class, 'service'])->name('service');
 Route::get('/home-loan', [HomeController::class, 'homeLoan'])->name('home-loan');
+Route::post('/save-home-loan', [HomeController::class, 'saveHomeLoan'])->name('saveHomeLoan');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/save-contact', [HomeController::class, 'saveContact'])->name('saveContact');
 Route::get('/view-all-villa', [HomeController::class, 'viewAllVilla'])->name('viewAllVilla');
 Route::get('/view-villa-property/{id}', [HomeController::class, 'viewVillaProperty'])->name('viewVillaProperty');
 Route::get('/view-all-flat', [HomeController::class, 'viewAllFlat'])->name('viewAllFlat');
@@ -76,8 +79,6 @@ Route::post('/updatehotproperty/{id}', [HotPropertyController::class, 'updateHot
 Route::post('/deletehotpropertyimage/{id}', [HotPropertyController::class, 'deleteHotPropertyImage'])->name('deleteHotPropertyImage');
 Route::delete('/deletehotproperty/{id}', [HotPropertyController::class, 'deleteHotProperty'])->name('deletehotproperty');
 Route::post('/hotpropertyenquiry', [HotPropertyController::class, 'hotPropertyEnquiry'])->name('hotPropertyEnquiry');
-// Route::get('/filterhotproperty', [HotPropertyController::class, 'filterHotProperty'])->name('filterHotProperty');
-// Route::get('/exporthotproperty', [HotPropertyController::class, 'hotPropertyExport'])->name('exportHotProperty');
 
 Route::get('/listlocality', [LocalityController::class, 'listLocality'])->name('listlocality');
 Route::post('/addlocality', [LocalityController::class, 'addLocality'])->name('addLocality');
@@ -86,3 +87,7 @@ Route::delete('/deletelocality/{id}', [LocalityController::class, 'deleteLocalit
 
 Route::get('/showChangePassword', [PasswordController::class, 'index'])->name('showChangePassword');
 Route::post('/updatePassword', [PasswordController::class, 'updatePassword'])->name('updatePassword');
+Route::get('/listforgotpassword', [PasswordController::class, 'listForgotPassword'])->name('listforgotpassword');
+Route::post('/saveforgotpassword', [PasswordController::class, 'saveForgotPassword'])->name('saveforgotpassword');
+Route::get('/resetpassword', [PasswordController::class, 'resetPassword'])->name('resetpassword');
+Route::post('/updatepassword', [PasswordController::class, 'updateResetPassword'])->name('updatePassword');

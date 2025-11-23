@@ -19,21 +19,14 @@
     <main class="flex-1 p-2 md:p-2 space-y-6 overflow-x-auto">
 
         <!-- Detail Panels -->
-
         <section class="bg-gray-100 ">
             <div class="max-w-full mx-auto bg-white shadow-lg">
+
                 <!-- Header -->
                 <div class="bg-primary text-white px-2 md:px-6 py-4">
                     <div class=" md:flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Property Details ({{ $property->property_code }})</h1>
                         <div class="flex items-center space-x-4">
-                            <!-- <div class="relative">
-                        <input type="text" placeholder="Search..." class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
-                    </div> -->
-                            <!-- <button class="flex items-center text-white hover:text-blue-100">
-                        <i class="fas fa-map-marker-alt mr-1"></i>
-                        <span class="text-sm">View All</span>
-                    </button> -->
                             <h1 class="font-bold">Status <span
                                     class="font-bold text-gray-300">{{ $property->is_approved ? 'Approved' : 'Pending' }}</span>
                             </h1>
@@ -45,30 +38,13 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="md:flex justify-between items-center">
                         <div class="flex space-x-0 md:space-x-4">
-                            {{-- <button class="flex items-center text-gray-600  hover:text-primary text-sm">
-                                <i class="far fa-eye mr-2"></i>
-                                Approved propery
-                            </button> --}}
                             <a href="{{ route('editproperty', $property->property_id) }}">
                                 <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
                                     <i class="fas fa-edit mr-2"></i>
                                     Edit
                                 </button>
                             </a>
-                            {{-- <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-download mr-2"></i>
-                                Export
-                            </button>
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-trash mr-2"></i>
-                                Refresh
-                            </button> --}}
                         </div>
-                        {{-- <button onclick="window.location.href='add_property.html'"
-                            class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
-                            <i class="fas fa-plus mr-2"></i>
-                            Add Property
-                        </button> --}}
                     </div>
                 </div>
 
@@ -107,6 +83,7 @@
                                     </h2>
 
                                     <div class="max-w-4xl mx-auto px-4">
+
                                         <!-- Badge -->
                                         <div class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-3 py-1">
                                             <span class="text-white text-sm font-semibold tracking-wide">KEY
@@ -163,7 +140,7 @@
                                                 </p>
                                             </div>
 
-                                            <!-- Link -->
+                                            <!-- Youtube Link -->
                                             <p class="mt-6 text-gray-700">
                                                 @if ($property->youtubeurl)
                                                     @php
@@ -188,29 +165,6 @@
                                             </p>
                                         </div>
                                     </div>
-
-
-                                    {{-- <div class="flex justify-between items-center mt-8">
-
-                                        <!-- Price -->
-                                        <p class="text-xl font-bold">
-                                            Rs. <span class="text-red-600">{{ $property->price }}</span>
-                                        </p>
-
-                                        <!-- Location -->
-                                        <p class="text-xl font-bold text-red-600">
-                                            {{ $property->locality->locality_name ?? 'N/A' }}
-                                        </p>
-                                    </div>
-                                    <div class="mt-6 space-y-2">
-
-                                        <!-- Contact -->
-                                        <p class="font-semibold text-gray-800">Contact: <span
-                                                class="font-normal">{{ $property->contact_name }}</span></p>
-                                        <p class="font-semibold text-gray-800">Contact Number:
-                                            <span class="font-normal">{{ $property->contact_number }}</span>
-                                        </p>
-                                    </div> --}}
 
                                     <div class="mt-8">
 

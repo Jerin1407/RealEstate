@@ -31,7 +31,8 @@
 
                 <!-- Form -->
                 <div class="p-6">
-                    <form class="space-y-6" action="{{ route('savehotproperty') }}" enctype="multipart/form-data" method="POST">
+                    <form class="space-y-6" action="{{ route('savehotproperty') }}" enctype="multipart/form-data"
+                        method="POST">
                         @csrf
 
                         <!-- Title Field -->

@@ -48,19 +48,6 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
-                            {{-- <button class="flex items-center text-gray-600 hover:text-primary text-sm">
-                                        <i class="far fa-eye mr-2"></i>
-                                        View User
-                                    </button>
-                                    <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                        <i class="fas fa-edit mr-2"></i>
-                                        Edit User
-                                    </button>
-
-                                    <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                        <i class="fas fa-trash mr-2"></i>
-                                        Delete User
-                                    </button> --}}
                         </div>
                         <a href="{{ route('addUser') }}">
                             <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm font-medium">
@@ -76,9 +63,6 @@
                     <table class="w-full border border-gray-300 rounded-lg overflow-hidden">
                         <thead class="bg-gray-300 text-black">
                             <tr>
-                                {{-- <th class="px-4 py-3 text-left text-sm font-medium">
-                                            <input type="checkbox" id="selectAll" class="rounded">
-                                        </th> --}}
                                 <th class="px-4 py-3 text-left text-sm font-medium">Full Name</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Login Name</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Email</th>
@@ -93,7 +77,6 @@
                         <tbody class="bg-white">
                             @forelse ($users as $user)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
-                                    {{-- <td class="px-4 py-3"><input type="checkbox" class="rowCheckbox rounded"></td> --}}
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $user->fullname }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $user->login_name }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $user->email }}</td>
@@ -317,6 +300,7 @@
             });
         @endif
 
+        // Delete Alert
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 let form = this.closest('form');

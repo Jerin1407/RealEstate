@@ -141,7 +141,6 @@
                             <a href="{{ route('hotpropertylist') }}"
                                 class="block px-4 py-2 hover:bg-primary hover:text-white">Hot
                                 Properties</a>
-                            <!-- Add more items here -->
                         </div>
                     </div>
 
@@ -155,6 +154,7 @@
         </div>
 
         <script>
+            // Logout Alert
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
                 const Toast = Swal.mixin({
                     toast: true,
@@ -181,6 +181,7 @@
         </script>
 
         <script>
+            // Logout Alert
             document.getElementById('logoutBtn_mobile').addEventListener('click', function(e) {
                 const Toast = Swal.mixin({
                     toast: true,

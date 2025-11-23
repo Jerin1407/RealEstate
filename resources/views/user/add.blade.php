@@ -19,7 +19,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-2 md:p-2 space-y-6 overflow-x-auto ">
         <div class="bg-white">
-            
+
             <!-- Header -->
             <div class="bg-primary text-white px-6 py-3">
                 <h1 class="text-lg font-medium">Add User Form</h1>

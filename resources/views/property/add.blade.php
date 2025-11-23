@@ -18,7 +18,6 @@
 
     <!-- Main Content -->
     <main class="flex-1 p-2 md:p-2 space-y-6 overflow-x-auto">
-
         <div class="max-w-7xl mx-auto bg-white shadow-lg">
 
             <!-- Header -->
@@ -110,7 +109,7 @@
                         </div>
                     </div>
 
-                    <!-- Location -->
+                    <!-- Location with Dropdown -->
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Location <span
                                 class="text-red-500">*</span></label>
@@ -130,7 +129,7 @@
                         </div>
                     </div>
 
-                    <!-- Price Range -->
+                    <!-- Price Range with Dropdown -->
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Price Range <span
                                 class="text-red-500">*</span></label>
@@ -146,7 +145,7 @@
                         </div>
                     </div>
 
-                    <!-- Price -->
+                    <!-- Price with Dropdown -->
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Price</label>
                         <div class="col-span-4">
@@ -170,7 +169,7 @@
                         </div>
                     </div>
 
-                    <!-- Priority -->
+                    <!-- Priority with Dropdown -->
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Priority</label>
                         <div class="col-span-4">
@@ -201,7 +200,7 @@
                         </div>
                     </div>
 
-                    <!-- Amount For -->
+                    <!-- Amount For with Dropdown -->
                     <div class="md:grid grid-cols-12 gap-4 items-center">
                         <label class="col-span-2 text-sm text-gray-700">Amount For</label>
                         <div class="col-span-4">
@@ -264,21 +263,6 @@
                                 class="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
-
-                    <!-- Terms and Conditions -->
-                    {{-- <div class="md:grid grid-cols-12 gap-4 items-center">
-                        <label class="col-span-2 text-sm text-gray-700"></label>
-                        <div class="col-span-10">
-                            <div class="flex items-center space-x-2">
-                                <input type="checkbox" id="terms" class="w-4 h-4 border-gray-300 rounded"
-                                    required>
-                                <label for="terms" class="text-sm text-gray-700">
-                                    Click to Agree <a href="#" class="text-blue-600 hover:underline">Terms and
-                                        Conditions</a>
-                                </label>
-                            </div>
-                        </div>
-                    </div> --}}
 
                     <!-- Save Button -->
                     <div class="md:grid grid-cols-12 gap-4">

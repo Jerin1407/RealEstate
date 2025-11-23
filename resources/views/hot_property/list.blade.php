@@ -28,13 +28,6 @@
                     <div class=" md:flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Hot Properties</h1>
                         <div class="flex items-center space-x-4">
-                            <!-- <div class="relative">
-                        <input type="text" placeholder="Search..." class="md:px-3 py-1 rounded border bg-white border-gray-300 text-black text-sm">
-                    </div>
-                    <button class="flex items-center text-white hover:text-blue-100">
-                        <i class="fas fa-map-marker-alt mr-1"></i>
-                        <span class="text-sm">View All</span>
-                    </button> -->
                         </div>
                     </div>
                 </div>
@@ -43,20 +36,6 @@
                 <div class="bg-gray-200   p -2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
-
-                            {{-- <button onclick=""
-                                class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-edit mr-2"></i>
-                                Add Hot Property
-                            </button>
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-download mr-2"></i>
-                                Edit
-                            </button>
-                            <button class="flex items-center text-gray-600 hover:text-primary 800 text-sm">
-                                <i class="fas fa-trash mr-2"></i>
-                                Delete
-                            </button> --}}
                         </div>
                         <a href="{{ route('addhotproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
@@ -70,42 +49,26 @@
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     <table class="w-full">
+
                         <!-- Table Header -->
                         <thead class="bg-gray-300 text-black">
                             <tr>
-                                {{-- <th class="px-4 py-3 text-left text-sm font-medium">
-                                    <input type="checkbox" class="rounded">
-                                </th> --}}
-                                <!-- <th class="px-4 py-3 text-left text-sm font-medium">Property code</th> -->
                                 <th class="px-4 py-3 text-left text-sm font-medium">Title</th>
-                                <!-- <th class="px-4 py-3 text-left text-sm font-medium">Category</th> -->
-                                <!-- <th class="px-4 py-3 text-left text-sm font-medium">Location</th> -->
                                 <th class="px-4  text-left text-sm font-medium">Description</th>
-                                <!-- <th class="px-4 py-3 text-left text-sm font-medium">Added By</th> -->
-                                <!-- <th class="px-4 py-3 text-left text-sm font-medium">Added On</th> -->
-                                <!-- <th class="px-4 py-3 text-left text-sm font-medium">Price</th> -->
                                 <th class="px-4 py-3 text-left text-sm font-medium">Date</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Type</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Action</th>
                             </tr>
                         </thead>
+
                         <!-- Table Body -->
                         <tbody class="bg-white">
                             @forelse ($hotProperties as $hotproperty)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
-                                    {{-- <td class="px-4 py-3">
-                                    <input type="checkbox" class="rounded">
-                                </td> --}}
-                                    <!-- <td class="px-4 py-3 text-sm text-gray-900">PRP001</td> -->
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $hotproperty->title }}</td>
-                                    <!-- <td class="px-4 py-3 text-sm text-gray-900">Villa</td>
-                        <td class="px-4 py-3 text-sm text-gray-900">Veluthur</td> -->
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ Str::limit(strip_tags($hotproperty->description), 50) }}</td>
-                                    <!-- <td class="px-4 py-3 text-sm text-gray-900">Realestate</td> -->
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $hotproperty->add_date }}</td>
-                                    <!-- <td class="px-4 py-3 text-sm text-gray-900">₹55,00,000</td> -->
-                                    <!-- <td class="px-4 py-3 text-sm text-gray-900">Active</td> -->
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $hotproperty->type }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         <div class="flex items-center gap-3">
@@ -324,6 +287,7 @@
     </script>
 
     <script>
+        // Delete Alert
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 let form = this.closest('form');

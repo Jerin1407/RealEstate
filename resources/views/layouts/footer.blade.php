@@ -23,10 +23,12 @@
             <div class="text-center md:text-start">
                 <h5 class="text-lg font-semibold mb-4">Property Types</h5>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="{{ route('viewAllVilla') }}" class="hover:text-primary transition-colors">Villas</a></li>
+                    <li><a href="{{ route('viewAllVilla') }}" class="hover:text-primary transition-colors">Villas</a>
+                    </li>
                     <li><a href="{{ route('viewAllFlat') }}" class="hover:text-primary transition-colors">Flats</a></li>
                     <li><a href="{{ route('viewAllPlot') }}" class="hover:text-primary transition-colors">Plots</a></li>
-                    <li><a href="{{ route('viewAllCommercial') }}" class="hover:text-primary transition-colors">Commercial</a></li>
+                    <li><a href="{{ route('viewAllCommercial') }}"
+                            class="hover:text-primary transition-colors">Commercial</a></li>
                 </ul>
             </div>
 
@@ -39,9 +41,6 @@
                     <p>Ground Floor, N.P.Tower,</p>
                     <p>Punkunnam Road, Westfort</p>
                     <p>Thrissur - 680 004</p>
-                    <!-- <p>📞 +91 98765 43210</p>
-                        <p>✉️ info@redstoneproperties.com</p>
-                        <p>📍 Bangalore, Karnataka</p> -->
                 </div>
             </div>
         </div>

@@ -48,31 +48,12 @@
                 <div class="bg-gray-200 p-2 md:px-6 py-3 border-b">
                     <div class="flex justify-between items-center">
                         <div class="flex space-x-1 md:space-x-4">
-                            {{-- <button type="button" id="viewBtn"
-                                class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
-                                <i class="far fa-eye mr-2"></i>
-                                View
-                            </button>
-                            <button id="editPropertyBtn"
-                                class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
-                                <i class="fas fa-edit mr-2"></i>
-                                Edit
-                            </button> --}}
                             <form action="{{ route('exportProperty') }}" method="GET" id="exportForm">
                                 <button class="flex items-center text-gray-600 hover:text-gray-950 text-sm">
                                     <i class="fas fa-download mr-2"></i> Export
                                 </button>
                             </form>
-                            {{-- <form id="deleteForm" action="{{ route('deleteproperty') }}" method="POST">
-                                @csrf
-                                @method('DELETE') --}}
-                            {{-- <button type="button" id="deleteBtn"
-                                    class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm">
-                                    <i class="fas fa-trash mr-2"></i>
-                                    Delete
-                                </button> --}}
                         </div>
-                        {{-- </form> --}}
                         <a href="{{ route('addproperty') }}">
                             <button class="flex items-center text-gray-600 hover:text-gray-950 800 text-sm font-medium">
                                 <i class="fas fa-plus mr-2"></i>
@@ -89,7 +70,6 @@
                         <!-- Table Header -->
                         <thead class="bg-gray-300 text-black">
                             <tr>
-                                {{-- <th></th> --}}
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property code</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Property Title</th>
                                 <th class="px-4 py-3 text-left text-sm font-medium">Category</th>
@@ -108,11 +88,6 @@
                         <tbody class="bg-white">
                             @forelse ($properties as $property)
                                 <tr class="border-b border-gray-200 hover:bg-gray-50">
-                                    {{-- <td class="px-4 py-3">
-                                        <input type="checkbox" name="selected_properties[]"
-                                            value="{{ $property->property_id }}" class="property-checkbox rounded"
-                                            onclick="event.stopPropagation();">
-                                    </td> --}}
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_code }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $property->property_title }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
@@ -319,103 +294,6 @@
             });
         @endif
 
-        // edit property
-        // document.getElementById('editPropertyBtn').addEventListener('click', function(e) {
-        //     e.preventDefault();
-
-        //     // Get all selected checkboxes
-        //     const selected = document.querySelectorAll('.property-checkbox:checked');
-
-        //     // Validate selection
-        //     if (selected.length === 0) {
-        //         Swal.fire({
-        //             icon: 'warning',
-        //             title: 'No property selected!',
-        //             text: 'Please select a property to edit.',
-        //             position: 'top',
-        //             background: '#EF4444', // red color
-        //             color: '#fff',
-        //             iconColor: '#fff',
-        //             toast: true,
-        //             showConfirmButton: false,
-        //             timer: 4000,
-        //         });
-        //         return;
-        //     }
-        //     if (selected.length > 1) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: ' Multiple properties selected!',
-        //             text: 'Please select only one property to edit.',
-        //             position: 'top',
-        //             background: '#EF4444', // red color
-        //             color: '#fff',
-        //             iconColor: '#fff',
-        //             toast: true,
-        //             showConfirmButton: false,
-        //             timer: 4000,
-        //         });
-        //         return;
-        //     }
-
-        //     // Get selected property ID
-        //     const propertyId = selected[0].value;
-
-        //     // Redirect to edit page
-        //     window.location.href = `/editproperty/${propertyId}`;
-        // });
-
-        // Delete Property
-        // document.getElementById('deleteBtn').addEventListener('click', function() {
-        //     const selected = document.querySelectorAll('.property-checkbox:checked');
-        //     const form = document.getElementById('deleteForm');
-
-        //     if (selected.length === 0) {
-        //         Swal.fire({
-        //             position: 'top',
-        //             icon: 'warning',
-        //             title: 'Please select atleast one property!',
-        //             showConfirmButton: false,
-        //             timer: 4000,
-        //             background: '#EF4444', // red color
-        //             color: '#fff',
-        //             iconColor: '#fff',
-        //             toast: true,
-        //         });
-        //         return;
-        //     }
-
-        //     Swal.fire({
-        //         position: 'top',
-        //         title: 'Are you sure?',
-        //         text: 'You want to delete selected property(s)?',
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#d33',
-        //         cancelButtonColor: '#3085d6',
-        //         confirmButtonText: 'Yes, delete!',
-        //         cancelButtonText: 'Cancel',
-        //         width: '380px',
-        //         toast: true
-        //     }).then(result => {
-        //         if (result.isConfirmed) {
-        //             // Remove previous hidden inputs
-        //             form.querySelectorAll('input[name="selected_properties[]"]').forEach(el => el.remove());
-
-        //             // Add selected IDs to form
-        //             selected.forEach(cb => {
-        //                 const input = document.createElement('input');
-        //                 input.type = 'hidden';
-        //                 input.name = 'selected_properties[]';
-        //                 input.value = cb.value;
-        //                 form.appendChild(input);
-        //             });
-
-        //             form.submit();
-        //         }
-        //     });
-        // });
-
         // Success Alert
         @if (session('success_delete'))
             const Toast = Swal.mixin({
@@ -449,48 +327,10 @@
                 width: '300px'
             });
         @endif
-
-        // View Button
-        // document.getElementById('viewBtn').addEventListener('click', function() {
-        //     const selected = document.querySelectorAll('.property-checkbox:checked');
-
-        //     if (selected.length === 0) {
-        //         // No property selected
-        //         Swal.fire({
-        //             position: 'top',
-        //             icon: 'warning',
-        //             title: 'No property selected!',
-        //             text: 'Please select a property to view.',
-        //             showConfirmButton: false,
-        //             timer: 4000,
-        //             background: '#EF4444', // red color
-        //             color: '#fff',
-        //             iconColor: '#fff',
-        //             toast: true,
-        //         });
-        //     } else if (selected.length > 1) {
-        //         // More than one selected
-        //         Swal.fire({
-        //             position: 'top',
-        //             icon: 'error',
-        //             title: ' Multiple properties selected!',
-        //             text: 'Please select only one property to view.',
-        //             showConfirmButton: false,
-        //             timer: 4000,
-        //             background: '#EF4444', // red color
-        //             color: '#fff',
-        //             iconColor: '#fff',
-        //             toast: true,
-        //         });
-        //     } else {
-        //         // Exactly one selected — redirect to view page
-        //         const propertyId = selected[0].value;
-        //         window.location.href = `/viewproperty/${propertyId}`;
-        //     }
-        // });
     </script>
 
     <script>
+        // Delete Alert
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 let form = this.closest('form');
@@ -517,13 +357,14 @@
     </script>
 
     <script>
+        // Export Alert
         document.getElementById('exportForm').addEventListener('submit', function() {
             setTimeout(() => {
                 Swal.fire({
                     toast: true,
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Export Successful!',
+                    title: 'Export Successfully!',
                     text: 'Excel file downloaded successfully.',
                     timer: 4000,
                     background: '#10B981', // green color
