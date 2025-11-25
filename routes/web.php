@@ -7,7 +7,6 @@ use App\Http\Controllers\HotPropertyController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 
 Route::get('/reload-captcha', function () {
     return response()->json(['captcha' => captcha_img('flat')]);
@@ -90,4 +89,4 @@ Route::post('/updatePassword', [PasswordController::class, 'updatePassword'])->n
 Route::get('/listforgotpassword', [PasswordController::class, 'listForgotPassword'])->name('listforgotpassword');
 Route::post('/saveforgotpassword', [PasswordController::class, 'saveForgotPassword'])->name('saveforgotpassword');
 Route::get('/resetpassword', [PasswordController::class, 'resetPassword'])->name('resetpassword');
-Route::post('/updatepassword', [PasswordController::class, 'updateResetPassword'])->name('updatePassword');
+Route::post('/updateresetpassword', [PasswordController::class, 'updateResetPassword'])->name('updateResetPassword');

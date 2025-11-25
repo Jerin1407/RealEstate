@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>New Hot Property Enquiry</title>
+    <title>New Home Loan Enquiry</title>
 
     <!-- MOBILE RESPONSIVE FIX -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +45,7 @@
                     <!-- Header -->
                     <tr>
                         <td style="background:#e63946; padding:20px; text-align:center;">
-                            <h1 style="color:white; margin:0; font-size:24px;">New Hot Property Enquiry</h1>
+                            <h1 style="color:white; margin:0; font-size:24px;">New Home Loan Enquiry</h1>
                         </td>
                     </tr>
 
@@ -54,7 +54,7 @@
                         <td class="padding-responsive" style="padding:25px;">
 
                             <p style="font-size:16px; color:#333; margin-bottom:20px;">
-                                You have received a new enquiry for a Hot Property.
+                                You have received a new enquiry for a Home Loan.
                             </p>
 
                             <table width="100%" cellpadding="0" cellspacing="0" style="font-size:15px; color:#333;">
@@ -68,11 +68,15 @@
                                 </tr>
                                 <tr>
                                     <td style="padding:8px 0;"><strong>Mobile Number:</strong></td>
-                                    <td style="padding:8px 0;">{{ $data['number'] }}</td>
+                                    <td style="padding:8px 0;">{{ $data['mobile'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px 0;"><strong>Loan Amount:</strong></td>
+                                    <td style="padding:8px 0;">{{ $data['loan'] }}</td>
                                 </tr>
                                 <tr>
                                     <td valign="top" style="padding:8px 0;"><strong>Message:</strong></td>
-                                    <td style="padding:8px 0;">{{ $data['message'] }}</td>
+                                    <td style="padding:8px 0;">{{ $data['comments'] }}</td>
                                 </tr>
                             </table>
 

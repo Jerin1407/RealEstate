@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEnquiryMail;
+use App\Mail\HomeLoanEnquiryMail;
 use Illuminate\Http\Request;
 use App\Models\MyProperties;
 use App\Models\CategoryModel;
@@ -16,6 +18,7 @@ use App\Models\PropertyImageModel;
 use App\Models\UserModel;
 use App\Models\HotPropertyModel;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -118,6 +121,18 @@ class HomeController extends Controller
             $home->created_at = now()->format('Y-m-d H:i:s');
             $home->save();
 
+            // Prepare email data
+            $data = [
+                'name' => $request->name,
+                'mobile' => $request->mobile,
+                'email' => $request->email,
+                'loan' => $request->loan,
+                'comments' => $request->comments,
+            ];
+
+            // Send email
+            Mail::to('bYw4y@example.com')->send(new HomeLoanEnquiryMail($data));
+
             return redirect()->back()->with('success', 'Home loan applied successfully !!!');
         } catch (\Exception $e) {
             Log::error('Error saving user: ' . $e->getMessage());
@@ -158,6 +173,17 @@ class HomeController extends Controller
             $contact->message = $request->message;
             $contact->created_at = now()->format('Y-m-d H:i:s');
             $contact->save();
+
+            // Prepare email data
+            $data = [
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'message' => $request->message,
+            ];
+
+            // Send email
+            Mail::to('bYw4y@example.com')->send(new ContactEnquiryMail($data));
 
             return redirect()->back()->with('success', 'Contact saved successfully !!!');
         } catch (\Exception $e) {

@@ -67,7 +67,7 @@
                                     <td style="padding:8px 0;">{{ $data['email'] }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:8px 0;"><strong>Phone:</strong></td>
+                                    <td style="padding:8px 0;"><strong>Mobile Number:</strong></td>
                                     <td style="padding:8px 0;">{{ $data['number'] }}</td>
                                 </tr>
                                 <tr>
