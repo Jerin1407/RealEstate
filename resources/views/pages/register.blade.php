@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Register')
+
 @section('content')
     <section id="about" class="bg-white py-16 text-center md:text-start flex justify-center">
         <div class="w-80 max-w-sm p-6 bg-white shadow-md rounded-md ">
