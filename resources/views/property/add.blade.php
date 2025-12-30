@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Estate Thrissur - Find Your Dream Home</title>
+    <title>Add Property | Real Estate Thrissur</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/logo 1.svg" />
     <link href="../assets/css/output_2.css" rel="stylesheet" />
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>

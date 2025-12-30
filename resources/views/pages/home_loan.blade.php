@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Home Loan Assistance | Real Estate Thrissur')
+
 @section('content')
     <section class="px-6 py-10 bg-white text-gray-800">
 

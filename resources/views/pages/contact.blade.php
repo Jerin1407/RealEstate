@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Contact Us | Real Estate Thrissur')
+
 @section('content')
     <section class="px-6 py-10 bg-white text-gray-800">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">

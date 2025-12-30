@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Hot Property Details | Real Estate Thrissur')
+
 @section('content')
     <section class="px-6 py-10 bg-gray-50" x-data="{ selectedImage: '{{ asset('uploads/hotproperties/' . ($hotProperties->images->where('is_cover', 1)->first()->filename ?? 'images/no-image.jpg')) }}' }">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">

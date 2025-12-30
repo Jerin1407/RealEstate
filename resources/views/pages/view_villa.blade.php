@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Villas | Real Estate Thrissur')
+
 @section('content')
     <section id="villas" class="py-16 bg-white">
         <div class="container mx-auto px-4">
